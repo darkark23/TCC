@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Noticias</title>
+  </head>
+  <body>
+    <section class="py-5">
+
+	<div class="container">
+		<strong>Título</strong>
+		<br>Audio Book 01</br>
+		<strong>Ledor</strong>
+		<br>Ledor 01</br>
+		<strong>Livro original</strong>
+		<br>---</br>
+		<strong>Assunto:</strong>
+		<ul>
+			<li>Assunto 01</li>
+			<li>Assunto 02</li>
+			<li>Assunto 03</li>
+		</ul>
+		<strong>Duração</strong>
+		<br>00:45</br>
+		<strong>Tamanho</strong>
+		<br>1055Kb</br>
+		<strong>Audio</strong>
+		<p></p>
+		<audio src="audio.mp3" preload="auto" controls></audio>
+		<p></p>
+		<div class="btn-group btn-group-toggle" data-toggle="buttons">
+		  <label class="btn btn-success active">
+		    <input type="radio" name="options" id="option1" autocomplete="off" checked> Reproduzir (>)
+		  </label>
+		  <label class="btn btn-danger">
+		    <input type="radio" name="options" id="option3" autocomplete="off"> Pausar (^)
+		  </label>
+		</div>
+	</div>
+	<p></p>
+    <div class="container">
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary">
+          <input type="radio" ui-sref="audioBusca" name="options" id="option2" autocomplete="off"> Voltar (4)
+        </label>
+      </div>
+    </div>
+  </section>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

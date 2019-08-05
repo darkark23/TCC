@@ -1,0 +1,154 @@
+<head>
+	<meta charset="UTF-8">
+</head>
+<div>
+	<p></p>
+	<form class="was-validated">
+	
+		<div class="form-row">
+			<label for="inputPlaca" class="col-sm-1 col-form-label">Placa</label>
+			<div class="form-group col-md-11">
+				<input type="text" class="form-control" id="inputPlaca" ui-mask="AAA-9999" ng-model="objetoAutomovel.placa" ng-change="atualizarTabela()" required>
+				<div class="invalid-feedback">
+					Campo obrigatório
+				</div>
+			</div>
+		</div>
+
+		<div class="form-row">
+			<label for="inputModelo" class="col-sm-1 col-form-label">Modelo</label>
+			<div class="form-group col-md-11">
+				<input type="text" class="form-control"	placeholder="Modelo" ng-focus="autoComplete(objetoAutomovel.modelo)" ng-model="objetoAutomovel.modelo" ng-change="atualizarTabela()" ng-keyup="autoComplete(objetoAutomovel.modelo)" required>
+				<div class="invalid-feedback">
+					Campo obrigatório
+				</div>
+				<ul class="list-group" ng-model="hidethis" ng-hide="hidethis">
+					<li class="list-group-item" ng-repeat="modelo in listaModeloAutoComplete" ng-click="fillTextbox(modelo.descricao)">{{modelo.descricao}}</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="form-row">
+			<label for="inputModelo" class="col-sm-1 col-form-label">Fabricante</label>
+			<div class="form-group col-md-5">
+				<input type="text" class="form-control" id="inputModelo" placeholder="(Campo obrigatorio) Selecione um fabricante em 'Buscar Fabricante'"  ng-model="fabricanteTela.nome" readonly required>
+				<div class="invalid-feedback">
+					Campo obrigatório
+				</div>
+			</div>
+			<div class="form-group col-md-5">
+				<input type="text" class="form-control" id="inputFabricante" placeholder="Pais Fabricante" ng-model="fabricanteTela.pais.descricao" readonly required>
+				<div class="invalid-feedback">
+					Campo obrigatório
+				</div>
+			</div>
+			<div class="form-group col-md-1">
+				<button class="btn btn-primary" data-toggle="modal"
+					data-target="#modalFabricante">Buscar Fabricante</button>
+			</div>
+		</div>
+
+		<div class="form-row">
+			<label for="inputModelo" class="col-sm-1 col-form-label">Tração</label>
+			<div class="form-group col-md-11">
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" ng-model="objetoAutomovel.tracao" ng-value="1" ng-change="atualizarTabela()" required>
+					<label class="form-check-label" for="inlineRadio1">Combustão</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"  ng-model="objetoAutomovel.tracao" ng-value="2" ng-change="atualizarTabela()" required>
+					<label class="form-check-label" for="inlineRadio2">Elétrico</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-row">
+			<label for="inputModelo" class="col-sm-1 col-form-label">Categoria</label>
+			<div class="form-group col-md-11">
+				<select class="form-control" ng-model="objetoAutomovel.categoria" ng-options="categoria.id as categoria.descricao for categoria in listaCategoria" ng-change="atualizarTabela()" required>
+ 					<option value="">---Selecione uma opção---</option>
+				</select>
+				<div class="invalid-feedback">
+					Campo obrigatório
+				</div>
+			</div>
+		</div>
+		
+		<div>
+			<button ng-if="!objetoAutomovel.id" type="submit" class="btn btn-secondary" ng-click="salvarAutomovel()">Cadastrar</button>
+			<button ng-if="objetoAutomovel.id"  type="submit" class="btn btn-secondary" ng-click="salvarAutomovel()">Alterar</button>
+			<button ng-if="objetoAutomovel.id"  type="button" class="btn btn-secondary" ng-click="acessarConsulta()">Voltar</button>
+		</div>
+		<p></p>
+		
+	</form>
+</div>
+	
+<!-- Modal Fabricante -->
+<div class="modal fade bd-example-modal-lg" id="modalFabricante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Registro/Escolha de Fabricante</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+				<form class="was-validated" >
+					<div class="form-row">
+						<label for="inputPlaca" class="col-sm-2 col-form-label">Fabricante</label>
+						<div class="form-group col-md-10">
+							<input type="text" ng-model="filtroFabricante.nome" class="form-control" id="inputPlaca"
+								placeholder="Digite o nome do fabricante para pesquisa ou cadastro" ng-change="atualizarTabelaFabricante()">
+						</div>
+					</div>
+
+					<div ng-if="!listaFabricanteView.length" class="form-row">
+						<label for="inputModelo" class="col-sm-2 col-form-label">Pais</label>
+						<div class="form-group col-md-10">
+							<select class="form-control" ng-model="filtroFabricante.pais" ng-options="pais.id as pais.descricao for pais in listaPais" ng-change="atualizarTabelaFabricante()" required>
+								<option value="">---Selecione um pais---</option>
+							</select>
+							<div class="invalid-feedback">
+								Campo obrigatório
+							</div>
+						</div>
+					</div>
+					<button type="button" class="btn btn-danger" ng-click="limparFabricante()">Limpar</button>
+						
+					<div>
+					<p></p>
+						<table class="table">
+							<thead class="thead-dark">
+								<tr>
+									<th scope="col">Fabricante</th>
+									<th scope="col">Pais</th>
+									<th scope="col"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-if="!listaFabricanteView.length">
+					               <td colspan="100%" class="text-center">Nenhum Registro Encontrado</td>
+					           </tr>
+								<tr ng-repeat = "fabricante in listaFabricanteView">
+									<td>{{fabricante.nome}}</td>
+									<td>{{fabricante.pais}}</td>
+									<td>
+										<button type="button" class="btn btn-success" ng-click=(selecionarFabricante(fabricante.id)) data-dismiss="modal">Selecionar</button>
+									</td>
+								</tr>	
+							</tbody>
+						</table>
+					</div>
+				</form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"  ng-click=(salvarFabricante())  ng-if="!listaFabricanteView.length && filtroFabricante.pais != null" >Salvar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"  ng-if="listaFabricanteView.length || filtroFabricante.pais == null" disabled>Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>

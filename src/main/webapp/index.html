@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Portal do Ledor</title>
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" href="node/node_modules/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" href="node/node_modules/angular-auto-complete/angular-auto-complete.css">
+	<link rel="stylesheet" href="node/node_modules/ng-toast/dist/ngToast.min.css">
+</head>
+
+<body ng-app="tccApp">
+	<toast></toast>
+	<div ui-view="headNav"></div>
+
+	<!-- 		<div id="nav">
+			<ul class="nav  nav-tabs">
+				<li ng-if="nav!=0" class="nav-item"><a ui-sref="home" class="nav-link">Home</a></li>
+				<li ng-if="nav==0" class="nav-item"><a ui-sref="home" class="nav-link active">Home</a></li>
+				<li ng-if="nav!=1" class="nav-item"><a ui-sref="cadastro({id:null})" class="nav-link">Cadastro</a></li>
+				<li ng-if="nav==1" class="nav-item"><a ui-sref="cadastro({id:null})" class="nav-link active">Cadastro</a></li>
+				<li ng-if="nav!=2" class="nav-item"><a ui-sref="consulta" class="nav-link">Consulta</a></li>
+				<li ng-if="nav==2" class="nav-item"><a ui-sref="consulta" class="nav-link active">Consulta</a></li>
+			</ul>
+		</div> -->
+		
+	<div class="container-fluid">
+		<div ui-view></div>
+	</div>
+	
+	 <!-- Footer -->
+	 <footer class="py-5 bg-dark">
+	   <div class="container">
+	     <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+	   </div>
+	   <!-- /.container -->
+	 </footer>
+	
+
+	<!-- Script -->
+	<script src="node/node_modules/jquery/dist/jquery.js"></script>
+	<script src="node/node_modules/popper.js/dist/umd/popper.js"></script>
+	<script src="node/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="node/node_modules/angular/angular.js"></script>
+	<script	src="node/node_modules/@uirouter/angularjs/release/angular-ui-router.js"></script>
+	<script	src="node/node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+	<script src="node/node_modules/underscore/underscore.js"></script>
+	<script src="node/node_modules/restangular/dist/restangular.js"></script>
+	<script src="node/node_modules/angular-auto-complete/angular-auto-complete.js"></script>
+	<script src="node/node_modules/angular-sanitize/angular-sanitize.js"></script>
+	<script	src="node/node_modules/ui-utils-npm/node_modules/angular-ui-mask/dist/mask.js"></script>
+	<script src="node/node_modules/ng-toast/dist/ngToast.min.js"></script>
+
+	<!-- directives -->
+	<script src="js/directives/app.js"></script>
+
+	<script src="js/directives/agenda/agenda.controller.js"></script>
+	<script src="js/directives/agenda/agenda.service.js"></script>
+	<script src="js/directives/audio/audio.controller.js"></script>
+	<script src="js/directives/audio/audio.service.js"></script>
+	<script src="js/directives/audio-busca/audio-busca.controller.js"></script>
+	<script src="js/directives/audio-busca/audio-busca.service.js"></script>
+	<script src="js/directives/audio-lista/audio-lista.controller.js"></script>
+	<script src="js/directives/audio-lista/audio-lista.service.js"></script>
+	<script src="js/directives/login/login.controller.js"></script>
+	<script src="js/directives/login/login.service.js"></script>
+	<script src="js/directives/menu/menu.controller.js"></script>
+	<script src="js/directives/menu/menu.service.js"></script>
+	<script src="js/directives/principal/principal.controller.js"></script>
+	<script src="js/directives/principal/principal.service.js"></script>
+
+	<script src="js/directives/cadastro/cadastro.controller.js"></script>
+	<script src="js/directives/cadastro/cadastro.service.js"></script>
+	<script src="js/directives/consulta/consulta.controller.js"></script>
+	<script src="js/directives/consulta/consulta.service.js"></script>
+	<script src="js/directives/home/home.controller.js"></script>
+	<script src="js/directives/home/home.service.js"></script>
+
+</body>
+</html>
