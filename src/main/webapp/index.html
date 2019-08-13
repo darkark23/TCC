@@ -11,17 +11,6 @@
 	<body ng-app="tccApp">
 		<toast></toast>
 		<div ui-view="headNav"></div>
-	
-		<!-- 		<div id="nav">
-				<ul class="nav  nav-tabs">
-					<li ng-if="nav!=0" class="nav-item"><a ui-sref="home" class="nav-link">Home</a></li>
-					<li ng-if="nav==0" class="nav-item"><a ui-sref="home" class="nav-link active">Home</a></li>
-					<li ng-if="nav!=1" class="nav-item"><a ui-sref="cadastro({id:null})" class="nav-link">Cadastro</a></li>
-					<li ng-if="nav==1" class="nav-item"><a ui-sref="cadastro({id:null})" class="nav-link active">Cadastro</a></li>
-					<li ng-if="nav!=2" class="nav-item"><a ui-sref="consulta" class="nav-link">Consulta</a></li>
-					<li ng-if="nav==2" class="nav-item"><a ui-sref="consulta" class="nav-link active">Consulta</a></li>
-				</ul>
-			</div> -->
 			
 		<div class="container-fluid">
 			<div ui-view></div>
@@ -66,6 +55,10 @@
 		<script src="js/directives/menu/menu.service.js"></script>
 		<script src="js/directives/principal/principal.controller.js"></script>
 		<script src="js/directives/principal/principal.service.js"></script>
+		<script src="js/directives/contato/contato.controller.js"></script>
+		<script src="js/directives/contato/contato.service.js"></script>
+		<script src="js/directives/localizacao/localizacao.controller.js"></script>
+		<script src="js/directives/localizacao/localizacao.service.js"></script>
 	
 		<script src="js/directives/cadastro/cadastro.controller.js"></script>
 		<script src="js/directives/cadastro/cadastro.service.js"></script>

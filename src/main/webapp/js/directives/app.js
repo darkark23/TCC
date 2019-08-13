@@ -100,6 +100,30 @@ angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast']).confi
 				            	controller: 'PrincipalController',
 				            	}
 				        }
+					}).state('localizacao', {
+						url : '/localizacao',
+				        views: {
+				            '': {
+								templateUrl : '/js/directives/localizacao/localizacao.html',
+								controller : 'LocalizacaoController'
+				            },
+				            'headNav': {
+				            	templateUrl: '/js/components/head-principal.html',
+				            	controller: 'LocalizacaoController',
+				            	}
+				        }
+					}).state('contato', {
+						url : '/contato',
+				        views: {
+				            '': {
+								templateUrl : '/js/directives/contato/contato.html',
+								controller : 'ContatoController'
+				            },
+				            'headNav': {
+				            	templateUrl: '/js/components/head-principal.html',
+				            	controller: 'ContatoController',
+				            	}
+				        }
 					});
 									
 					$locationProvider.hashPrefix('');
