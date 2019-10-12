@@ -26,11 +26,16 @@
 				<br>1055Kb</br>
 				<strong>Audio</strong>
 				<p></p>
-				<audio src="audio.mp3" preload="auto" controls></audio>
+				<audio id="audio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="auto"></audio>
+				<div class="progress">
+					<div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+				</div>
 				<p></p>
-				<div class="btn-group btn-group-toggle" data-toggle="buttons">
-					<label class="btn btn-success active"> <input type="radio" name="options" id="option1" autocomplete="off" checked> Reproduzir (>) </label> 
-					<label class="btn btn-danger"> <input type="radio" name="options" id="option3" autocomplete="off"> Pausar (^) </label>
+				<div class="btn-group" role="group" aria-label="Basic example">
+					<button type="button" class="btn btn-secondary" ng-click="retrocederAudio()">Retornar</button>
+					<button type="button" class="btn btn-success" ng-click="reproduzirAudio()">Reproduzir</button>
+					<button type="button" class="btn btn-danger" ng-click="pararAudio()">Pausar</button>
+					<button type="button" class="btn btn-secondary" ng-click="avancarAudio()">Avançar</button>
 				</div>
 			</div>
 			<p></p>

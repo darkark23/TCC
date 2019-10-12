@@ -92,7 +92,12 @@ angular
 											$state.go('localizacao', {}, {
 												reload : true
 											});
-										} else if (son == 'notícia') {
+										} else if (son == 'login') {
+											synth.cancel();
+											$state.go('login', {}, {
+												reload : true
+											});
+										}else if (son == 'notícia') {
 											document.getElementById("noticia01").focus();
 											reproduzirFrase(noticia);
 										} else if (son == 'outros' || son == 'ajuda') {
