@@ -2,30 +2,13 @@
 angular.module('tccApp').controller('ContatoController',
 		[ "$scope", '$state', 'contatoService', '$rootScope', function($scope, $state, contatoService, $rootScope) {
 
-			var synth = window.speechSynthesis;
-			var utterance = null;
-			var recognition = null;
+
 			var frasePrincipal = 'Página de contato. O telefone para contato é 61 3901 7607.';
-			var fraseAjuda = 'Você tem as seguintes opções, diga principal para acessar a página principal, contato para página com informações de contato da instituição, localização para página com informação de localização da instituição, login para acessar a página para entrada do sistema. Você pode também apertar os botões de um a quatro no teclado numérico para as respectivas páginas, principal, contato, localização e login.' ;
-			
-			var reproduzirFrase = function(frase) {
-				synth.cancel();
-				utterance = new SpeechSynthesisUtterance(frase);
-				utterance.lang = 'pt-BR';
-				utterance.rate = 2;
-				synth.speak(utterance);
-			}
-			
-			var comecarReconhecimento = function(){
-				recognition = new webkitSpeechRecognition();
-				recognition.interimResults = true;
-				recognition.lang = "pt-BR";
-				recognition.continuous = true;
-				recognition.start();
-			}
 			
 			synth.cancel();
 			reproduzirFrase(frasePrincipal);
+
+			comecarReconhecimento();
 
 			document.onkeyup = function(e) {
 				if (e.which == 96) {
@@ -54,8 +37,6 @@ angular.module('tccApp').controller('ContatoController',
 					reproduzirFrase('Você tem as seguintes opções, diga principal para acessar a página principal, contato para página com informações de contato da instituição, localização para página com informação de localização da instituição, login para acessar a página para entrada do sistema. Você pode também apertar os botões de um a quatro no teclado numérico para as respectivas páginas, principal, contato, localização e login.');
 				}
 			};
-
-			comecarReconhecimento();
 			
 			recognition.onresult = function(event) {
 				for (let i = event.resultIndex; i < event.results.length; i++) {

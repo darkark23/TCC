@@ -52,6 +52,18 @@ angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast']).confi
 				            	controller: 'AudioBuscaController',
 				            	}
 				        }
+					}).state('audioBuscaAvancada', {
+						url : '/audioBuscaAvancada',
+						views: {
+							'': {
+								templateUrl : '/js/directives/audio-busca-avancada/audio-busca-avancada.html',
+								controller : 'AudioBuscaControllerAvancada'
+							},
+							'headNav': {
+								templateUrl: '/js/components/head-menu.html',
+								controller: 'AudioBuscaControllerAvancada',
+							}
+						}
 					}).state('audioLista', {
 						url : '/audioLista',
 				        views: {

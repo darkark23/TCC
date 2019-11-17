@@ -101,15 +101,12 @@
 						</tr>
 					</tbody>
 				</table>
-	
 			</div>
 			<div class="container">
 				<div class="btn-group btn-group-toggle" data-toggle="buttons">
-					<label class="btn btn-secondary active">
-						<input type="radio"	name="options" id="option1" autocomplete="off" checked> Anterior (<)
-					</label> 
-					<label class="btn btn-secondary"> <input type="radio" ui-sref="audioBusca" name="options" id="option2" autocomplete="off"> Voltar (4) </label>
-					<label class="btn btn-secondary"> <input type="radio" name="options" id="option3" autocomplete="off"> Proximo (>) </label>
+					<button type="button" ui-sref="audioLista" class="btn btn-primary"> Anterior (<)</button>
+					<button type="button" ui-sref="menu" class="btn btn-danger">  Voltar (4)</button>
+					<button type="button" ui-sref="audioLista" class="btn btn-primary "> Proximo (>)</button>
 				</div>
 			</div>
 		</section>

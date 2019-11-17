@@ -26,9 +26,9 @@
 				<br>1055Kb</br>
 				<strong>Audio</strong>
 				<p></p>
-				<audio id="audio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="auto"></audio>
+				<audio id="audio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="auto" controls></audio>
 				<div class="progress">
-					<div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+					<div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{tempoAudio}}</div>
 				</div>
 				<p></p>
 				<div class="btn-group" role="group" aria-label="Basic example">
@@ -41,7 +41,7 @@
 			<p></p>
 			<div class="container">
 				<div class="btn-group btn-group-toggle" data-toggle="buttons">
-					<label class="btn btn-secondary"> <input type="radio" ui-sref="audioBusca" name="options" id="option2" autocomplete="off"> Voltar (4) </label>
+					<button type="button" ui-sref="menu" class="btn btn-secondary">Voltar (4)</button>
 				</div>
 			</div>
 		</section>

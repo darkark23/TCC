@@ -10,36 +10,16 @@
 			<div class="container">
 				<div class="form-label-group">
 					<div class="form-group">
-						<label for="formGroupExampleInput">Título Audio Livro (Alt+1)</label>
-						<input type="text" class="form-control"	id="formGroupExampleInput" placeholder="Digite o título do audio livro" accesskey="1">
-					</div>
-					<div class="form-group">
-						<label for="formGroupExampleInput">Título Livro Original (Alt+2)</label> <input type="text" class="form-control" id="formGroupExampleInput"	placeholder="Digite o título do livro original" accesskey="2">
-					</div>
-					<div class="form-group">
-						<label for="formGroupExampleInput2">Assunto (Alt+3)</label> 
-						<select	id="inputState" class="form-control" accesskey="3">
-							<option selected>Escolha um assunto</option>
-							<option>Ciência da Computação</option>
-							<option>Bibliografia Brasil</option>
-							<option>Literatura e leitura complementar</option>
-							<option>Literatura infantil</option>
-							<option>Sistemas filosóficos</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label for="formGroupExampleInput">Código Audio Livro (Alt+1)</label> <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Digite o código do audio livro" accesskey="4">
+						<label for="formGroupExampleInput">Palavra-chave (Alt+1)</label>
+						<input type="text" class="form-control"	id="formGroupExampleInput" placeholder="Digite ou diga uma palavra-chave referente ao audio livro" accesskey="1">
 					</div>
 				</div>
 			</div>
 			<div class="container">
 				<div class="btn-group btn-group-toggle" data-toggle="buttons">
-					<label class="btn btn-secondary active"> <input type="radio" name="options" id="option1" autocomplete="off" accesskey="37" checked> Anterior (<) </label> <label class="btn btn-secondary">
-						<input type="radio"	name="options" id="option2" autocomplete="off" accesskey="38"> Voltar (4) 
-					</label>
-					<label class="btn btn-secondary">
-						<input type="radio"	name="options" id="option3" autocomplete="off" accesskey="39"> Buscar (Enter)
-					</label>
+					<button type="button" ui-sref="audioLista" class="btn btn-primary "> Buscar (Enter)</button>
+					<button type="button" ui-sref="audioBuscaAvancada" class="btn btn-warning "> Busca Avançada (Enter)</button>
+					<button type="button" ui-sref="menu" class="btn btn-danger">  Voltar (4)</button>
 				</div>
 			</div>
 		</section>
