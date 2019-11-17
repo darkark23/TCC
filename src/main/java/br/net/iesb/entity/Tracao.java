@@ -24,7 +24,7 @@ public class Tracao {
 	@Id
 	@Column(name = "ID", nullable = false)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TRACAO_SEQUENCE")
-	@SequenceGenerator(name = "TRACAO_SEQUENCE", sequenceName = "TRACAO_SEQUENCE", initialValue = 10)
+	@SequenceGenerator(name = "TRACAO_SEQUENCE", sequenceName = "TRACAO_SEQUENCE")
 	private Integer id;
 
 	@Column(name = "DESCRICAO", nullable = false)

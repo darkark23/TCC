@@ -18,11 +18,11 @@ public class Idioma {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "IDIOMA_SEQUENCE")
-    @SequenceGenerator(name = "IDIOMA_SEQUENCE", sequenceName = "IDIOMA_SEQUENCE", initialValue = 10)
+    @SequenceGenerator(name = "IDIOMA_SEQUENCE", sequenceName = "IDIOMA_SEQUENCE")
     @Column(name = "ID", nullable = false)
-    private Integer id;
+    private Long id;
 
-    @Column(name = "NOME", nullable = false)
+    @Column(name = "NOME", nullable = false, length = 50)
     private String nome;
 
 }

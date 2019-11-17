@@ -1,6 +1,5 @@
 package br.net.iesb.entity;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,8 +17,7 @@ public class Endereco {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ENDERECO_SEQUENCE")
-    @SequenceGenerator(name = "ENDERECO_SEQUENCE", sequenceName = "ENDERECO_SEQUENCE", initialValue = 10)
-
+    @SequenceGenerator(name = "ENDERECO_SEQUENCE", sequenceName = "ENDERECO_SEQUENCE")
     @Column(name = "ID", nullable = false)
     private Integer id;
 
@@ -27,13 +25,13 @@ public class Endereco {
     @JoinColumn(name = "ID_CIDADE", foreignKey = @ForeignKey(name = "FK_ENDERECO_CIDADE"), nullable = false)
     private Cidade cidade;
 
-    @Column(name = "BAIRRO", nullable = false)
+    @Column(name = "BAIRRO", nullable = false, length = 50)
     private String bairro;
 
-    @Column(name = "COMPLEMENTO", nullable = false)
+    @Column(name = "COMPLEMENTO", nullable = false, length = 50)
     private String complemento;
 
-    @Column(name = "CEP", nullable = false)
-    private String cep;
+    @Column(name = "CEP", nullable = false, length = 8)
+    private Integer cep;
 
 }

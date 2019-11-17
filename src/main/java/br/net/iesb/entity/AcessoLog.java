@@ -19,9 +19,9 @@ public class AcessoLog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACESSO_LOG_SEQUENCE")
-    @SequenceGenerator(name = "ACESSO_LOG_SEQUENCE", sequenceName = "ACESSO_LOG_SEQUENCE", initialValue = 10)
+    @SequenceGenerator(name = "ACESSO_LOG_SEQUENCE", sequenceName = "ACESSO_LOG_SEQUENCE")
     @Column(name = "ID", nullable = false)
-    private Integer id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "ID_FUNCIONALIDADE", foreignKey = @ForeignKey(name = "FK_ACESSO_LOG_FUNCIONALIDADE"), nullable = false)
@@ -30,7 +30,6 @@ public class AcessoLog {
     @ManyToOne
     @JoinColumn(name = "ID_USUARIO", foreignKey = @ForeignKey(name = "FK_ACESSO_LOG_USUARIO"), nullable = false)
     private Usuario usuario;
-
 
     @Column(name = "DESCRICAO", nullable = false)
     private String descricao;

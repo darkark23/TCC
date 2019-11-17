@@ -1,6 +1,5 @@
 package br.net.iesb.entity;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,20 +18,20 @@ public class Competencia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "COMPETENCIA_SEQUENCE")
-    @SequenceGenerator(name = "COMPETENCIA_SEQUENCE", sequenceName = "COMPETENCIA_SEQUENCE", initialValue = 10)
+    @SequenceGenerator(name = "COMPETENCIA_SEQUENCE", sequenceName = "COMPETENCIA_SEQUENCE")
     @Column(name = "ID", nullable = false)
-    private Integer id;
+    private Long id;
 
-    @Column(name = "NOME", nullable = false)
+    @Column(name = "NOME", nullable = false, length = 50)
     private String nome;
 
-    @Column(name = "DESCRICAO", nullable = false)
+    @Column(name = "DESCRICAO", nullable = false, length = 255)
     private String descricao;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(name="PESSOA_COMPETENCIA",
-            joinColumns={@JoinColumn(name="ID_PESSOA", referencedColumnName="ID")},
-            inverseJoinColumns={@JoinColumn(name="ID_COMPETENCIA", referencedColumnName="ID")})
+            joinColumns={@JoinColumn(name="ID_COMPETENCIA", referencedColumnName="ID")},
+            inverseJoinColumns={@JoinColumn(name="ID_PESSOA", referencedColumnName="ID")})
     private List<Pessoa> listaPessoas;
 
 }

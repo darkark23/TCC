@@ -1,6 +1,5 @@
 package br.net.iesb.entity;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,14 +17,14 @@ public class Imagem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "IMAGEM_SEQUENCE")
-    @SequenceGenerator(name = "IMAGEM_SEQUENCE", sequenceName = "IMAGEM_SEQUENCE", initialValue = 10)
+    @SequenceGenerator(name = "IMAGEM_SEQUENCE", sequenceName = "IMAGEM_SEQUENCE")
     @Column(name = "ID", nullable = false)
-    private Integer id;
+    private Long id;
 
-    @Column(name = "NOME", nullable = false)
+    @Column(name = "DESCRICAO", nullable = false, length = 255)
     private String nome;
 
-    @Column(name = "URL", nullable = false)
+    @Column(name = "URL", nullable = false, length = 255)
     private String url;
 
 }

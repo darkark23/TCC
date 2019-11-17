@@ -7,19 +7,18 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
-@Table(name = "PERFIL")
+@Table(name = "ASSUNTO")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Perfil {
+public class Assunto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PERFIL_SEQUENCE")
-    @SequenceGenerator(name = "PERFIL_SEQUENCE", sequenceName = "PERFIL_SEQUENCE")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ASSUNTO_SEQUENCE")
+    @SequenceGenerator(name = "ASSUNTO_SEQUENCE", sequenceName = "ASSUNTO_SEQUENCE")
     @Column(name = "ID", nullable = false)
     private Long id;
 

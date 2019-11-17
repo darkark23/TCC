@@ -1,6 +1,5 @@
 package br.net.iesb.entity;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,14 +17,15 @@ public class Telefone {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TELEFONE_SEQUENCE")
-    @SequenceGenerator(name = "TELEFONE_SEQUENCE", sequenceName = "TELEFONE_SEQUENCE", initialValue = 10)
+    @SequenceGenerator(name = "TELEFONE_SEQUENCE", sequenceName = "TELEFONE_SEQUENCE")
     @Column(name = "ID", nullable = false)
-    private Integer id;
+    private Long id;
 
-    @Column(name = "TIPO", nullable = false)
+    //R-RESIDENCIAL / T-TRABALHO / C-CELULAR
+    @Column(name = "TIPO", nullable = false, length = 1)
     private String tipo;
 
-    @Column(name = "NUMERO", nullable = false)
-    private String numero;
+    @Column(name = "NUMERO", nullable = false, length = 14)
+    private Long numero;
     
 }

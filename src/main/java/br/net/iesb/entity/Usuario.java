@@ -1,6 +1,5 @@
 package br.net.iesb.entity;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,26 +19,25 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USUARIO_SEQUENCE")
-    @SequenceGenerator(name = "USUARIO_SEQUENCE", sequenceName = "USUARIO_SEQUENCE", initialValue = 10)
+    @SequenceGenerator(name = "USUARIO_SEQUENCE", sequenceName = "USUARIO_SEQUENCE")
     @Column(name = "ID", nullable = false)
-    private Integer id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "ID_PESSOA", foreignKey = @ForeignKey(name = "FK_USUARIO_PESSOA"), nullable = false)
-    private Pessoa endereco;
+    private Pessoa pessoa;
 
     @ManyToOne
     @JoinColumn(name = "ID_PERFIL", foreignKey = @ForeignKey(name = "FK_USUARIO_PERFIL"), nullable = false)
-    private Perfil telefone;
+    private Perfil perfil;
 
-
-    @Column(name = "LOGIN", nullable = false)
+    @Column(name = "LOGIN", nullable = false, length = 50)
     private String login;
 
-    @Column(name = "EMAIL", nullable = false)
+    @Column(name = "EMAIL", nullable = false, length = 50)
     private String email;
 
-    @Column(name = "SENHA", nullable = false)
+    @Column(name = "SENHA", nullable = false, length = 50)
     private String senha;
 
 }

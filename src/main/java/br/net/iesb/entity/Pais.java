@@ -24,7 +24,7 @@ public class Pais {
 	@Id
 	@Column(name = "ID", nullable = false)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PAIS_SEQUENCE")
-	@SequenceGenerator(name = "PAIS_SEQUENCE", sequenceName = "PAIS_SEQUENCE", initialValue = 10)
+	@SequenceGenerator(name = "PAIS_SEQUENCE", sequenceName = "PAIS_SEQUENCE")
 	private Integer id;
 
 	@Column(name = "DESCRICAO", nullable = false)

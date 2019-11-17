@@ -26,7 +26,7 @@ public class Automovel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AUTOMOVEL_SEQUENCE")
-	@SequenceGenerator(name = "AUTOMOVEL_SEQUENCE", sequenceName = "AUTOMOVEL_SEQUENCE", initialValue = 10)
+	@SequenceGenerator(name = "AUTOMOVEL_SEQUENCE", sequenceName = "AUTOMOVEL_SEQUENCE")
 	@Column(name = "ID", nullable = false)
 	private Integer id;
 
