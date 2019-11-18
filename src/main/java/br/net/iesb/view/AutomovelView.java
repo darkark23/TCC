@@ -3,7 +3,7 @@ package br.net.iesb.view;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import br.net.iesb.entity.Automovel;
+import br.net.iesb.entity.transacional.Automovel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

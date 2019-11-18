@@ -1,6 +1,6 @@
 package br.net.iesb.view;
 
-import br.net.iesb.entity.Modelo;
+import br.net.iesb.entity.transacional.Modelo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

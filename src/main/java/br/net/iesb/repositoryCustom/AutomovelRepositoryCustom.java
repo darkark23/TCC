@@ -12,9 +12,9 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.net.iesb.entity.Automovel;
+import br.net.iesb.entity.transacional.Automovel;
 import br.net.iesb.json.AutomovelFiltroJson;
-import br.net.iesb.repository.AutomovelRepository;
+import br.net.iesb.repository.transacional.AutomovelRepository;
 
 @org.springframework.stereotype.Repository
 public class AutomovelRepositoryCustom {

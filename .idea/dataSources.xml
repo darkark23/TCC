@@ -7,11 +7,17 @@
       <jdbc-driver>org.h2.Driver</jdbc-driver>
       <jdbc-url>jdbc:h2:mem:TCC</jdbc-url>
     </data-source>
-    <data-source source="LOCAL" name="tcc" uuid="4c1f5f9b-697c-42c3-90a7-d84daa04cad0">
+    <data-source source="LOCAL" name="transacional" uuid="8b7419f4-6b61-4d4c-a02f-2a201a9095da">
       <driver-ref>h2.unified</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.h2.Driver</jdbc-driver>
-      <jdbc-url>jdbc:h2:~/M18;AUTO_SERVER=TRUE</jdbc-url>
+      <jdbc-url>jdbc:h2:~/transacional;AUTO_SERVER=TRUE</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="bi" uuid="bb41465a-2662-4ec8-a256-412ae7724471">
+      <driver-ref>h2.unified</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.h2.Driver</jdbc-driver>
+      <jdbc-url>jdbc:h2:~/bi;AUTO_SERVER=TRUE</jdbc-url>
     </data-source>
   </component>
 </project>

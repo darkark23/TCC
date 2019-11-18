@@ -1,6 +1,6 @@
 package br.net.iesb.view;
 
-import br.net.iesb.entity.Automovel;
+import br.net.iesb.entity.transacional.Automovel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
