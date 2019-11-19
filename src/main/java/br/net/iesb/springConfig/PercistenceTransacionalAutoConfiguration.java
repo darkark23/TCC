@@ -1,16 +1,12 @@
 package br.net.iesb.springConfig;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
-import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -18,15 +14,21 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
-import java.util.Map;
 
 @Configuration
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:application-dt-transacional.properties")
 @EnableJpaRepositories(
-        basePackages = {"br.net.iesb.repository.transacional","br.net.iesb.service.transacional"},
+        basePackages = "br.net.iesb.repository.transacional",
         entityManagerFactoryRef = "transacionalEntityManager",
         transactionManagerRef = "transacionalTransactionManager")
 public class PercistenceTransacionalAutoConfiguration  {
+
+    @Bean
+    @Primary
+    @ConfigurationProperties(prefix="spring.datasource-transacional")
+    public DataSource transacionalDataSource() {
+        return DataSourceBuilder.create().build();
+    }
 
     @Bean
     @Primary
@@ -37,24 +39,12 @@ public class PercistenceTransacionalAutoConfiguration  {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
         HashMap<String, String> properties = new HashMap<>();
-        properties.put("spring.datasource.data", "transacional.sql");
-        properties.put("spring.h2.console.enabled", "true");
-        properties.put("spring.h2.console.path", "/h2");
-        properties.put("spring.jpa.hibernate.ddl-auto", "create-drop");
-        properties.put("spring.jpa.show-sql", "true");
+        properties.put("hibernate.hbm2ddl.auto", "create-drop");
+        properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        properties.put("hibernate.show_sql", "true");
+        properties.put("hibernate.hbm2ddl.import_files", "transacional.sql");
         em.setJpaPropertyMap(properties);
         return em;
-    }
-
-    @Bean
-    @Primary
-    public DataSource transacionalDataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:h2:~/transacional;AUTO_SERVER=TRUE");
-        dataSource.setUsername("sa");
-        dataSource.setPassword("");
-        return dataSource;
     }
 
     @Bean
