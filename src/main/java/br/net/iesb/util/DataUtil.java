@@ -43,7 +43,7 @@ public final class DataUtil {
     };
 
     public static String DataHoraAula(Date data, String nome){
-        return  FORMAT_HORARIO.format(data) + " - " + FORMAT_HORARIO.format(dataAdicionarHora(data)) + " - " + nome;
+        return  nome + " das " + FORMAT_HORARIO.format(data) + " às " + FORMAT_HORARIO.format(dataAdicionarHora(data));
     };
 
 }

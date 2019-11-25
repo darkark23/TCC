@@ -1,90 +1,83 @@
-'use strict'
+'use strict';
 angular.module('tccApp').controller('AgendaController',
 		[ "$scope", '$state', 'agendaService', '$rootScope', function($scope, $state, agendaService, $rootScope) {
 
-			if ($state.params.data){
-				agendaService.getAgendaDia($state.params.data,function (agendaDia) {
-					$scope.agendaDia = agendaDia;
-				},function () {
-					alert("Não foi possivel recuperar a  agenda para este dia.")
-				})
-			}else {
-				agendaService.getAgendaDia(new Date(),function (agendaDia) {
-					$scope.agendaDia = agendaDia;
-				},function () {
-					alert("Não foi possivel recuperar a  agenda para este dia.")
-				})
-			}
+	var audioAgenda = null;
+	if ($state.params.data){
+		agendaService.getAgendaDia($state.params.data,function (agendaDia) {
+			$scope.agendaDia = agendaDia;
+			construirAudioAgenda();
+			iniciarAudio();
+		},function () {
+		})
+	}else {
+		agendaService.getAgendaDia(new Date(),function (agendaDia) {
+			$scope.agendaDia = agendaDia;
+			construirAudioAgenda();
+			iniciarAudio();
+		},function () {
+		})
+	}
 
-			var synth = window.speechSynthesis;
-			synth.cancel();
-			var utterance = new SpeechSynthesisUtterance('Página de agenda.');
-			utterance.lang = 'pt-BR';
-			utterance.rate = 2;
+	document.onkeyup = function(e) {
+		if (e.which == 32) {
 			synth.speak(utterance);
-			
-			document.onkeyup = function(e) {
-				if (e.which == 32) {
-					synth.speak(utterance);
-				} 
-			};
-													
-	          const recognition = new webkitSpeechRecognition();
-	          recognition.interimResults = true;
-	          recognition.lang = "pt-BR";
-	          recognition.continuous = true;
-	          recognition.start();
-	          // This event happens when you talk in the microphone
-	          recognition.onresult = function(event) {
-	            for (let i = event.resultIndex; i < event.results.length; i++) {
-	              if (event.results[i].isFinal) {
-	            	  var son = event.results[i][0].transcript.trim();
-	            	  if (son == 'principal'){
-	            		  synth.cancel();
-	            		  $state.go('principal', {
-							}, {
-								reload : true
-							});
-	            	  } else if(son == 'menu'){
-	            		  	synth.cancel();
-	            			$state.go('menu', {
-							}, {
-								reload : true
-							});
-	            	  } else if(son == 'sair'){
-	            		  	synth.cancel();
-	            			$state.go('principal', {
-							}, {
-								reload : true
-							});
-	            	  }       	 
-	              }
-	            }
-	          };
-	          
-	          $scope.atualizar = function(string) {
-	        	  console.log(string);
-	        	  $scope.microfone = string;
-	          };
+		}
+	};
 
-			$scope.acessarAgendaProxima = function() {
-				var proximaData = new Date($state.params.data);
-				proximaData.setDate(proximaData.getDate() + 1);
-				$state.go('agenda', {
-					data : proximaData
-				}, {
-					reload : true
-				});
-			};
+	recognition.onresult = function(event) {
+		for (let i = event.resultIndex; i < event.results.length; i++) {
+			if (event.results[i].isFinal) {
+				var son = event.results[i][0].transcript.trim();
+				if (son == 'voltar' || son == 'menu'){
+					synth.cancel();
+					$state.go('principal',{}, {reload : true});
+				} else if(son == 'próximo'){
+					synth.cancel();
+					$scope.acessarAgendaProxima();
+				} else if(son == 'anterior'){
+					synth.cancel();
+					$scope.acessarAgendaAnterior();
+				} else if(son == 'repetir'){
+					synth.cancel();
+					reproduzirFrase()
+				}else {
+					synth.cancel();
+					reproduzirFrase(getAudio.ajuda);
+				}
+			}
+		}
+	};
 
-			$scope.acessarAgendaAnterior = function() {
-				var proximaData = new Date($state.params.data);
-				proximaData.setDate(proximaData.getDate() - 1);
-				$state.go('agenda', {
-					data : proximaData
-				}, {
-					reload : true
-				});
-			};
+	$scope.acessarAgendaProxima = function() {
+		var proximaData = new Date($state.params.data);
+		proximaData.setDate(proximaData.getDate() + 1);
+		$state.go('agenda',{data : proximaData},{reload : true});
+	};
+
+	$scope.acessarAgendaAnterior = function() {
+		var proximaData = new Date($state.params.data);
+		proximaData.setDate(proximaData.getDate() - 1);
+		$state.go('agenda',{data : proximaData},{reload : true});
+	};
+
+	function construirAudioAgenda (){
+		if($scope.agendaDia.listaAulas.length == 0){
+			audioAgenda = ' Agenda para o dia ' + $scope.agendaDia.data + '. não existem aulas marcadas no momento.'
+		}else {
+			audioAgenda = ' Agenda para o dia ' + $scope.agendaDia.data + '. Para este dia estão marcadas as seguintes aulas: ';
+			$scope.agendaDia.listaAulas.forEach(adicionarAulasAudio);
+		}
+	}
+
+	function adicionarAulasAudio(item, index) {
+		audioAgenda = audioAgenda + item.descricao + ' , ';
+	}
+
+	function iniciarAudio() {
+		synth.cancel();
+		reproduzirFrase(getAudio.agenda.intro + audioAgenda);
+		comecarReconhecimento();
+	}
 	          
-		}]);
+}]);

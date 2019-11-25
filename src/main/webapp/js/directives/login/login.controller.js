@@ -1,40 +1,17 @@
 'use strict'
 angular.module('tccApp').controller('LoginController',
-		[ "$scope", '$state', 'loginService', '$rootScope', function($scope, $state, loginService, $rootScope) {
+		[ '$scope', '$state', 'loginService', '$rootScope', function($scope, $state, loginService, $rootScope) {
 			
-			$scope.dados = {
-					usuario : null,
-					senha : null
-			};
-			var synth = window.speechSynthesis;
+			$scope.dados = {usuario : null,	senha : null};
 			var tipoInput = 0;
-			var utterance = null;
-			var recognition = null;
-			var frasePrincipal = 'Página login. Diga usuário para informar um usuário via teclado, senha para informar uma senha. Aperte seta para baixo para submeter o usuário e senha. Caso a senha ou o usuário estejam incorretos diga o nome do campo que queira corrigir e digite outra vez.';
-			var fraseAjuda = 'Você tem as seguintes opções, diga principal para acessar a página principal, contato para página com informações de contato da instituição, localização para página com informação de localização da instituição, login para acessar a página para entrada do sistema. Você pode também apertar os botões de um a quatro no teclado numérico para as respectivas páginas, principal, contato, localização e login. Fonte exame.abril.com.br/estilo-de-vida/designer-cria-fonte-que-une-braile-ao-alfabeto-tradicional/' ;
-			
-			var reproduzirFrase = function(frase) {
-				synth.cancel();
-				utterance = new SpeechSynthesisUtterance(frase);
-				utterance.lang = 'pt-BR';
-				utterance.rate = 2;
-				synth.speak(utterance);
-			}
-			
-			var comecarReconhecimento = function(){
-				recognition = new webkitSpeechRecognition();
-				recognition.interimResults = true;
-				recognition.lang = "pt-BR";
-				recognition.continuous = true;
-				recognition.start();
-			}
-			
+
 			synth.cancel();
-			reproduzirFrase(frasePrincipal);
+			reproduzirFrase(getAudio.login.intro);
+			comecarReconhecimento();
 
 			document.onkeyup = function(e) {
 				if (e.which == 96) {
-					reproduzirFrase(frasePrincipal);
+					reproduzirFrase(getAudio.login.intro);
 				} else if (e.which == 97) {
 					synth.cancel();
 					$state.go('principal', {}, {
@@ -61,12 +38,10 @@ angular.module('tccApp').controller('LoginController',
 						reload : true
 					});
 				}  else if (e.which == 105) {
-					reproduzirFrase(fraseAjuda);
+					reproduzirFrase(getAudio.login.fraseAjuda);
 				}
 			};
 
-			comecarReconhecimento();
-			
 			recognition.onresult = function(event) {
 				for (let i = event.resultIndex; i < event.results.length; i++) {
 					if (event.results[i].isFinal) {
@@ -98,16 +73,16 @@ angular.module('tccApp').controller('LoginController',
 							});
 						} else if (son == 'entrar') {
 							if(!$scope.dados.usuario){
-								reproduzirFrase('Por favor informe um usuário.');
+								reproduzirFrase(getAudio.login.informeUsuario);
 								tipoInput = 1;
 							} else if(!$scope.dados.senha){
-								reproduzirFrase('Por favor Informe uma senha.');
+								reproduzirFrase(getAudio.login.informeSenha);
 								tipoInput = 2;
 							} else if(!$scope.dados.usuario && !$scope.dados.senha){
-								reproduzirFrase('Por favor Informe uma senha e um usuário.');
+								reproduzirFrase(getAudio.login.informeUsuarioSenha);
 								tipoInput = 0;
 							} else if($scope.dados.usuario != 'teste' || $scope.dados.senha != 'teste'){
-								reproduzirFrase('Senha ou usuário incorreto.');
+								reproduzirFrase(getAudio.login.usuarioSenhaIncorreto);
 								tipoInput = 0;
 							} else {
 								synth.cancel();
@@ -117,39 +92,39 @@ angular.module('tccApp').controller('LoginController',
 							}
 						}else if (son == 'usuário') {
 							if($scope.dados.usuario){
-								document.getElementById("usuario").focus();
+								document.getElementById('usuario').focus();
 								tipoInput = 1;
 								reproduzirFrase('O usuário digitado foi ' + $scope.dados.usuario + '. Informe um novo usuário.');
 							} else {
-								document.getElementById("usuario").focus();
+								document.getElementById('usuario').focus();
 								tipoInput = 1;
-								reproduzirFrase('Informe um usuário.');
+								reproduzirFrase(getAudio.login.informeUsuario);
 							}
 						} else if (son == 'senha') {
 							if($scope.dados.senha){
-								document.getElementById("senha").focus();
+								document.getElementById('senha').focus();
 								tipoInput = 2;
 								reproduzirFrase('A senha informada foi ' + $scope.dados.senha + '. Informe uma nova senha.');
 							} else {
-								document.getElementById("senha").focus();
+								document.getElementById('senha').focus();
 								tipoInput = 2;
-								reproduzirFrase('Informe uma senha.');
+								reproduzirFrase(getAudio.login.informeSenha);
 							}
 						} else if (son == 'outros' || son == 'ajuda') {
-							reproduzirFrase(fraseAjuda);
+							reproduzirFrase(getAudio.login.fraseAjuda);
 						} else if (son == 'repetir') {
-							reproduzirFrase(frasePrincipal);
+							reproduzirFrase(getAudio.login.intro);
 						} else if(tipoInput == 0) {
-							reproduzirFrase('Descupa não entendi, por favor repita. Em caso de dúvida diga ajuda.');
+							reproduzirFrase(getAudio.ajuda);
 						} else if (tipoInput == 1){
 							$scope.dados.usuario = son;
-							document.getElementById("usuario").value = son;
-							document.getElementById("usuario").blur();
+							document.getElementById('usuario').value = son;
+							document.getElementById('usuario').blur();
 							tipoInput = 0;
 							reproduzirFrase('O usuário digitado foi ' + son);
 						} else if (tipoInput == 2){
-							document.getElementById("senha").blur();
-							document.getElementById("senha").value = son;
+							document.getElementById('senha').blur();
+							document.getElementById('senha').value = son;
 							$scope.dados.senha = son;
 							tipoInput = 0;
 							reproduzirFrase('A senha digitada foi ' + son);

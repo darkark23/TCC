@@ -6,18 +6,18 @@
 		<title>Noticias</title>
 	</head>
 	<body>
-	<div ng-repeat="noticia in noticias">
-		<header class="py-5 bg-image-full" style="background-image:url({{noticia.imagemUrl}}); background-repeat:no-repeat; background-size: cover; background-position: center" alt="{{noticia.descricaoImagem}}">
-			<img class="img-fluid d-block mx-auto"  ng-show="$first" style="height: 250px; width: 250px" src="resources/imagem/logo.jpg" alt="imagem">
-			<div  ng-show="!$first > 0" style="height: 200px;"></div>
-		</header>
-		<section class="py-5">
-			<div class="container">
-				<h1 id="noticia{{$index+1}}">{{noticia.titulo}}</h1>
-				<p class="lead"> Publicação em {{noticia.dataPublicacao| date:'dd/MM/yyyy'}} por {{noticia.usuario}}</p>
-				<div ng-bind-html="noticia.corpo"></div>
-			</div>
-		</section>
-	</div>
+		<div ng-repeat="noticia in noticias">
+			<header class="py-5 bg-image-full" style="background-image:url({{noticia.imagemUrl}}); background-repeat:no-repeat; background-size: cover; background-position: center" alt="{{noticia.descricaoImagem}}">
+				<img class="img-fluid d-block mx-auto"  ng-show="$first" style="height: 250px; width: 250px" src="resources/imagem/logo.jpg" alt="imagem">
+				<div  ng-show="!$first > 0" style="height: 200px;"></div>
+			</header>
+			<section class="py-5">
+				<div class="container">
+					<h1 id="noticia{{$index+1}}">{{noticia.titulo}}</h1>
+					<p class="lead"> Publicação em {{noticia.dataPublicacao| date:'dd/MM/yyyy'}} por {{noticia.usuario}}</p>
+					<div ng-bind-html="noticia.corpo"></div>
+				</div>
+			</section>
+		</div>
 	</body>
 </html>
