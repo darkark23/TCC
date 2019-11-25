@@ -8,105 +8,48 @@
 	<body>
 		<section class="py-5">
 			<div class="container">
-				<div class="alert alert-light" role="alert">Mostrando resultado	1-10 de 301</div>
-				<table class="table">
-					<thead class="thead-dark">
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">Titulo</th>
-							<th scope="col">Código</th>
-							<th scope="col"></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th scope="row">1</th>
-							<td>Audio Livro 01</td>
-							<td>000001</td>
-							<td align="right">
-								<button type="button" ui-sref="audio" class="btn btn-success"> Selecionar (Alt+0) </button>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Audio Livro 02</td>
-							<td>000002</td>
-							<td align="right">
-								<button type="button" ui-sref="audio" class="btn btn-success"> Selecionar (Alt+1) </button>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Audio Livro 03</td>
-							<td>000003</td>
-							<td align="right">
-								<button type="button" ui-sref="audio" class="btn btn-success"> Selecionar (Alt+2) </button>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row">4</th>
-							<td>Audio Livro 04</td>
-							<td>000004</td>
-							<td align="right">
-								<button type="button" ui-sref="audio" class="btn btn-success"> Selecionar (Alt+3) </button>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row">5</th>
-							<td>Audio Livro 05</td>
-							<td>000005</td>
-							<td align="right">
-								<button type="button" ui-sref="audio" class="btn btn-success"> Selecionar (Alt+4) </button>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row">6</th>
-							<td>Audio Livro 06</td>
-							<td>000006</td>
-							<td align="right">
-								<button type="button" ui-sref="audio" class="btn btn-success"> Selecionar (Alt+5) </button>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row">7</th>
-							<td>Audio Livro 07</td>
-							<td>000007</td>
-							<td align="right">
-								<button type="button" ui-sref="audio" class="btn btn-success"> Selecionar (Alt+6) </button>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row">8</th>
-							<td>Audio Livro 08</td>
-							<td>000008</td>
-							<td align="right">
-								<button type="button" ui-sref="audio" class="btn btn-success"> Selecionar (Alt+7) </button>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row">9</th>
-							<td>Audio Livro 09</td>
-							<td>000009</td>
-							<td align="right">
-								<button type="button" ui-sref="audio" class="btn btn-success"> Selecionar (Alt+8) </button>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row">10</th>
-							<td>Audio Livro 10</td>
-							<td>000010</td>
-							<td align="right">
-								<button type="button" ui-sref="audio" class="btn btn-success"> Selecionar (Alt+9) </button>
-							</td>
-						</tr>
-					</tbody>
+				<div ng-show="audioLivros.length > 1 && audioLivros" class="alert alert-light" role="alert">Mostrando {{audioLivros.length}} resultados</div>
+				<div ng-show="audioLivros.length == 1 && audioLivros" class="alert alert-light" role="alert">Mostrando 1 resultado</div>
+				<div ng-show="audioLivros == 0">
+					<div class="alert alert-danger" role="alert">
+						Nenhum áudio livro encontrado com o termo informado.
+					</div>
+				</div>
+				<table ng-show="audioLivros != 0" class="table">
+					<div ng-show="audioLivros">
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Titulo</th>
+								<th scope="col">Código</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="audioLivro in audioLivros">
+								<th scope="row">{{$index + 1}}</th>
+								<td>{{audioLivro.titulo}}</td>
+								<td>{{audioLivro.codigo}}</td>
+								<td align="right">
+									<button type="button" ng-click="acessarAudio(audioLivro.id)" class="btn btn-success"> Selecionar (Alt+0) </button>
+								</td>
+							</tr>
+						</tbody>
+					</div>
 				</table>
 			</div>
 			<div class="container">
-				<div class="btn-group btn-group-toggle" data-toggle="buttons">
-					<button type="button" ui-sref="audioLista" class="btn btn-primary"> Anterior (<)</button>
-					<button type="button" ui-sref="menu" class="btn btn-danger">  Voltar (4)</button>
-					<button type="button" ui-sref="audioLista" class="btn btn-primary "> Proximo (>)</button>
+				<div ng-show="audioLivros.length > 10 && audioLivros">
+					<div class="btn-group btn-group-toggle" data-toggle="buttons">
+						<button type="button" class="btn btn-primary"> Anterior (<)</button>
+						<button type="button" ng-click="voltar()" class="btn btn-danger">  Voltar (4)</button>
+						<button type="button" class="btn btn-primary "> Proximo (>)</button>
+					</div>
+				</div>
+				<div ng-show="audioLivros.length < 10">
+					<div class="btn-group btn-group-toggle" data-toggle="buttons">
+						<button type="button" ng-click="voltar()" class="btn btn-secondary">Voltar (4)</button>
+					</div>
 				</div>
 			</div>
 		</section>

@@ -2,8 +2,21 @@
 angular.module('tccApp').controller('AudioController',
     ["$scope", '$state', 'audioService', '$rootScope', function ($scope, $state, audioService, $rootScope) {
 
+        $scope.audioLivro = null;
+        $scope.audio = null;
+
+        if($state.params.id){
+            audioService.getAudioLivro($state.params.id,function (audioLivro) {
+                $scope.audioLivro = audioLivro;
+            },function () {
+                alert("Não foi possivel recuperar o áudio livro.")
+            })
+        }
+
         var audio = document.getElementById('audio');
         audio.currentTime = 12;
+        //$scope.audio = audio.duration;
+
 
         $scope.salvarPosicao = function () {
             console.log(audio.currentTime);
@@ -92,5 +105,10 @@ angular.module('tccApp').controller('AudioController',
                 }
             }
         };
+
+        $scope.voltar = function () {
+            window.history.back();
+
+        }
 
     }]);

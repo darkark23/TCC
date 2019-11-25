@@ -7,21 +7,19 @@
 	</head>
 	<body>
 		<section class="py-5">
-			<div class="container">
+			<div ng-show="agendaDia" class="container">
 				<ul class="list-group">
-					<li class="list-group-item active">2 de maio de 2019</li>
-					<li class="list-group-item">08:30 - 09:30 - Aula 01</li>
-					<li class="list-group-item">10:30 - 11:30 - Aula 01</li>
-					<li class="list-group-item">14:30 - 15:30 - Aula 01</li>
-					<li class="list-group-item">16:30 - 17:30 - Aula 01</li>
+					<li class="list-group-item active">{{agendaDia.data}}</li>
+					<li ng-show="agendaDia.listaAulas" ng-repeat="aula in agendaDia.listaAulas" class="list-group-item">{{aula.descricao}}</li>
+					<li ng-show="agendaDia.listaAulas.length == 0" class="list-group-item">Não existem aulas registradas para este dia.</li>
 				</ul>
 			</div>
 			<p></p>
 			<div class="container">
 				<div class="btn-group btn-group-toggle" data-toggle="buttons">
-					<button type="button" ui-sref="audioLista" class="btn btn-primary"> Anterior (<)</button>
+					<button type="button" ng-click="acessarAgendaAnterior()" class="btn btn-primary"> Anterior (<)</button>
 					<button type="button" ui-sref="menu" class="btn btn-danger">  Voltar (4)</button>
-					<button type="button" ui-sref="audioLista" class="btn btn-primary "> Proximo (>)</button>
+					<button type="button" ng-click="acessarAgendaProxima()" class="btn btn-primary "> Proximo (>)</button>
 				</div>
 			</div>
 		</section>

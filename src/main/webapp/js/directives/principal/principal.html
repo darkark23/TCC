@@ -6,38 +6,18 @@
 		<title>Noticias</title>
 	</head>
 	<body>
-		<header class="py-5 bg-image-full" style="background-image:url('resources/imagem/noticia01.jpg'); background-repeat:no-repeat; background-size: cover; background-position: center">
-			<img class="img-fluid d-block mx-auto" style="height: 250px; width: 250px" src="resources/imagem/logo.jpg" alt="">
+	<div ng-repeat="noticia in noticias">
+		<header class="py-5 bg-image-full" style="background-image:url({{noticia.imagemUrl}}); background-repeat:no-repeat; background-size: cover; background-position: center" alt="{{noticia.descricaoImagem}}">
+			<img class="img-fluid d-block mx-auto"  ng-show="$first" style="height: 250px; width: 250px" src="resources/imagem/logo.jpg" alt="imagem">
+			<div  ng-show="!$first > 0" style="height: 200px;"></div>
 		</header>
 		<section class="py-5">
 			<div class="container">
-				<h1 id="noticia01">Notícia 01</h1>
-				<p class="lead">Designer cria fonte que une braile ao alfabeto tradicional.</p>
-				<p>São Paulo – Um designer japonês teve uma ideia brilhante para tentar incluir ainda mais os deficientes visuais no dia-a-dia da sociedade: criar uma fonte tipográfica que une a escrita tradicional ao braile. A lógica por trás disso é permitir que cegos e outras pessoas possam compartilhar de uma mesma comunicação em um espaço comum.</p>
-				<p>Como? Da seguinte maneira: os pontos do braile aprecem em alto relevo e integrados aos caracteres tradicionais do alfabeto latino. O designer Kosuke Takahashi, criador da fonte Braile Neue, propõe que essa tipografia seja adotada já nos próximos Jogos Olímpicos, que ocorrem daqui a dois anos, em Tóquio, capital do Japão.</p>
-				<p>Mas há um problema: geralmente a comunicação em braile tende a ser pequena e quase invisível. Por isso, Takahashi diz que realizou uma pesquisa para ver se uma larga sinalização com a linguagem para deficientes visuais poderia ser legível a eles. “Descobri que é possível, contanto que exista um padrão de até seis pontos, independentemente do tamanho”, diz o designer, em seu website.</p>
-				<p>“Hoje em dia, raramente vemos o braile implementado nos lugares públicos, uma vez que essa comunicação necessita de um espaço adicional, sendo considerada por aqueles que têm visão como algo não importante”, diz Takahashi.</p>
-				<p>“A Braille Neue aborda essa questão, ao tornar o braile mais acessível para ser usado por pessoas sem deficiência visual. Ao divulgar essa fonte tipográfica, acredito que mais pessoas vão ficar familiarizadas com a linguagem”, acrescenta o designer.</p>
-				<p>Ele afirma ainda que a fonte pode substituir as atuais sinalizações no espaço público, precisando apenas fazer alguns ajustes. “É fácil implementá-la na infraestrutura existente e é também um trampolim para um futuro mais sustentável e inclusivo após 2020”, comenta Takahashi.</p>
-				<p>Fonte:https://exame.abril.com.br/estilo-de-vida/designer-cria-fonte-que-une-braile-ao-alfabeto-tradicional/</p>
-				<button class="btn btn-primary" type="submit">comentarios(1)</button>
+				<h1 id="noticia{{$index+1}}">{{noticia.titulo}}</h1>
+				<p class="lead"> Publicação em {{noticia.dataPublicacao| date:'dd/MM/yyyy'}} por {{noticia.usuario}}</p>
+				<div ng-bind-html="noticia.corpo"></div>
 			</div>
 		</section>
-		<header class="py-5 bg-image-full" style="background-image:url('resources/imagem/noticia02.jpg'); background-repeat:no-repeat; background-size: cover; background-position: center">
-			<div style="height: 200px;"></div>
-		</header>
-		</section>
-		<section class="py-5">
-			<div class="container">
-				<h1>Notícia 02</h1>
-				<p class="lead">Lorem ipsum dolor sit amet, consectetur
-					adipisicing elit.</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-					Aliquid, suscipit, rerum quos facilis repellat architecto commodi
-					officia atque nemo facere eum non illo voluptatem quae delectus odit
-					vel itaque amet.</p>
-				<button class="btn btn-primary" type="submit">comentarios(12)</button>
-			</div>
-		</section>
+	</div>
 	</body>
 </html>

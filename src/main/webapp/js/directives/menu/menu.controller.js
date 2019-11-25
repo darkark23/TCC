@@ -7,6 +7,14 @@ angular.module('tccApp').controller('MenuController',
 			var recognition = null;
 			var frasePrincipal = 'Menu de seleção de funcionalidades. Diga áudio para procura um áudio livro, agenda para verificar a agenda de aulas marcadas para o clube do ledor, sair para encerrar a sessão atual.';
 			var fraseAjuda = 'Você tem as seguintes opções, diga áudio para procura um áudio livro, agenda para verificar a agenda de aulas marcadas para o clube do ledor, sair para encerrar a sessão atual. Você pode também apertar os botões de um a três no teclado numérico para as respectivas opções, áudio, agenda e sair' ;
+
+			$scope.acessarAgenda = function() {
+				$state.go('agenda', {
+					data : new Date()
+				}, {
+					reload : true
+				});
+			};
 			
 			var reproduzirFrase = function(frase) {
 				synth.cancel();

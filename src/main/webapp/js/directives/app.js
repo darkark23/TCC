@@ -17,7 +17,7 @@ angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast']).confi
 						templateUrl : '/js/directives/consulta/consulta.html',
 						controller : 'ConsultaController'
 					}).state('agenda', {
-						url : '/agenda',
+						url : '/agenda/:data',
 					        views: {
 					            '': {
 									templateUrl : '/js/directives/agenda/agenda.html',
@@ -29,7 +29,7 @@ angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast']).confi
 					            	}
 					        }
 					}).state('audio', {
-						url : '/audio',
+						url : '/audio/:id',
 				        views: {
 				            '': {
 								templateUrl : '/js/directives/audio/audio.html',
@@ -65,7 +65,7 @@ angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast']).confi
 							}
 						}
 					}).state('audioLista', {
-						url : '/audioLista',
+						url : '/audioLista/:termo',
 				        views: {
 				            '': {
 								templateUrl : '/js/directives/audio-lista/audio-lista.html',

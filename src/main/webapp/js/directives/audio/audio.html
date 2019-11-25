@@ -9,39 +9,53 @@
 		<section class="py-5">
 			<div class="container">
 				<strong>Título</strong>
-				<br>Audio Book 01</br>
+				<br>{{audioLivro.tituloAudioBook}}</br>
 				<strong>Ledor</strong>
-				<br>Ledor 01</br>
+				<br>{{audioLivro.ledor}}</br>
 				<strong>Livro original</strong>
-				<br>---</br>
+				<br>{{audioLivro.tituloLivroReferencia}}</br>
 				<strong>Assunto:</strong>
-				<ul>
-					<li>Assunto 01</li>
-					<li>Assunto 02</li>
-					<li>Assunto 03</li>
-				</ul>
-				<strong>Duração</strong>
-				<br>00:45</br>
-				<strong>Tamanho</strong>
-				<br>1055Kb</br>
+				<div ng-show="!audioLivro.listaAssunto">
+					<br >Sem assuntos vinculados</br>
+				</div>
+				<div ng-show="audioLivro.listaAssunto">
+					<ul>
+						<li ng-show="audioLivro.listaAssunto" ng-repeat="assunto in audioLivro.listaAssunto">{{assunto.nome}}</li>
+					</ul>
+				</div>
+
+				<strong>Descrição</strong>
+				<br>{{audioLivro.descricao}}</br>
+
+				<div ng-show="audioLivro.urlTexto">
+					<br>
+						<a href="{{audioLivro.urlTexto}}">Versão em texto</a>
+					</br>
+				</div>
+				<div ng-show="!audioLivro.urlTexto">
+					<br>
+						Sem versão em texto
+					</br>
+				</div>
+				<p></p>
 				<strong>Audio</strong>
 				<p></p>
-				<audio id="audio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="auto" controls></audio>
-				<div class="progress">
-					<div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{tempoAudio}}</div>
-				</div>
+				<audio preload="metadata" id="audio" src="{{audioLivro.url}}" controls></audio>
+
 				<p></p>
 				<div class="btn-group" role="group" aria-label="Basic example">
 					<button type="button" class="btn btn-secondary" ng-click="retrocederAudio()">Retornar</button>
 					<button type="button" class="btn btn-success" ng-click="reproduzirAudio()">Reproduzir</button>
 					<button type="button" class="btn btn-danger" ng-click="pararAudio()">Pausar</button>
 					<button type="button" class="btn btn-secondary" ng-click="avancarAudio()">Avançar</button>
+					<button type="button" class="btn btn-success" >Vol +</button>
+					<button type="button" class="btn btn-danger" >Vol -</button>
 				</div>
 			</div>
 			<p></p>
 			<div class="container">
 				<div class="btn-group btn-group-toggle" data-toggle="buttons">
-					<button type="button" ui-sref="menu" class="btn btn-secondary">Voltar (4)</button>
+					<button type="button" ng-click="voltar()" class="btn btn-secondary">Voltar (4)</button>
 				</div>
 			</div>
 		</section>

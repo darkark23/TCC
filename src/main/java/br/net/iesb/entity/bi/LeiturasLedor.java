@@ -8,16 +8,16 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "LEITURAS_USUARIO")
+@Table(name = "LEITURAS_LEDOR")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class LeiturasUsuario {
+public class LeiturasLedor {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LEITURAS_USUARIO_SEQUENCE")
-	@SequenceGenerator(name = "LEITURAS_USUARIO_SEQUENCE", sequenceName = "LEITURAS_USUARIO_SEQUENCE")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LEITURAS_LEDOR_SEQUENCE")
+	@SequenceGenerator(name = "LEITURAS_LEDOR_SEQUENCE", sequenceName = "LEITURAS_LEDOR_SEQUENCE")
 	@Column(name = "ID", nullable = false)
 	private Integer id;
 

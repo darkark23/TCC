@@ -11,14 +11,14 @@
 				<div class="form-label-group">
 					<div class="form-group">
 						<label for="formGroupExampleInput">Palavra-chave (Alt+1)</label>
-						<input type="text" class="form-control"	id="formGroupExampleInput" placeholder="Digite ou diga uma palavra-chave referente ao audio livro" accesskey="1">
+						<input ng-model="termo" type="text" class="form-control"	id="formGroupExampleInput" placeholder="Digite ou diga uma palavra-chave referente ao audio livro" accesskey="1">
 					</div>
 				</div>
 			</div>
 			<div class="container">
 				<div class="btn-group btn-group-toggle" data-toggle="buttons">
-					<button type="button" ui-sref="audioLista" class="btn btn-primary "> Buscar (Enter)</button>
-					<button type="button" ui-sref="audioBuscaAvancada" class="btn btn-warning "> Busca Avançada (Enter)</button>
+					<button type="button" ng-click="acessarLista()" class="btn btn-primary "> Buscar (Enter)</button>
+					<!--<button type="button" ui-sref="audioBuscaAvancada" class="btn btn-warning "> Busca Avançada (Enter)</button>-->
 					<button type="button" ui-sref="menu" class="btn btn-danger">  Voltar (4)</button>
 				</div>
 			</div>

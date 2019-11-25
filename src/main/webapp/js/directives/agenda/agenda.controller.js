@@ -1,8 +1,21 @@
 'use strict'
 angular.module('tccApp').controller('AgendaController',
 		[ "$scope", '$state', 'agendaService', '$rootScope', function($scope, $state, agendaService, $rootScope) {
-			
-			
+
+			if ($state.params.data){
+				agendaService.getAgendaDia($state.params.data,function (agendaDia) {
+					$scope.agendaDia = agendaDia;
+				},function () {
+					alert("Não foi possivel recuperar a  agenda para este dia.")
+				})
+			}else {
+				agendaService.getAgendaDia(new Date(),function (agendaDia) {
+					$scope.agendaDia = agendaDia;
+				},function () {
+					alert("Não foi possivel recuperar a  agenda para este dia.")
+				})
+			}
+
 			var synth = window.speechSynthesis;
 			synth.cancel();
 			var utterance = new SpeechSynthesisUtterance('Página de agenda.');
@@ -52,6 +65,26 @@ angular.module('tccApp').controller('AgendaController',
 	          $scope.atualizar = function(string) {
 	        	  console.log(string);
 	        	  $scope.microfone = string;
-				};
+	          };
+
+			$scope.acessarAgendaProxima = function() {
+				var proximaData = new Date($state.params.data);
+				proximaData.setDate(proximaData.getDate() + 1);
+				$state.go('agenda', {
+					data : proximaData
+				}, {
+					reload : true
+				});
+			};
+
+			$scope.acessarAgendaAnterior = function() {
+				var proximaData = new Date($state.params.data);
+				proximaData.setDate(proximaData.getDate() - 1);
+				$state.go('agenda', {
+					data : proximaData
+				}, {
+					reload : true
+				});
+			};
 	          
 		}]);

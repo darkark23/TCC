@@ -8,11 +8,24 @@ angular.module('tccApp').controller('AudioBuscaController',
 			utterance.lang = 'pt-BR';
 			utterance.rate = 2;
 			synth.speak(utterance);
+			$scope.termo = null;
 			
 			document.onkeyup = function(e) {
 				if (e.which == 32) {
 					synth.speak(utterance);
 				} 
+			};
+
+			$scope.acessarLista = function() {
+				if(!$scope.termo){
+					alert("Informe algum termo!");
+				} else {
+					$state.go('audioLista', {
+						termo : $scope.termo
+					}, {
+						reload : true
+					});
+				}
 			};
 													
 	          const recognition = new webkitSpeechRecognition();

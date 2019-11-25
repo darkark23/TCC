@@ -37,7 +37,7 @@ public class PercistenceBIAutoConfiguration {
         em.setJpaVendorAdapter(vendorAdapter);
         HashMap<String, String> properties = new HashMap<>();
         properties.put("hibernate.hbm2ddl.auto", "create-drop");
-        properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
         properties.put("hibernate.show_sql", "true");
         properties.put("hibernate.hbm2ddl.import_files", "bi.sql");
         em.setJpaPropertyMap(properties);

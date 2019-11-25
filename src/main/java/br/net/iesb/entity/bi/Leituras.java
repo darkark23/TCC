@@ -23,11 +23,11 @@ public class Leituras {
 
 	@ManyToOne
 	@JoinColumn(name = "ID_LEITOR", foreignKey = @ForeignKey(name = "FK_LEITURAS_LEITOR"), nullable = false)
-	private LeiturasUsuario leitor;
+	private LeiturasLeitor leitor;
 
 	@ManyToOne
 	@JoinColumn(name = "ID_LEDOR", foreignKey = @ForeignKey(name = "FK_LEITURAS_LEDOR"), nullable = false)
-	private LeiturasUsuario ledor;
+	private LeiturasLedor ledor;
 
 	@ManyToOne
 	@JoinColumn(name = "ID_ASSUNTO", foreignKey = @ForeignKey(name = "FK_LEITURAS_ASSUNTO"), nullable = false)

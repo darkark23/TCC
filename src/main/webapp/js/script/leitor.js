@@ -19,4 +19,15 @@ var comecarReconhecimento = function(){
 	recognition.lang = "pt-BR";
 	recognition.continuous = true;
 	recognition.start();
+
+	recognition.onend = function() {
+		recognition.abort();
+		recognition.start();
+	};
+
+	recognition.onerror = function(event) {
+		recognition.abort();
+		recognition.start();
+	};
+
 }
