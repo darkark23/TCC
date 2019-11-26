@@ -42,12 +42,12 @@ angular.module('tccApp').controller('MenuController',
 					});
 				} else if (son == 'áudio') {
 					synth.cancel();
-					$state.go('audio-busca', {}, {
+					$state.go('audioBusca', {}, {
 						reload : true
 					});
 				} else if (son == 'agenda') {
 					synth.cancel();
-					acessarAgenda();
+					$scope.acessarAgenda();
 				} else if (son == 'sair') {
 					synth.cancel();
 					$state.go('principal', {}, {
@@ -65,11 +65,7 @@ angular.module('tccApp').controller('MenuController',
 	};
 
 	$scope.acessarAgenda = function() {
-		$state.go('agenda', {
-			data : new Date()
-		}, {
-			reload : true
-		});
+		$state.go('agenda',{data : new Date()}, {reload : true});
 	};
 
 }]);

@@ -15,8 +15,6 @@ angular.module('tccApp').controller('AudioController',
 
         var audio = document.getElementById('audio');
         audio.currentTime = 12;
-        //$scope.audio = audio.duration;
-
 
         $scope.salvarPosicao = function () {
             console.log(audio.currentTime);
@@ -99,6 +97,21 @@ angular.module('tccApp').controller('AudioController',
                     } else if (son == 'parar') {
                         synth.cancel();
                         $scope.pararAudio();
+                    } else if (son == 'menu') {
+                        synth.cancel();
+                        $state.go('menu', {}, {reload : true});
+                    } else if (son == 'agenda') {
+                        synth.cancel();
+                        $state.go('agenda',{data : new Date()}, {reload : true});
+                    } else if (son == 'buscar') {
+                        synth.cancel();
+                        $state.go('audioBusca', {},{reload : true});
+                    } else if (son == 'voltar') {
+                        synth.cancel();
+                        $scope.voltar();
+                    }else if (son == 'sair') {
+                        synth.cancel();
+                        $state.go('principal', {},{reload : true});
                     } else {
                         reproduzirFrase('Descupa não entendi, por favor repita. Em caso de dúvida diga ajuda.');
                     }
@@ -108,7 +121,6 @@ angular.module('tccApp').controller('AudioController',
 
         $scope.voltar = function () {
             window.history.back();
-
         }
 
     }]);

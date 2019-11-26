@@ -2,6 +2,7 @@
 angular.module('tccApp').controller('AgendaController',
 		[ "$scope", '$state', 'agendaService', '$rootScope', function($scope, $state, agendaService, $rootScope) {
 
+	comecarReconhecimento();
 	var audioAgenda = null;
 	if ($state.params.data){
 		agendaService.getAgendaDia($state.params.data,function (agendaDia) {
@@ -31,7 +32,7 @@ angular.module('tccApp').controller('AgendaController',
 				var son = event.results[i][0].transcript.trim();
 				if (son == 'voltar' || son == 'menu'){
 					synth.cancel();
-					$state.go('principal',{}, {reload : true});
+					$state.go('menu',{}, {reload : true});
 				} else if(son == 'próximo'){
 					synth.cancel();
 					$scope.acessarAgendaProxima();
@@ -41,6 +42,12 @@ angular.module('tccApp').controller('AgendaController',
 				} else if(son == 'repetir'){
 					synth.cancel();
 					reproduzirFrase()
+				} else if (son == 'agenda') {
+					synth.cancel();
+					$state.go('agenda',{data : new Date()}, {reload : true});
+				} else if (son == 'buscar') {
+					synth.cancel();
+					$state.go('audioBusca',{}, {reload : true});
 				}else {
 					synth.cancel();
 					reproduzirFrase(getAudio.ajuda);
@@ -77,7 +84,6 @@ angular.module('tccApp').controller('AgendaController',
 	function iniciarAudio() {
 		synth.cancel();
 		reproduzirFrase(getAudio.agenda.intro + audioAgenda);
-		comecarReconhecimento();
 	}
 	          
 }]);

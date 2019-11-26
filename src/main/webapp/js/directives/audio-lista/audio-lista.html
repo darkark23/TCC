@@ -31,7 +31,7 @@
 								<td>{{audioLivro.titulo}}</td>
 								<td>{{audioLivro.codigo}}</td>
 								<td align="right">
-									<button type="button" ng-click="acessarAudio(audioLivro.id)" class="btn btn-success"> Selecionar (Alt+0) </button>
+									<button id="botao{{$index+1}}" type="button" ng-click="acessarAudio(audioLivro.id)" class="btn btn-success"> Selecionar (Alt+0) </button>
 								</td>
 							</tr>
 						</tbody>

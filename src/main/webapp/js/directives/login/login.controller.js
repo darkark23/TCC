@@ -9,6 +9,25 @@ angular.module('tccApp').controller('LoginController',
 			reproduzirFrase(getAudio.login.intro);
 			comecarReconhecimento();
 
+			$scope.confirmarUsuario = function(){
+
+				loginService.confirmarUsuario($scope.dados,
+				function (confirmacao) {
+					if (confirmacao == true){
+						synth.cancel();
+						$state.go('menu', {}, {
+							reload : true
+						});
+					}else{
+						reproduzirFrase(getAudio.login.usuarioSenhaIncorreto);
+					}
+				},function () {
+				});
+
+			}
+
+
+
 			document.onkeyup = function(e) {
 				if (e.which == 96) {
 					reproduzirFrase(getAudio.login.intro);
@@ -47,10 +66,6 @@ angular.module('tccApp').controller('LoginController',
 					if (event.results[i].isFinal) {
 						var son = event.results[i][0].transcript
 								.trim();
-						console.log(son);
-						console.log(tipoInput);
-						console.log($scope.dados.usuario);
-						console.log($scope.dados.senha);
 						if (son == 'principal') {
 							synth.cancel();
 							$state.go('principal', {}, {
@@ -81,14 +96,9 @@ angular.module('tccApp').controller('LoginController',
 							} else if(!$scope.dados.usuario && !$scope.dados.senha){
 								reproduzirFrase(getAudio.login.informeUsuarioSenha);
 								tipoInput = 0;
-							} else if($scope.dados.usuario != 'teste' || $scope.dados.senha != 'teste'){
-								reproduzirFrase(getAudio.login.usuarioSenhaIncorreto);
-								tipoInput = 0;
 							} else {
-								synth.cancel();
-								$state.go('menu', {}, {
-									reload : true
-								});
+								$scope.confirmarUsuario();
+								tipoInput = 0;
 							}
 						}else if (son == 'usuário') {
 							if($scope.dados.usuario){

@@ -1,4 +1,13 @@
 'use strict'
-angular.module('tccApp').service('menuService', ['Restangular', function (Restangular) {
-	
+angular.module('tccApp').service('loginService', ['Restangular', function (Restangular) {
+
+    this.api = function () {
+        return Restangular.one('login');
+    };
+
+    this.confirmarUsuario = function (usuarioConfirmacao ,success, error) {
+        var confirmacao = this.api().one('verificarUsuario').withHttpConfig({paramSerializer: '$httpParamSerializerJQLike'}).customGET('', usuarioConfirmacao).then(success, error);
+        return confirmacao;
+    };
+
 }]);

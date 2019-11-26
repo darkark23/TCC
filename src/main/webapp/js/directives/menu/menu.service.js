@@ -1,4 +1,4 @@
 'use strict'
-angular.module('tccApp').service('loginService', ['Restangular', function (Restangular) {
+angular.module('tccApp').service('menuService', ['Restangular', function (Restangular) {
 	
 }]);

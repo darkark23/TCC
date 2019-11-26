@@ -27,12 +27,24 @@ var getAudio = {
 		usuarioSenhaIncorreto:'Senha ou usuário incorreto.'
 	},
 	menu: {
-		intro:'Menu de seleção de funcionalidades. Diga áudio para procura um áudio livro, agenda para verificar a agenda de aulas marcadas para o clube do ledor, sair para encerrar a sessão atual.',
+		intro:'Menu de seleção de Funcionalidades. Diga áudio para procura um áudio livro, agenda para verificar a agenda das aulas marcadas para o clube do ledor, sair para encerrar a sessão atual.',
 		fraseAjuda:'Você tem as seguintes opções, diga áudio para procura um áudio livro, agenda para verificar a agenda de aulas marcadas para o clube do ledor, sair para encerrar a sessão atual. Você pode também apertar os botões de um a três no teclado numérico para as respectivas opções, áudio, agenda e sair'
 	},
 	agenda: {
 		intro:'Página de Agenda de aulas.',
 		fraseAjuda:'Você tem as seguintes opções, diga áudio para procura um áudio livro, agenda para verificar a agenda de aulas marcadas para o clube do ledor, sair para encerrar a sessão atual. Você pode também apertar os botões de um a três no teclado numérico para as respectivas opções, áudio, agenda e sair'
+	},
+	audioBusca: {
+		intro:'Página de Busca de áudio livro, diga termo para informar um termo para busca de áudio livro.',
+		fraseAjuda:'Você tem as seguintes opções, diga áudio para procura um áudio livro, agenda para verificar a agenda de aulas marcadas para o clube do ledor, sair para encerrar a sessão atual. Você pode também apertar os botões de um a três no teclado numérico para as respectivas opções, áudio, agenda e sair',
+		nenhumTermo:'Nenhum termo informado, por favor diga termo para informar uma palavra para busca de áudio livro.',
+		informeTermo:'Diga um termo para a busca.'
+	},audioLista: {
+		intro:'Página de resultado de Consulta de áudio livro.',
+		naoEncontrado:'Não foram encontrados áudio livros com o termo informado, diga voltar para retornar a tela de busca e tentar outro termo.',
+		informeTermo:'Diga um termo para a busca.',
+		semResultado:'Não existem resultados para a busca.',
+		ultimoResultado:'Você esta no ultimo resultado, digar anterior para voltar ao resultado anterior ou diga resultados para começar a percorre do primeiro resultado.'
 	},
 	ajuda:'Descupa não entendi, por favor repita. Em caso de dúvida diga ajuda'
 };
