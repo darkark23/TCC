@@ -31,7 +31,7 @@
 								<td>{{audioLivro.titulo}}</td>
 								<td>{{audioLivro.codigo}}</td>
 								<td align="right">
-									<button id="botao{{$index+1}}" type="button" ng-click="acessarAudio(audioLivro.id)" class="btn btn-success"> Selecionar (Alt+0) </button>
+									<button id="botao{{$index+1}}" type="button" ng-click="acessarAudio(audioLivro.id)" class="btn btn-success">Selecionar(Escutar)</button>
 								</td>
 							</tr>
 						</tbody>
@@ -41,14 +41,14 @@
 			<div class="container">
 				<div ng-show="audioLivros.length > 10 && audioLivros">
 					<div class="btn-group btn-group-toggle" data-toggle="buttons">
-						<button type="button" class="btn btn-primary"> Anterior (<)</button>
-						<button type="button" ng-click="voltar()" class="btn btn-danger">  Voltar (4)</button>
-						<button type="button" class="btn btn-primary "> Proximo (>)</button>
+						<button type="button" class="btn btn-primary"> Anterior</button>
+						<button type="button" ng-click="voltar()" class="btn btn-danger">Voltar</button>
+						<button type="button" class="btn btn-primary "> Próximo</button>
 					</div>
 				</div>
 				<div ng-show="audioLivros.length < 10">
 					<div class="btn-group btn-group-toggle" data-toggle="buttons">
-						<button type="button" ng-click="voltar()" class="btn btn-secondary">Voltar (4)</button>
+						<button type="button" ng-click="voltar()" class="btn btn-secondary">Voltar</button>
 					</div>
 				</div>
 			</div>

@@ -9,17 +9,8 @@ angular.module('tccApp').controller('AudioListaController',
 	audioListaService.getListaAudioLivroTermo($state.params.termo,function (listaAudioLivro) {
 		$scope.audioLivros = listaAudioLivro;
 		synth.cancel();
-		if(!$scope.audioLivros){
-			reproduzirFrase(getAudio.audioLista.intro + ' ' + getAudio.audioLista.naoEncontrado);
-		}else {
-			if(listaAudioLivro.length == 1){
-				reproduzirFrase(getAudio.audioLista.intro + ' Foi encontrado um resultado.' );
-			}else {
-				reproduzirFrase(getAudio.audioLista.intro + ' Foram encontrados ' + listaAudioLivro.length + 'resultados.' );
-			}
-		};
+		reproduzirIntro();
 	},function () {
-		alert("Não foi possivel recuperar a lista de áudio livros.")
 	});
 
 	$scope.acessarAudio = function(id) {
@@ -30,41 +21,80 @@ angular.module('tccApp').controller('AudioListaController',
 		$state.go('audioBusca',{}, {reload : true});
 	};
 
+	var reproduzirIntro = function() {
+		if(!$scope.audioLivros || $scope.audioLivros.length == 0 ){
+			reproduzirFrase(getAudio.audioLista.intro + ' ' + getAudio.audioLista.naoEncontrado);
+		}else {
+			if($scope.audioLivros.length == 1){
+				reproduzirFrase(getAudio.audioLista.intro + ' Foi encontrado um resultado.' );
+			}else {
+				reproduzirFrase(getAudio.audioLista.intro + ' Foram encontrados ' + $scope.audioLivros.length + ' resultados. ' + getAudio.audioLista.comandos );
+			}
+		}
+	};
+
 	recognition.onresult = function(event) {
 		for (let i = event.resultIndex; i < event.results.length; i++) {
 			if (event.results[i].isFinal) {
 				var son = event.results[i][0].transcript.trim();
-				if (son == 'menu') {
-					synth.cancel();
-					$state.go('menu', {}, {reload: true});
-				} else if (son == 'agenda') {
-					synth.cancel();
-					$state.go('agenda',{data : new Date()}, {reload : true});
-				} else if (son == 'voltar') {
-					synth.cancel();
-					$scope.voltar();
-				} else if (son == 'resultados') {
-					reproduzirFrase('Resultados.');
+				if (son == 'resultados') {
 					currentResultado = 1;
 					reproduzirLista();
 				} else if (son == 'repetir' && currentResultado != 0) {
 					reproduzirLista();
 				} else if (son == 'próximo' && currentResultado != 0) {
-					++currentResultado;
-					reproduzirLista();
-				}else if (son == 'escutar' && currentResultado != 0) {
-					$scope.acessarAudio($scope.audioLivros[currentResultado - 1].id);
+					if (currentResultado < $scope.audioLivros.length ) {
+						++currentResultado;
+						reproduzirLista();
+					} else {
+						reproduzirFrase(getAudio.audioLista.ultimoResultado);
+					}
 				} else if (son == 'anterior' && currentResultado != 0) {
 					if (currentResultado > 1) {
 						--currentResultado;
 						reproduzirLista();
 					} else {
-						reproduzirFrase('Não existem resultados anteriores ao atual.');
+						reproduzirFrase(getAudio.audioLista.primeiroResultado);
 					}
-				}else {
-					reproduzirFrase('Descupa não entendi, por favor repita. Em caso de dúvida diga ajuda.');
+				} else if (son == 'escutar' && currentResultado != 0) {
+					$scope.acessarAudio($scope.audioLivros[currentResultado - 1].id);
+				} else if(son == 'menu') {
+					synth.cancel();
+					$state.go('menu',{},{reload : true});
+				} else if (son == 'áudio' || son == 'voltar') {
+					synth.cancel();
+					$state.go('audioBusca',{},{reload : true});
+				} else if (son == 'agenda') {
+					synth.cancel();
+					$state.go('agenda',{data : new Date()}, {reload : true});
+				} else if (son == 'sair') {
+					synth.cancel();
+					$state.go('principal', {}, {reload : true});
+				} else if (son == 'ajuda') {
+					reproduzirIntro()
+				} else if (son == 'outros') {
+					reproduzirFrase(getAudio.audioLista.fraseAjuda);
+				} else {
+					reproduzirFrase(getAudio.ajuda);
 				}
 			}
+		}
+	};
+
+	document.onkeyup = function(e) {
+		if (e.which == 96) {
+			reproduzirFrase(getAudio.menu.intro);
+		} else if (e.which == 49) {
+			synth.cancel();
+			$state.go('audio-busca',{}, {reload : true});
+		} else if (e.which == 50) {
+			synth.cancel();
+			$state.go('agenda',{data : new Date()}, {reload : true});
+		} else if (e.which == 51) {
+			synth.cancel();
+			$state.go('principal',{}, {reload : true});
+		} else if (e.which == 52) {
+			reproduzirFrase(getAudio.menu.fraseAjuda);
 		}
 	};
 
@@ -72,12 +102,9 @@ angular.module('tccApp').controller('AudioListaController',
 		if (!$scope.audioLivros){
 			reproduzirFrase(getAudio.principal.semResultado);
 			currentResultado = 0;
-		}else if(currentResultado > $scope.audioLivros.length){
-			reproduzirFrase(getAudio.principal.ultimoResultado);
-			--currentResultado;
 		}else if ($scope.audioLivros){
 			document.getElementById("botao"+currentResultado).focus();
-			reproduzirFrase(" Resultado " + currentResultado + " : " + $scope.audioLivros[currentResultado - 1].titulo + ". Diga ouvir para acessar o áudio livro, próximo ou anterior para ouvir outros resultados. Para escutar novamente diga repetir.");
+			reproduzirFrase(" Resultado " + currentResultado + " : " + $scope.audioLivros[currentResultado - 1].titulo + ". " + getAudio.audioLista.comandos2 );
 		} else {
 			reproduzirFrase(getAudio.audioLista.semResultado);
 			currentResultado = 0;

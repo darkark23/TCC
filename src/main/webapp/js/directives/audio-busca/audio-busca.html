@@ -8,20 +8,21 @@
 	<body>
 		<section class="py-5">
 			<div class="container">
-				<div ng-show="faltaTermo" class="alert alert-secondary" role="alert">
+				<!--<div ng-show="faltaTermo" class="alert alert-secondary" role="alert">
 					Informe um termo para a busca!
-				</div>
+				</div>-->
 				<div class="form-label-group">
 					<div class="form-group">
-						<label for="termo">Termo (Alt+1)</label>
-						<input ng-model="termo" type="text" class="form-control"	id="termo" placeholder="Digite ou diga um termo referente ao audio livro" accesskey="1">
+						<label for="termo">Termo</label>
+						<input type="text" ng-model="termo"  class="form-control" placeholder="Digite ou diga um termo referente ao audio livro" id="termo">
+						<!--<input ng-model="termo" type="text" class="form-control" id="termo" placeholder="Digite ou diga um termo referente ao audio livro" accesskey="1">-->
 					</div>
 				</div>
 			</div>
 			<div class="container">
 				<div class="btn-group btn-group-toggle" data-toggle="buttons">
-					<button type="button" ng-click="acessarLista()" class="btn btn-primary "> Buscar (Enter)</button>
-					<button type="button" ui-sref="menu" class="btn btn-danger">  Voltar (4)</button>
+					<button type="button" ng-click="acessarLista()" class="btn btn-primary ">Buscar</button>
+					<button type="button" ui-sref="menu" class="btn btn-danger"> Voltar</button>
 				</div>
 			</div>
 		</section>

@@ -9,22 +9,16 @@ angular.module('tccApp').controller('MenuController',
 	document.onkeyup = function(e) {
 		if (e.which == 96) {
 			reproduzirFrase(getAudio.menu.intro);
-		} else if (e.which == 97) {
+		} else if (e.which == 49) {
 			synth.cancel();
-			$state.go('audio-busca', {}, {
-				reload : true
-			});
-		} else if (e.which == 98) {
+			$state.go('audio-busca',{}, {reload : true});
+		} else if (e.which == 50) {
 			synth.cancel();
-			$state.go('agenda', {}, {
-				reload : true
-			});
-		} else if (e.which == 99) {
+			$state.go('agenda',{data : new Date()}, {reload : true});
+		} else if (e.which == 51) {
 			synth.cancel();
-			$state.go('principal', {}, {
-				reload : true
-			});
-		} else if (e.which == 105) {
+			$state.go('principal',{}, {reload : true});
+		} else if (e.which == 52) {
 			reproduzirFrase(getAudio.menu.fraseAjuda);
 		}
 	};
@@ -32,31 +26,23 @@ angular.module('tccApp').controller('MenuController',
 	recognition.onresult = function(event) {
 		for (let i = event.resultIndex; i < event.results.length; i++) {
 			if (event.results[i].isFinal) {
-				var son = event.results[i][0].transcript
-						.trim();
-				console.log(son);
+				var son = event.results[i][0].transcript.trim();
 				if (son == 'menu') {
 					synth.cancel();
-					$state.go('menu', {}, {
-						reload : true
-					});
+					$state.go('menu',{},{reload : true});
 				} else if (son == 'áudio') {
 					synth.cancel();
-					$state.go('audioBusca', {}, {
-						reload : true
-					});
+					$state.go('audioBusca',{},{reload : true});
 				} else if (son == 'agenda') {
 					synth.cancel();
-					$scope.acessarAgenda();
+					$state.go('agenda',{data : new Date()}, {reload : true});
 				} else if (son == 'sair') {
 					synth.cancel();
-					$state.go('principal', {}, {
-						reload : true
-					});
-				} else if (son == 'outros' || son == 'ajuda') {
+					$state.go('principal', {}, {reload : true});
+				} else if (son == 'ajuda') {
+					reproduzirFrase(getAudio.menu.intro + ' ' + getAudio.menu.fraseAjuda);
+				} else if (son == 'outros') {
 					reproduzirFrase(getAudio.menu.fraseAjuda);
-				} else if (son == 'repetir') {
-					reproduzirFrase(getAudio.menu.intro);
 				} else {
 					reproduzirFrase(getAudio.ajuda);
 				}

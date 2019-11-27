@@ -10,7 +10,7 @@ angular.module('tccApp').controller('AudioBuscaAvancadaController',
 			synth.speak(utterance);
 			
 			document.onkeyup = function(e) {
-				if (e.which == 32) {
+				if (e.which == 96) {
 					synth.speak(utterance);
 				} 
 			};

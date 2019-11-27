@@ -2,8 +2,10 @@
 angular.module('tccApp').controller('AgendaController',
 		[ "$scope", '$state', 'agendaService', '$rootScope', function($scope, $state, agendaService, $rootScope) {
 
-	comecarReconhecimento();
 	var audioAgenda = null;
+
+	comecarReconhecimento();
+
 	if ($state.params.data){
 		agendaService.getAgendaDia($state.params.data,function (agendaDia) {
 			$scope.agendaDia = agendaDia;
@@ -21,7 +23,7 @@ angular.module('tccApp').controller('AgendaController',
 	}
 
 	document.onkeyup = function(e) {
-		if (e.which == 32) {
+		if (e.which == 96) {
 			synth.speak(utterance);
 		}
 	};
@@ -30,10 +32,7 @@ angular.module('tccApp').controller('AgendaController',
 		for (let i = event.resultIndex; i < event.results.length; i++) {
 			if (event.results[i].isFinal) {
 				var son = event.results[i][0].transcript.trim();
-				if (son == 'voltar' || son == 'menu'){
-					synth.cancel();
-					$state.go('menu',{}, {reload : true});
-				} else if(son == 'próximo'){
+				if(son == 'próximo'){
 					synth.cancel();
 					$scope.acessarAgendaProxima();
 				} else if(son == 'anterior'){
@@ -41,15 +40,24 @@ angular.module('tccApp').controller('AgendaController',
 					$scope.acessarAgendaAnterior();
 				} else if(son == 'repetir'){
 					synth.cancel();
-					reproduzirFrase()
+					reproduzirFrase(audioAgenda)
+				} else if (son == 'voltar' || son == 'menu'){
+					synth.cancel();
+					$state.go('menu',{}, {reload : true});
+				} else if (son == 'áudio'  || son == 'áudio livro' ) {
+					synth.cancel();
+					$state.go('audioBusca',{},{reload : true});
 				} else if (son == 'agenda') {
 					synth.cancel();
 					$state.go('agenda',{data : new Date()}, {reload : true});
-				} else if (son == 'buscar') {
+				} else if (son == 'sair') {
 					synth.cancel();
-					$state.go('audioBusca',{}, {reload : true});
-				}else {
-					synth.cancel();
+					$state.go('principal', {}, {reload : true});
+				} else if (son == 'ajuda') {
+					reproduzirFrase(getAudio.agenda.intro + '' + getAudio.agenda.comandos + ' ' + getAudio.agenda.fraseAjuda);
+				} else if (son == 'outros') {
+					reproduzirFrase(getAudio.agenda.fraseAjuda);
+				} else {
 					reproduzirFrase(getAudio.ajuda);
 				}
 			}
@@ -57,13 +65,13 @@ angular.module('tccApp').controller('AgendaController',
 	};
 
 	$scope.acessarAgendaProxima = function() {
-		var proximaData = new Date($state.params.data);
+		let proximaData = new Date($state.params.data);
 		proximaData.setDate(proximaData.getDate() + 1);
 		$state.go('agenda',{data : proximaData},{reload : true});
 	};
 
 	$scope.acessarAgendaAnterior = function() {
-		var proximaData = new Date($state.params.data);
+		let proximaData = new Date($state.params.data);
 		proximaData.setDate(proximaData.getDate() - 1);
 		$state.go('agenda',{data : proximaData},{reload : true});
 	};
@@ -83,7 +91,7 @@ angular.module('tccApp').controller('AgendaController',
 
 	function iniciarAudio() {
 		synth.cancel();
-		reproduzirFrase(getAudio.agenda.intro + audioAgenda);
+		reproduzirFrase(audioAgenda + getAudio.agenda.comandos);
 	}
 	          
 }]);
