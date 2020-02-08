@@ -136,6 +136,30 @@ angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast']).confi
 				            	controller: 'ContatoController',
 				            	}
 				        }
+					}).state('audioListaLedor', {
+						url : '/audioListaLedor',
+						views: {
+							'': {
+								templateUrl : '/js/directives/paginas-ledor/ledor-lista-audio/ledor-lista-audio.html',
+								controller : 'LedorListaAudioController'
+							},
+							'headNav': {
+								templateUrl: '/js/components/head-menu-ledor.html',
+								controller: 'MenuController',
+							}
+						}
+					}).state('aulaLedor', {
+						url : '/aulaLedor',
+						views: {
+							'': {
+								templateUrl : '/js/directives/paginas-ledor/ledor-aulas/ledor-aulas.html',
+								controller : 'LedorAulasController'
+							},
+							'headNav': {
+								templateUrl: '/js/components/head-menu-ledor.html',
+								controller: 'MenuController',
+							}
+						}
 					});
 									
 					$locationProvider.hashPrefix('');

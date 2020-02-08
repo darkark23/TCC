@@ -1,12 +1,8 @@
 package br.net.iesb.controller;
 
-import br.net.iesb.dto.AudioLivroDetalheDTO;
-import br.net.iesb.dto.AudioLivroSelecaoDTO;
 import br.net.iesb.dto.LivroDTO;
 import br.net.iesb.dto.LivroNovoDTO;
-import br.net.iesb.service.transacional.AudioLivroService;
 import br.net.iesb.service.transacional.LivroService;
-import br.net.iesb.view.AudioLivroView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +25,7 @@ public class LivroController {
 
     @ResponseBody
     @GetMapping(path = "/findById/{id}")
-    public LivroDTO findById(@PathVariable ("id") Long id) {
+    public LivroDTO findById(@PathVariable ("id") String id) {
         return livroService.findById(id);
     }
 
@@ -42,7 +38,7 @@ public class LivroController {
     @ResponseBody
     @GetMapping(path = "/save")
     public Integer save(LivroNovoDTO livroNovoDTO) {
-        return livroService.saveLivroNovo(livroNovoDTO);
+        return livroService.save(livroNovoDTO);
     }
 
 }

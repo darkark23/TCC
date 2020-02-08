@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Noticias</title>
+	</head>
+	<body>
+		<section class="py-5">
+			<div class="container">
+				<div ng-show="audioLivros.length > 1 && audioLivros" class="alert alert-light" role="alert">Mostrando {{audioLivros.length}} resultados</div>
+				<div ng-show="audioLivros.length == 1 && audioLivros" class="alert alert-light" role="alert">Mostrando 1 resultado</div>
+				<div ng-show="audioLivros == 0">
+					<div class="alert alert-danger" role="alert">
+						Nenhum áudio livro encontrado com o termo informado.
+					</div>
+				</div>
+				<table ng-show="audioLivros != 0" class="table">
+					<div ng-show="audioLivros">
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Titulo</th>
+								<th scope="col">Código</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="audioLivro in audioLivros">
+								<th scope="row">{{$index + 1}}</th>
+								<td>{{audioLivro.titulo}}</td>
+								<td>{{audioLivro.codigo}}</td>
+								<td align="right">
+									<button id="botao{{$index+1}}" type="button" ng-click="acessarAudio(audioLivro.id)" class="btn btn-success">Selecionar(Escutar)</button>
+								</td>
+							</tr>
+						</tbody>
+					</div>
+				</table>
+			</div>
+			<div class="container">
+				<div ng-show="audioLivros.length > 10 && audioLivros">
+					<div class="btn-group btn-group-toggle" data-toggle="buttons">
+						<button type="button" class="btn btn-primary"> Anterior</button>
+						<button type="button" ng-click="voltar()" class="btn btn-danger">Voltar</button>
+						<button type="button" class="btn btn-primary "> Próximo</button>
+					</div>
+				</div>
+				<div ng-show="audioLivros.length < 10">
+					<div class="btn-group btn-group-toggle" data-toggle="buttons">
+						<button type="button" ng-click="voltar()" class="btn btn-secondary">Voltar</button>
+					</div>
+				</div>
+			</div>
+		</section>
+	</body>
+</html>

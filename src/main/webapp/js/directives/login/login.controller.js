@@ -11,10 +11,12 @@ angular.module('tccApp').controller('LoginController',
 
 	$scope.confirmarUsuario = function(){
 		loginService.confirmarUsuario($scope.dados,
-			function (confirmacao) {
-				if (confirmacao == true){
+			function (usuarioPerfil) {
+				if (usuarioPerfil.existente == true){
 					synth.cancel();
+					$rootScope.usuarioPerfil = usuarioPerfil;
 					$state.go('menu',{},{reload : true});
+
 				}else{
 					reproduzirFrase(getAudio.login.usuarioSenhaIncorreto);
 				}

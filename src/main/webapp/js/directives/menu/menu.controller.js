@@ -6,6 +6,8 @@ angular.module('tccApp').controller('MenuController',
 	reproduzirFrase(getAudio.menu.intro);
 	comecarReconhecimento();
 
+	$scope.usuarioPerfil = $rootScope.usuarioPerfil;
+
 	document.onkeyup = function(e) {
 		if (e.which == 96) {
 			reproduzirFrase(getAudio.menu.intro);

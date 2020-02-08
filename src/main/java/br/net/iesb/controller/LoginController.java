@@ -1,6 +1,7 @@
 package br.net.iesb.controller;
 
 import br.net.iesb.dto.UsuarioConfirmacaoDTO;
+import br.net.iesb.dto.UsuarioLoginDTO;
 import br.net.iesb.service.transacional.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,7 @@ public class LoginController {
 
 	@ResponseBody
 	@GetMapping(path = "/verificarUsuario")
-	public Boolean getListaAutomovelView(UsuarioConfirmacaoDTO usuarioConfirmacaoDTO) {
+	public UsuarioLoginDTO getListaAutomovelView(UsuarioConfirmacaoDTO usuarioConfirmacaoDTO) {
 		return usuarioService.verificaLogin(usuarioConfirmacaoDTO);
 	}
 

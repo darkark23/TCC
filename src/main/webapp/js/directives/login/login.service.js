@@ -6,8 +6,8 @@ angular.module('tccApp').service('loginService', ['Restangular', function (Resta
     };
 
     this.confirmarUsuario = function (usuarioConfirmacao ,success, error) {
-        var confirmacao = this.api().one('verificarUsuario').withHttpConfig({paramSerializer: '$httpParamSerializerJQLike'}).customGET('', usuarioConfirmacao).then(success, error);
-        return confirmacao;
+        var usuarioPerfil = this.api().one('verificarUsuario').withHttpConfig({paramSerializer: '$httpParamSerializerJQLike'}).customGET('', usuarioConfirmacao).then(success, error);
+        return usuarioPerfil;
     };
 
 }]);

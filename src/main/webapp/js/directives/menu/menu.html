@@ -8,6 +8,8 @@
 	<body>
 		<section class="py-5">
 			<div class="container">
+				<button ng-show="usuarioPerfil.perfil == 'Ledor'" type="button" ui-sref="audioListaLedor" class="btn btn-primary btn-lg btn-block">Editar/Adicionar Áudio Livro</button>
+				<button ng-show="usuarioPerfil.perfil == 'Ledor'" type="button" ng-click="acessarAgenda()" class="btn btn-secondary btn-lg btn-block">Verificar Aulas Programadas</button>
 				<button type="button" ui-sref="audioBusca" class="btn btn-primary btn-lg btn-block">Biblioteca Áudio Livro (Áudio)</button>
 				<button type="button" ng-click="acessarAgenda()" class="btn btn-secondary btn-lg btn-block">Agenda de Clube do Ledor (Agenda)</button>
 				<button type="button" ui-sref="principal" class="btn btn-secondary btn-lg btn-block">Sair</button>
