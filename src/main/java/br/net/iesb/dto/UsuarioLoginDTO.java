@@ -1,12 +1,13 @@
 package br.net.iesb.dto;
 
 import br.net.iesb.entity.transacional.Usuario;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 @Getter
+@Setter
 public class  UsuarioLoginDTO {
 
     private String nome;
@@ -16,6 +17,12 @@ public class  UsuarioLoginDTO {
     public UsuarioLoginDTO (Usuario usuario){
         this.nome = usuario.getPessoa().getNome();
         this.perfil = usuario.getPerfil().getNome();
+        this.existente = true;
+    }
+
+    public UsuarioLoginDTO (UsuarioInformationDTO usuarioInformationDTO){
+        this.nome = usuarioInformationDTO.getNome();
+        this.perfil = usuarioInformationDTO.getPerfil();
         this.existente = true;
     }
 

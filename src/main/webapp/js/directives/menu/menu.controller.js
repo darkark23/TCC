@@ -1,12 +1,21 @@
 'use strict'
 angular.module('tccApp').controller('MenuController',
-		['$scope', '$state', 'menuService', '$rootScope', function($scope, $state, menuService, $rootScope) {
+		['$scope', '$state', 'menuService','loginService', '$rootScope', function($scope, $state, menuService, loginService, $rootScope) {
 	
 	synth.cancel();
 	reproduzirFrase(getAudio.menu.intro);
 	comecarReconhecimento();
 
-	$scope.usuarioPerfil = $rootScope.usuarioPerfil;
+	loginService.confirmarUsuario($scope.dados,
+		function (usuarioPerfil) {
+			if (usuarioPerfil.existente == true){
+				$rootScope.usuarioPerfil = usuarioPerfil;
+				$scope.confirmarUsuario = usuarioPerfil;
+			}else{
+				reproduzirFrase(getAudio.login.usuarioSenhaIncorreto);
+			}
+		},function () {
+		});
 
 	document.onkeyup = function(e) {
 		if (e.which == 96) {

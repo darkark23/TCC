@@ -16,7 +16,6 @@ angular.module('tccApp').controller('LoginController',
 					synth.cancel();
 					$rootScope.usuarioPerfil = usuarioPerfil;
 					$state.go('menu',{},{reload : true});
-
 				}else{
 					reproduzirFrase(getAudio.login.usuarioSenhaIncorreto);
 				}
