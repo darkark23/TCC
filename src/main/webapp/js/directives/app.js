@@ -1,5 +1,5 @@
 'use strict'
-angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast']).config(
+angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast','ngMaterial','ngMessages']).config(
 		[ '$stateProvider', '$urlRouterProvider','$locationProvider', 'RestangularProvider',
 				function($stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider) {
 			
