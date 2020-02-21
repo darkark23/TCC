@@ -38,4 +38,10 @@ public class LoginController {
         }
     }
 
+    @ResponseBody
+    @GetMapping(path = "/logOff")
+    public void logOff() {
+        usuarioInformationDTO = new UsuarioInformationDTO();
+    }
+
 }

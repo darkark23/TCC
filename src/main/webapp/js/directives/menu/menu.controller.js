@@ -17,6 +17,8 @@ angular.module('tccApp').controller('MenuController',
 		},function () {
 		});
 
+
+
 	document.onkeyup = function(e) {
 		if (e.which == 96) {
 			reproduzirFrase(getAudio.menu.intro);
@@ -63,6 +65,14 @@ angular.module('tccApp').controller('MenuController',
 
 	$scope.acessarAgenda = function() {
 		$state.go('agenda',{data : new Date()}, {reload : true});
+	};
+
+	$scope.sair = function() {
+		loginService.logOff(
+			function () {
+				$state.go('principal', {}, {reload : true});
+			},function () {
+			});
 	};
 
 }]);
