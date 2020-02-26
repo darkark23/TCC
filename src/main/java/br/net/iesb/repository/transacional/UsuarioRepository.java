@@ -10,4 +10,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Long> {
 
     Usuario findByLoginLikeAndSenhaLike (String login,String senha);
 
+    Usuario findByLoginLike (String Login);
+
 }

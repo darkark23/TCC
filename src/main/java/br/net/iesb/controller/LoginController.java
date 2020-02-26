@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
+
 @Controller
 @Scope("session")
 @RequestMapping("/login")
@@ -28,13 +30,20 @@ public class LoginController {
         if (usuarioInformationDTO.getExistente()) {
             return new UsuarioLoginDTO(usuarioInformationDTO);
         } else {
-			UsuarioLoginDTO usuarioLoginDTO = usuarioService.verificaLogin(usuarioConfirmacaoDTO);
-			if (usuarioLoginDTO.getExistente()) {
-				usuarioInformationDTO = new UsuarioInformationDTO(usuarioLoginDTO);
-				return usuarioLoginDTO;
+            usuarioInformationDTO = usuarioService.verificaLogin(usuarioConfirmacaoDTO);
+			if (usuarioInformationDTO.getExistente()) {
+				return new UsuarioLoginDTO(usuarioInformationDTO);
 			} else {
 				return new UsuarioLoginDTO();
 			}
+        }
+    }
+
+    public String retornarUsuarioLogin() {
+        if (usuarioInformationDTO.getExistente()) {
+            return usuarioInformationDTO.getLogin();
+        } else {
+            return null;
         }
     }
 

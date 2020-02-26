@@ -1,17 +1,20 @@
 'use strict'
 angular.module('tccApp').controller('LedorListaAudioController',
-		[ "$scope", '$state', 'ledorListaAudioService', '$rootScope', function($scope, $state, ledorListaAudioService, $rootScope) {
+		[ "$scope", '$state', 'ledorListaAudioService', 'loginService', '$rootScope', function($scope, $state, ledorListaAudioService, loginService,  $rootScope) {
+
+	loginService.confirmarUsuario($scope.dados,
+		function (usuarioPerfil) {
+			if (usuarioPerfil.existente == true){
+				synth.cancel();
+				$rootScope.usuarioPerfil = usuarioPerfil;
+				carregarListaLivros($rootScope.usuarioPerfil.login);
+			}else{}
+		},function () {
+		});
 
 	comecarReconhecimento();
 	$scope.audioLivros = null;
 	var currentResultado = 0;
-
-	audioListaService.getListaAudioLivroTermo($state.params.termo,function (listaAudioLivro) {
-		$scope.audioLivros = listaAudioLivro;
-		synth.cancel();
-		reproduzirIntro();
-	},function () {
-	});
 
 	$scope.acessarAudio = function(id) {
 		$state.go('audio',{id : id}, {reload : true});
@@ -111,4 +114,36 @@ angular.module('tccApp').controller('LedorListaAudioController',
 		}
 	};
 
+	function carregarListaLivros(login) {
+		let dados = {usuario : null};
+		dados.usuario = login;
+		ledorListaAudioService.findAllLedor(dados,
+			function (lista) {
+				$scope.audioLivros = lista;
+			},function () {
+			})
+	}
+
+	$scope.remover = function(id) {
+		ledorListaAudioService.remover(id,function (status) {
+			if(status == 1){
+				console.log('Removido com sucesso!')
+				$state.go('audioListaLedor', {}, {reload : true});
+			}else {
+				console.log('Erro ao remover o audio livro!')
+				$state.go('audioListaLedor', {}, {reload : true});
+			}
+		},function () {
+			console.log('Erro ao remover o audio livro!')
+			$state.go('audioListaLedor', {}, {reload : true});
+		})
+	}
+
+	$scope.adicionar = function() {
+		$state.go('audioEditarLedor', {}, {reload : true});
+	}
+
+	$scope.editar = function(id) {
+		$state.go('audioEditarLedor',{id : id}, {reload : true});
+	};
 }]);

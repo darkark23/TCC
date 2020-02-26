@@ -2,7 +2,7 @@
 angular.module('tccApp').service('audioListaService', ['Restangular', function (Restangular) {
 
     this.api = function () {
-        return Restangular.one('audioLista');
+        return Restangular.one('audio');
     };
 
     this.getListaAudioLivro = function (success, error) {

@@ -12,7 +12,7 @@
 				<div ng-show="audioLivros.length == 1 && audioLivros" class="alert alert-light" role="alert">Mostrando 1 resultado</div>
 				<div ng-show="audioLivros == 0">
 					<div class="alert alert-danger" role="alert">
-						Nenhum áudio livro encontrado com o termo informado.
+						Nenhum áudio livro cadastrado pelo ledor.
 					</div>
 				</div>
 				<table ng-show="audioLivros != 0" class="table">
@@ -22,6 +22,7 @@
 								<th scope="col">#</th>
 								<th scope="col">Titulo</th>
 								<th scope="col">Código</th>
+								<th scope="col">Situação</th>
 								<th scope="col"></th>
 							</tr>
 						</thead>
@@ -30,8 +31,11 @@
 								<th scope="row">{{$index + 1}}</th>
 								<td>{{audioLivro.titulo}}</td>
 								<td>{{audioLivro.codigo}}</td>
+								<td>{{audioLivro.aprovado}}</td>
 								<td align="right">
-									<button id="botao{{$index+1}}" type="button" ng-click="acessarAudio(audioLivro.id)" class="btn btn-success">Selecionar(Escutar)</button>
+									<button id="botao{{$index+1}}" type="button" ng-click="acessarAudio(audioLivro.id)" class="btn btn-success">Visualizar</button>
+									<button id="botao{{$index+1}}" type="button" ng-click="editar(audioLivro.id)" class="btn btn-success">Editar</button>
+									<button id="botao{{$index+1}}" type="button" ng-click="remover(audioLivro.id)" class="btn btn-success">Remover</button>
 								</td>
 							</tr>
 						</tbody>
@@ -49,6 +53,7 @@
 				<div ng-show="audioLivros.length < 10">
 					<div class="btn-group btn-group-toggle" data-toggle="buttons">
 						<button type="button" ng-click="voltar()" class="btn btn-secondary">Voltar</button>
+						<button type="button" ng-click="adicionar()" class="btn btn-secondary">Adicionar Audio Livro</button>
 					</div>
 				</div>
 			</div>

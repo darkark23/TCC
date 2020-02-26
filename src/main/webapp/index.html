@@ -5,8 +5,10 @@
 		<title>Portal do Ledor</title>
 		<meta name="viewport" content="width=device-width">
 		<link rel="stylesheet" href="node/node_modules/bootstrap/dist/css/bootstrap.css">
-		<link rel="stylesheet" href="node/node_modules/angular-auto-complete/angular-auto-complete.css">
 		<link rel="stylesheet" href="node/node_modules/ng-toast/dist/ngToast.min.css">
+		<link rel="stylesheet" href="node/node_modules/angular-material/angular-material.css">
+		<link rel="stylesheet" href="node/node_modules/ui-select/dist/select.css">
+		<link rel="stylesheet" href="resources/css/ui-select.bootstrap4.shim.css">
 	</head>
 	<body ng-app="tccApp">
 		<toast></toast>
@@ -22,22 +24,26 @@
 		     <p class="m-0 text-center text-white">Copyright &copy; Portal do Ledor 2019</p>
 		   </div>
 		 </footer>
-		
-	
+
 		<!-- Script -->
 		<script src="node/node_modules/jquery/dist/jquery.js"></script>
 		<script src="node/node_modules/popper.js/dist/umd/popper.js"></script>
 		<script src="node/node_modules/bootstrap/dist/js/bootstrap.js"></script>
 		<script src="node/node_modules/angular/angular.js"></script>
+		<script src="/node/node_modules/moment/moment.js"></script>
 		<script	src="node/node_modules/@uirouter/angularjs/release/angular-ui-router.js"></script>
 		<script	src="node/node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
 		<script src="node/node_modules/underscore/underscore.js"></script>
 		<script src="node/node_modules/restangular/dist/restangular.js"></script>
-		<script src="node/node_modules/angular-auto-complete/angular-auto-complete.js"></script>
 		<script src="node/node_modules/angular-sanitize/angular-sanitize.js"></script>
 		<script	src="node/node_modules/ui-utils-npm/node_modules/angular-ui-mask/dist/mask.js"></script>
 		<script src="node/node_modules/ng-toast/dist/ngToast.min.js"></script>
-	
+		<script src="/node/node_modules/angular-material/angular-material.js"></script>
+		<script src="/node/node_modules/angular-animate/angular-animate.js"></script>
+		<script src="/node/node_modules/angular-messages/angular-messages.js"></script>
+		<script src="/node/node_modules/ui-select/dist/select.js"></script>
+		<script src="/node/node_modules/angular-aria/angular-aria.js"></script>
+
 		<!-- directives -->
 		<script src="js/directives/app.js"></script>
 
@@ -95,11 +101,9 @@
 		<script src="js/directives/paginas-ledor/ledor-lista-audio/ledor-lista-audio.controller.js"></script>
 		<script src="js/directives/paginas-ledor/ledor-lista-audio/ledor-lista-audio.service.js"></script>
 
-		<!-- Componentes -->
-		<script src="/node/node_modules/angular-material/angular-material.js"></script>
-		<script src="/node/node_modules/angular-animate/angular-animate.js"></script>
-		<script src="/node/node_modules/angular-aria/angular-aria.js"></script>
-		<script src="/node/node_modules/angular-messages/angular-messages.js"></script>
+		<!-- Audio Ledor -->
+		<script src="js/directives/paginas-ledor/ledor-editar-audio/ledor-editar-audio.controller.js"></script>
+		<script src="js/directives/paginas-ledor/ledor-editar-audio/ledor-editar-audio.service.js"></script>
 
 	</body>
 </html>

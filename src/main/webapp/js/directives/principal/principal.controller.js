@@ -1,14 +1,33 @@
 'use strict'
 angular.module('tccApp').controller('PrincipalController',
-	["$scope",'$state','principalService','$rootScope',function($scope, $state, principalService, $rootScope) {
+	["$scope",'$state','principalService', 'loginService','$rootScope',function($scope, $state, principalService, loginService, $rootScope) {
 
 	var currentNoticia = 0;
 	$scope.noticias = null;
+
+
 
 	principalService.getNoticias(function (listaNoticias) {
 		$scope.noticias = listaNoticias;
 	},function () {
 	});
+
+	$scope.logar = function(){
+		let dados = {usuario : null,	senha : null};
+		loginService.confirmarUsuario(dados,
+			function (usuarioPerfil) {
+				if (usuarioPerfil.existente == true){
+					synth.cancel();
+					$rootScope.usuarioPerfil = usuarioPerfil;
+					$state.go('menu',{},{reload : true});
+				}else{
+					$state.go('login', {}, {
+						reload : true
+					});
+				}
+			},function () {
+			});
+	}
 
 	synth.cancel();
 	reproduzirFrase(getAudio.principal.intro);

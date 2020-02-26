@@ -1,7 +1,6 @@
 package br.net.iesb.controller;
 
-import br.net.iesb.dto.AudioLivroDetalheDTO;
-import br.net.iesb.dto.AudioLivroSelecaoDTO;
+import br.net.iesb.dto.*;
 import br.net.iesb.service.transacional.AudioLivroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,5 +22,41 @@ public class AudioController {
     @GetMapping(path = "/findById/{id}")
     public AudioLivroDetalheDTO findById(@PathVariable ("id") String id) {
         return audioLivroService.findById(id);
+    }
+
+    @ResponseBody
+    @GetMapping(path = "/findByIdEdicao/{id}")
+    public AudioLivroEdicaoDTO findByIdEdicao(@PathVariable ("id") String id) {
+        return audioLivroService.findByIdEdicao(id);
+    }
+
+    @ResponseBody
+    @GetMapping(path = "/remove/{id}")
+    public Integer remove(@PathVariable ("id") String id) {
+        return audioLivroService.remove(id);
+    }
+
+    @ResponseBody
+    @GetMapping(path = "/findAll")
+    public List<AudioLivroSelecaoDTO> getAll() {
+        return audioLivroService.findAll();
+    }
+
+    @ResponseBody
+    @GetMapping(path = "/findAll/{termo}")
+    public List<AudioLivroSelecaoDTO> getAllTermo(@PathVariable ("termo") String termo) {
+        return audioLivroService.findByLivroReferencia_TituloIsLikeOrTituloLike(termo);
+    }
+
+    @ResponseBody
+    @GetMapping(path = "/findAllLedor")
+    public List<AudioLivroSelecaoDTO> findAllByLedor(UsuarioConfirmacaoDTO login) {
+        return audioLivroService.findAllByLedor(login.getUsuario());
+    }
+
+    @ResponseBody
+    @GetMapping(path = "/getListaAudioEdicao")
+    public ListaAudioEdicaoDTO getListaAudioEdicao() {
+        return audioLivroService.getListaAudioEdicao();
     }
 }

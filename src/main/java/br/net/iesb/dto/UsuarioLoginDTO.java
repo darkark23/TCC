@@ -11,6 +11,7 @@ import lombok.Setter;
 public class  UsuarioLoginDTO {
 
     private String nome;
+    private String login;
     private String perfil;
     private Boolean existente = false;
 
@@ -22,6 +23,7 @@ public class  UsuarioLoginDTO {
 
     public UsuarioLoginDTO (UsuarioInformationDTO usuarioInformationDTO){
         this.nome = usuarioInformationDTO.getNome();
+        this.login = usuarioInformationDTO.getLogin();
         this.perfil = usuarioInformationDTO.getPerfil();
         this.existente = true;
     }

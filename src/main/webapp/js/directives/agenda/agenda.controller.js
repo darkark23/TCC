@@ -9,6 +9,7 @@ angular.module('tccApp').controller('AgendaController',
 	if ($state.params.data){
 		agendaService.getAgendaDia($state.params.data,function (agendaDia) {
 			$scope.agendaDia = agendaDia;
+			$scope.dataSelecionada = new Date($state.params.data);
 			construirAudioAgenda();
 			iniciarAudio();
 		},function () {
@@ -16,6 +17,7 @@ angular.module('tccApp').controller('AgendaController',
 	}else {
 		agendaService.getAgendaDia(new Date(),function (agendaDia) {
 			$scope.agendaDia = agendaDia;
+			$scope.dataSelecionada = new Date();
 			construirAudioAgenda();
 			iniciarAudio();
 		},function () {
@@ -73,6 +75,11 @@ angular.module('tccApp').controller('AgendaController',
 	$scope.acessarAgendaAnterior = function() {
 		let proximaData = new Date($state.params.data);
 		proximaData.setDate(proximaData.getDate() - 1);
+		$state.go('agenda',{data : proximaData},{reload : true});
+	};
+
+	$scope.acessarAgendaBusca = function() {
+		let proximaData = new Date($scope.dataSelecionada);
 		$state.go('agenda',{data : proximaData},{reload : true});
 	};
 

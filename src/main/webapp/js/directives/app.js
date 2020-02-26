@@ -1,7 +1,7 @@
 'use strict'
-angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast','ngMaterial','ngMessages']).config(
-		[ '$stateProvider', '$urlRouterProvider','$locationProvider', 'RestangularProvider',
-				function($stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider) {
+angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast','ngMaterial','ngMessages','ui.select','ngSanitize']).config(
+		[ '$stateProvider', '$urlRouterProvider','$locationProvider', 'RestangularProvider','$mdDateLocaleProvider',
+				function($stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider,$mdDateLocaleProvider) {
 			
 					$urlRouterProvider.otherwise('principal');
 					$stateProvider.state('home', {
@@ -160,10 +160,34 @@ angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast','ngMate
 								controller: 'MenuController',
 							}
 						}
+					}).state('audioEditarLedor', {
+						url : '/audioEditarLedor/?id',
+						views: {
+							'': {
+
+								templateUrl : '/js/directives/paginas-ledor/ledor-editar-audio/ledor-editar-audio.html',
+								controller : 'LedorEditarAudioController'
+							},
+							'headNav': {
+								templateUrl: '/js/components/head-menu-ledor.html',
+								controller: 'MenuController',
+							}
+						}
 					});
 									
 					$locationProvider.hashPrefix('');
 					RestangularProvider.setBaseUrl('');
+					$mdDateLocaleProvider.shortMonths  = ['Jan', 'Fev', 'Mar', 'Abril','Maio', 'Jun', 'Jul','Ago', 'Set', 'Out','Nov','Dez'];
+					$mdDateLocaleProvider.Months  = ['Janeiro', 'Fevereiro', 'Março', 'Abril','Maio', 'Junho', 'Julho','Agosto', 'Setembro', 'Outubro','Novembro','Dezembro'];
+					$mdDateLocaleProvider.days = ['Domingo','Segunda', 'Terça', 'Quarta', 'Quinta','Sexta', 'Sabado'];
+					$mdDateLocaleProvider.shortDays = ['D', 'S', 'T', 'Q', 'Q','S','S'];
+					$mdDateLocaleProvider.formatDate = function(date) {
+						return moment(date).format('DD/MM/YYYY');
+					};
+					$mdDateLocaleProvider.parseDate = function (dateString) {
+						var m = moment(dateString, 'DD/MM/YYYY', true);
+						return m.isValid() ? m.toDate() : new Date(NaN);
+					}
 				}]).run(function($rootScope) {
 				    $rootScope.nav = null;
 				});

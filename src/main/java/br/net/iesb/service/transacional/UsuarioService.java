@@ -1,6 +1,7 @@
 package br.net.iesb.service.transacional;
 
 import br.net.iesb.dto.UsuarioConfirmacaoDTO;
+import br.net.iesb.dto.UsuarioInformationDTO;
 import br.net.iesb.dto.UsuarioLoginDTO;
 import br.net.iesb.entity.transacional.Usuario;
 import br.net.iesb.repository.transacional.UsuarioRepository;
@@ -13,12 +14,12 @@ public class UsuarioService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
-    public UsuarioLoginDTO verificaLogin(UsuarioConfirmacaoDTO usuarioConfirmacao){
+    public UsuarioInformationDTO verificaLogin(UsuarioConfirmacaoDTO usuarioConfirmacao){
         Usuario usuario = usuarioRepository.findByLoginLikeAndSenhaLike(usuarioConfirmacao.getUsuario(),usuarioConfirmacao.getSenha());
         if(usuario == null){
-            return new UsuarioLoginDTO();
+            return new UsuarioInformationDTO();
         } else {
-            return new UsuarioLoginDTO(usuario);
+            return new UsuarioInformationDTO(usuario);
         }
     };
 

@@ -3,6 +3,17 @@ angular.module('tccApp').controller('LoginController',
 		[ '$scope', '$state', 'loginService', '$rootScope', function($scope, $state, loginService, $rootScope) {
 
 	$scope.dados = {usuario : null,	senha : null};
+
+	loginService.confirmarUsuario($scope.dados,
+		function (usuarioPerfil) {
+			if (usuarioPerfil.existente == true){
+				synth.cancel();
+				$rootScope.usuarioPerfil = usuarioPerfil;
+				$state.go('menu',{},{reload : true});
+			}else{}
+		},function () {
+		});
+
 	var tipoInput = 0;
 
 	synth.cancel();

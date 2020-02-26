@@ -6,10 +6,12 @@
 		<title>Noticias</title>
 	</head>
 	<body>
-		<div>
-			<md-datepicker md-placeholder="Enter date" md-open-on-focus=""></md-datepicker>
-		</div>
 		<section class="py-5">
+			<div class="container">
+				<md-datepicker id="selecaoData" md- ng-model="dataSelecionada" md-placeholder="Selecion um dia" md-open-on-focus=""></md-datepicker>
+				<button style="margin: 5px" type="button" ng-click="acessarAgendaBusca()" class="btn btn-primary">Buscar</button>
+			</div>
+			<p></p>
 			<div ng-show="agendaDia" class="container">
 				<ul class="list-group">
 					<li class="list-group-item active">{{agendaDia.data}}</li>
