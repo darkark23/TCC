@@ -10,10 +10,17 @@
 			<div class="container">
 				<form>
 					<div><h5>{{audioLivro}}</h5></div>
+					<div class="alert alert-warning alert-dismissible fade show" role="alert">
+						<strong>Holy guacamole!</strong> You should check in on some of those fields below.
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
 					<div class="form-group">
 						<label >Título</label>
 						<input type="text" ng-model="audioLivro.tituloAudioBook" class="form-control"  aria-describedby="emailHelp">
 						<small  class="form-text text-muted">O título sera usado na busca pelo audio livro via comando de voz.</small>
+					</div>
 					<div class="form-group">
 						<label>Assuntos</label>
 						<ui-select multiple ng-model="audioLivro.listaAssunto" theme="bootstrap" close-on-select="false" title="Selecione um assunto...">
@@ -54,8 +61,8 @@
 			<div class="container">
 					<div class="btn-group btn-group-toggle" data-toggle="buttons">
 						<button type="button" ng-click="voltar()" class="btn btn-secondary">Voltar</button>
-						<button ng-show="!edicao" type="button" ng-click="cadastrar()" class="btn btn-secondary">Cadastrar</button>
-						<button ng-show="edicao" type="button" ng-click="cadastrar()" class="btn btn-secondary">Salvar</button>
+						<button ng-show="!$state.params.id" type="button" ng-click="salvarLivro()" class="btn btn-secondary">Cadastrar</button>
+						<button ng-show="$state.params.id" type="button" ng-click="salvarLivro()" class="btn btn-secondary">Salvar</button>
 					</div>
 			</div>
 		</section>

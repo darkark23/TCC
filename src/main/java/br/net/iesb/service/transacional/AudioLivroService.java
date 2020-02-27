@@ -1,9 +1,6 @@
 package br.net.iesb.service.transacional;
 
-import br.net.iesb.dto.AudioLivroDetalheDTO;
-import br.net.iesb.dto.AudioLivroEdicaoDTO;
-import br.net.iesb.dto.AudioLivroSelecaoDTO;
-import br.net.iesb.dto.ListaAudioEdicaoDTO;
+import br.net.iesb.dto.*;
 import br.net.iesb.entity.transacional.Assunto;
 import br.net.iesb.entity.transacional.AudioLivro;
 import br.net.iesb.entity.transacional.Livro;
@@ -16,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -81,6 +79,28 @@ public class AudioLivroService {
         List<Livro> listaLivro = livroRepository.findAll();
         List<Assunto> listaAssunto = assuntoRepository.findAll();
         return new ListaAudioEdicaoDTO(listaAssunto,listaLivro);
+    }
+
+    public Integer salvarAudioLivro(AudioLivroEdicaoDTO audioLivroDTO){
+        AudioLivro audioLivro = audioLivroDTO.getId() != null?audioLivroRepository.findById(audioLivroDTO.getId()).get(): new AudioLivro();
+        audioLivro.setTitulo(audioLivroDTO.getTituloAudioBook());
+        audioLivro.setUrl(audioLivroDTO.getUrl());
+        if(audioLivroDTO.getUrlTexto() != null){
+            audioLivro.setUrlTexto(audioLivroDTO.getUrlTexto());
+        }
+        audioLivro.setDescricao(audioLivroDTO.getDescricao());
+        audioLivro.setAtivo(true);
+        audioLivro.setAprovado(1);
+        audioLivro.setLedor(usuarioRepository.findByLoginLike(audioLivroDTO.getLedor()));
+        audioLivro.setLivroReferencia(livroRepository.findById(audioLivroDTO.getLivro().getId()).get());
+        List<Long> listaIdAssunto = new ArrayList<>();
+        for (AssuntoEdicaoDTO assunto : audioLivroDTO.getListaAssunto()) {
+            listaIdAssunto.add(assunto.getId());
+        }
+        audioLivro.setAssuntos(assuntoRepository.findAllById(listaIdAssunto));
+        audioLivro.setDataInsercao(new Date());
+        audioLivroRepository.saveAndFlush(audioLivro);
+        return 0;
     }
 
 }

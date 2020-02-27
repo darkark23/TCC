@@ -19,14 +19,14 @@ public class AudioLivro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AUDIO_LIVRO_SEQUENCE")
-    @SequenceGenerator(name = "AUDIO_LIVRO_SEQUENCE", sequenceName = "AUDIO_LIVRO_SEQUENCE")
+    @SequenceGenerator(name = "AUDIO_LIVRO_SEQUENCE", sequenceName = "AUDIO_LIVRO_SEQUENCE", initialValue = 6)
     @Column(name = "ID", nullable = false)
     private Long id;
 
     @Column(name = "TITULO", nullable = false, length = 50)
     private String titulo;
 
-    @Column(name = "CODIGO", nullable = false, length = 50)
+    @Column(name = "CODIGO", nullable = true, length = 50)
     private String codigo;
 
     @Column(name = "URL_AUDIO", nullable = false, length = 255)
@@ -57,6 +57,7 @@ public class AudioLivro {
     private List<Assunto> assuntos;
 
     @Column(name = "DATA_INSERCAO", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dataInsercao;
 
 }

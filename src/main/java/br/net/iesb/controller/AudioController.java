@@ -4,10 +4,7 @@ import br.net.iesb.dto.*;
 import br.net.iesb.service.transacional.AudioLivroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -58,5 +55,11 @@ public class AudioController {
     @GetMapping(path = "/getListaAudioEdicao")
     public ListaAudioEdicaoDTO getListaAudioEdicao() {
         return audioLivroService.getListaAudioEdicao();
+    }
+
+    @ResponseBody
+    @PostMapping(path = "/salvarAudioLivro", consumes = "application/json")
+    public Integer salvarAudioLivro(@RequestBody AudioLivroEdicaoDTO audioLivro) {
+        return audioLivroService.salvarAudioLivro(audioLivro);
     }
 }
