@@ -67,6 +67,10 @@ angular.module('tccApp').controller('MenuController',
 		$state.go('agenda',{data : new Date()}, {reload : true});
 	};
 
+	$scope.acessarAgendaLedor = function() {
+		$state.go('aulaLedor',{data : new Date()}, {reload : true});
+	};
+
 	$scope.sair = function() {
 		loginService.logOff(
 			function () {

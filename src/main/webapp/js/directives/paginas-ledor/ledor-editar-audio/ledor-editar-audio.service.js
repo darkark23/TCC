@@ -15,10 +15,6 @@ angular.module('tccApp').service('ledorEditarAudioService', ['Restangular', func
         return lista;
     }
 
-    //this.salvarAudioLivro = function (audioLivros ,success, error) {
-//        return this.api().one('salvarAudioLivro').withHttpConfig({paramSerializer: '$httpParamSerializerJQLike'}).customGET('', audioLivros).then(success, error);
-//    };
-
     this.salvarAudioLivro = function (audioLivros ,success, error) {
         return Restangular.all('audio/salvarAudioLivro').post(audioLivros).then(success, error);
     };

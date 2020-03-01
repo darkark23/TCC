@@ -17,7 +17,7 @@ angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast','ngMate
 						templateUrl : '/js/directives/consulta/consulta.html',
 						controller : 'ConsultaController'
 					}).state('agenda', {
-						url : '/agenda/:data',
+						url : '/agenda/?data',
 					        views: {
 					            '': {
 									templateUrl : '/js/directives/agenda/agenda.html',
@@ -149,7 +149,7 @@ angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast','ngMate
 							}
 						}
 					}).state('aulaLedor', {
-						url : '/aulaLedor',
+						url : '/aulaLedor/?data',
 						views: {
 							'': {
 								templateUrl : '/js/directives/paginas-ledor/ledor-aulas/ledor-aulas.html',

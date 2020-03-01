@@ -7,10 +7,20 @@
 	</head>
 	<body>
 		<section class="py-5">
+			<div class="container">
+				<md-datepicker id="selecaoData" md- ng-model="dataSelecionada" md-placeholder="Selecion um dia" md-open-on-focus=""></md-datepicker>
+				<button style="margin: 5px" type="button" ng-click="acessarAgendaBusca()" class="btn btn-primary">Buscar</button>
+			</div>
 			<div ng-show="agendaDia" class="container">
 				<ul class="list-group">
 					<li class="list-group-item active">{{agendaDia.data}}</li>
-					<li ng-show="agendaDia.listaAulas" ng-repeat="aula in agendaDia.listaAulas" class="list-group-item">{{aula.descricao}}</li>
+					<li ng-show="agendaDia.listaAulas" ng-repeat="aula in agendaDia.listaAulas" class="list-group-item">
+						<span ng-show="aula.id" class="align-middle">{{aula.descricao + ' - Ledor: ' + aula.ledor + ' - Situação: ' + aula.aprovado}}</span>
+						<button disabled ng-show="aula.id && !aula.aulaLedor" type="button" ng-click="" class="btn btn-success float-right align-middle">Marcar</button>
+						<button ng-show="aula.aulaLedor" type="button" ng-click="cancelar(aula.id)" class="btn btn-danger float-right align-middle">Cancelar</button>
+						<span ng-show="!aula.id" class="align-middle">{{aula.descricao}}</span>
+						<button ng-show="!aula.id" type="button" ng-click="acessarAgendaAnterior()" class="btn btn-success float-right align-middle">Marcar</button>
+					</li>
 					<li ng-show="agendaDia.listaAulas.length == 0" class="list-group-item">Não existem aulas registradas para este dia.</li>
 				</ul>
 			</div>

@@ -1,13 +1,12 @@
 'use strict'
 angular.module('tccApp').service('ledorAulasService', ['Restangular', function (Restangular) {
 
-    this.api = function () {
-        return Restangular.one('aula');
+    this.agendaDiaEdicao = function (dados ,success, error) {
+        return Restangular.all('aula/agendaDiaEdicao').post(dados).then(success, error);
     };
 
-    this.getAgendaDia = function (data, success, error) {
-        var agendaDia = this.api().one('agendaDia/' + data).get().then(success, error);
-        return agendaDia;
+    this.cancelarAula = function (id ,success, error) {
+        return Restangular.all('aula/cancelarAula').post(id).then(success, error);
     };
 
 }]);
