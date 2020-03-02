@@ -1,9 +1,8 @@
 package br.net.iesb.service.transacional;
 
 import br.net.iesb.dto.*;
-import br.net.iesb.entity.transacional.AudioLivro;
-import br.net.iesb.entity.transacional.Aula;
-import br.net.iesb.entity.transacional.Usuario;
+import br.net.iesb.entity.transacional.*;
+import br.net.iesb.repository.transacional.AssuntoRepository;
 import br.net.iesb.repository.transacional.AudioLivroRepository;
 import br.net.iesb.repository.transacional.AulaRepository;
 import br.net.iesb.repository.transacional.UsuarioRepository;
@@ -26,8 +25,11 @@ public class AulaService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
+    @Autowired
+    AssuntoRepository assuntoRepository;
+
     public AgendaDiaDTO getAgendaDia(Date data){
-        return new AgendaDiaDTO(aulaRepository.findByDataHorarioBetween(DataUtil.dataInicio(data),DataUtil.dataFinal(data)),data);
+        return new AgendaDiaDTO(aulaRepository.findByDataHorarioBetweenAndControleAtivoAndControleAprovado(DataUtil.dataInicio(data),DataUtil.dataFinal(data),true,1),data);
     };
 
     public AulaDiaEdicaoDTO getAgendaDiaEdicao(AulaDiaEdicaoRequestDTO request){
@@ -39,6 +41,21 @@ public class AulaService {
     public Integer cancelarAula(Long id){
         Aula aula = aulaRepository.findById(id).get();
         aula.getControle().setAtivo(false);
+        aulaRepository.saveAndFlush(aula);
+        return 0;
+    };
+
+    public Integer saveAula(AulaRequestDTO aulaRequestDTO){
+        Usuario usuario = usuarioRepository.findByLoginLike(aulaRequestDTO.getLogin());
+        Assunto assunto = assuntoRepository.findById(aulaRequestDTO.getAssunto().getId()).get();
+        Aula aula = new Aula();
+        aula.setAssunto(assunto);
+        aula.setLedor(usuario);
+        aula.setControle(new Controle());
+        aula.setDataInsercao(new Date());
+        aula.setDescricao(aulaRequestDTO.getDescricao());
+        aula.setNome(aulaRequestDTO.getTitulo());
+        aula.setDataHorario(DataUtil.setHora(aulaRequestDTO.getData(),aulaRequestDTO.getIdHorario()));
         aulaRepository.saveAndFlush(aula);
         return 0;
     };

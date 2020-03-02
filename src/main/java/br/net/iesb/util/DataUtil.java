@@ -52,4 +52,12 @@ public final class DataUtil {
         return calendar.get(Calendar.HOUR_OF_DAY);
     }
 
+    public static Date setHora(Date data,Integer hora){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(data);
+        calendar.set(Calendar.HOUR_OF_DAY, hora);
+        calendar.set(Calendar.MINUTE, 0);
+        return calendar.getTime();
+    }
+
 }

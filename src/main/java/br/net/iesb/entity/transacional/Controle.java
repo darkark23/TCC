@@ -21,7 +21,7 @@ public class Controle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONTROLE_SEQUENCE")
-    @SequenceGenerator(name = "CONTROLE_SEQUENCE", sequenceName = "CONTROLE_SEQUENCE")
+    @SequenceGenerator(name = "CONTROLE_SEQUENCE", sequenceName = "CONTROLE_SEQUENCE",initialValue = 15)
     @Column(name = "ID", nullable = false)
     private Long id;
 

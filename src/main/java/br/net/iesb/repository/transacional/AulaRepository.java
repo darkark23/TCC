@@ -15,4 +15,6 @@ public interface AulaRepository extends JpaRepository<Aula,Long> {
 
     List<Aula> findByDataHorarioBetweenAndControleAtivo(Date dataInicio ,Date dataFim, Boolean ativo);
 
+    List<Aula> findByDataHorarioBetweenAndControleAtivoAndControleAprovado(Date dataInicio ,Date dataFim, Boolean ativo, Integer integer);
+
 }

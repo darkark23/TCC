@@ -19,7 +19,7 @@ public class Aula {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AULA_SEQUENCE")
-    @SequenceGenerator(name = "AULA_SEQUENCE", sequenceName = "AULA_SEQUENCE")
+    @SequenceGenerator(name = "AULA_SEQUENCE", sequenceName = "AULA_SEQUENCE",initialValue = 5)
     @Column(name = "ID", nullable = false)
     private Long id;
 
