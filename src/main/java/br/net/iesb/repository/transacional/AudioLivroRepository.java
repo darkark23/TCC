@@ -14,9 +14,9 @@ public interface AudioLivroRepository extends JpaRepository<AudioLivro,Long> {
     @Override
     List<AudioLivro> findAll();
 
-    List<AudioLivro> findByLivroReferencia_TituloContainingIgnoreCaseOrTituloContainingIgnoreCase(String livro, String titulo);
+    List<AudioLivro> findByLivroReferencia_TituloContainingIgnoreCaseOrTituloContainingIgnoreCaseAndControleAtivoAndControleAprovado(String livro, String titulo,Boolean ativo,Integer aprovado);
 
-    List<AudioLivro> findByLedorIdAndAtivo(Long idUsuario,Boolean ativo);
+    List<AudioLivro> findByLedorIdAndControleAtivo(Long idUsuario,Boolean ativo);
 
     Optional<AudioLivro> findById(Long id);
 

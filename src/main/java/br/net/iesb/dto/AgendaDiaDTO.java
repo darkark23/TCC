@@ -4,6 +4,7 @@ package br.net.iesb.dto;
 import br.net.iesb.entity.transacional.Assunto;
 import br.net.iesb.entity.transacional.AudioLivro;
 import br.net.iesb.entity.transacional.Aula;
+import br.net.iesb.entity.transacional.Usuario;
 import br.net.iesb.util.DataUtil;
 import lombok.Getter;
 
@@ -30,11 +31,15 @@ public class AgendaDiaDTO {
 
         String descricao;
         String id;
+        String assunto;
+        String ledor;
 
         public AulaDTO(Aula aula){
 
             this.id = aula.getId().toString();
             this.descricao = DataUtil.DataHoraAula(aula.getDataHorario(),aula.getNome());
+            this.assunto = aula.getAssunto().getNome();
+            this.ledor =  aula.getLedor().getPessoa().getNome();
 
         }
 

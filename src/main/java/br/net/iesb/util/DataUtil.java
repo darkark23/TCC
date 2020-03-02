@@ -46,4 +46,10 @@ public final class DataUtil {
         return  nome + " das " + FORMAT_HORARIO.format(data) + " às " + FORMAT_HORARIO.format(dataAdicionarHora(data));
     };
 
+    public static int getHora(Date data){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(data);
+        return calendar.get(Calendar.HOUR_OF_DAY);
+    }
+
 }

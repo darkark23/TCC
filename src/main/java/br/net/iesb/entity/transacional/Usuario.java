@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "USUARIO")
@@ -42,4 +43,11 @@ public class Usuario {
     @Column(name = "DATA_INSERCAO", nullable = false)
     private Date dataInsercao;
 
+    @ManyToOne(cascade = { CascadeType.PERSIST,CascadeType.MERGE})
+    @JoinColumn(name = "ID_CONTROLE", nullable = false, foreignKey = @ForeignKey(name = "FK_AULA_CONTROLE") )
+    private Controle controle;
+
+    @OneToMany
+    @JoinColumn(name = "ID_LEDOR")
+    private List<Competencia> listaCompetencias;
 }

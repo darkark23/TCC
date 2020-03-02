@@ -38,12 +38,6 @@ public class AudioLivro {
     @Column(name = "DESCRICAO", nullable = false, length = 255)
     private String descricao;
 
-    @Column(name = "ATIVO", nullable = false)
-    private Boolean ativo;
-
-    @Column(name = "APROVADO", nullable = false)
-    private Integer aprovado;
-
     @ManyToOne
     @JoinColumn(name = "ID_LIVRO_REFERENCIA", nullable = true, foreignKey = @ForeignKey(name = "FK_AUDIO_LIV_LIVRO"))
     private Livro livroReferencia;
@@ -59,5 +53,9 @@ public class AudioLivro {
     @Column(name = "DATA_INSERCAO", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataInsercao;
+
+    @ManyToOne(cascade = { CascadeType.PERSIST,CascadeType.MERGE})
+    @JoinColumn(name = "ID_CONTROLE", nullable = false, foreignKey = @ForeignKey(name = "FK_AULA_CONTROLE") )
+    private Controle controle;
 
 }

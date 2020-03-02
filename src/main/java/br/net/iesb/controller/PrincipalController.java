@@ -4,7 +4,6 @@ import br.net.iesb.dto.NoticiaDTO;
 import br.net.iesb.entity.transacional.Noticia;
 import br.net.iesb.json.AutomovelFiltroJson;
 import br.net.iesb.service.transacional.NoticiaService;
-import br.net.iesb.view.AutomovelListaView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

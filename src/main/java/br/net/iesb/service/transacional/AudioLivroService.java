@@ -1,10 +1,7 @@
 package br.net.iesb.service.transacional;
 
 import br.net.iesb.dto.*;
-import br.net.iesb.entity.transacional.Assunto;
-import br.net.iesb.entity.transacional.AudioLivro;
-import br.net.iesb.entity.transacional.Livro;
-import br.net.iesb.entity.transacional.Usuario;
+import br.net.iesb.entity.transacional.*;
 import br.net.iesb.repository.transacional.AssuntoRepository;
 import br.net.iesb.repository.transacional.AudioLivroRepository;
 import br.net.iesb.repository.transacional.LivroRepository;
@@ -33,7 +30,7 @@ public class AudioLivroService {
     LivroRepository livroRepository;
 
     public List<AudioLivroSelecaoDTO> findByLivroReferencia_TituloIsLikeOrTituloLike(String termo){
-        List<AudioLivro> listaAudioLivro = audioLivroRepository.findByLivroReferencia_TituloContainingIgnoreCaseOrTituloContainingIgnoreCase(termo,termo);
+        List<AudioLivro> listaAudioLivro = audioLivroRepository.findByLivroReferencia_TituloContainingIgnoreCaseOrTituloContainingIgnoreCaseAndControleAtivoAndControleAprovado(termo,termo,true,1);
         List<AudioLivroSelecaoDTO> listaAudioLivroSelecao = new ArrayList<>();
         listaAudioLivro.forEach(x->listaAudioLivroSelecao.add(new AudioLivroSelecaoDTO(x)));
         return listaAudioLivroSelecao;
@@ -57,7 +54,7 @@ public class AudioLivroService {
     public Integer remove(String id){
         try{
             AudioLivro audioLivro = audioLivroRepository.findById(Long.parseLong(id)).get();
-            audioLivro.setAtivo(false);
+            audioLivro.getControle().setAtivo(false);
             audioLivroRepository.save(audioLivro);
             audioLivroRepository.flush();
             return 1;
@@ -69,7 +66,7 @@ public class AudioLivroService {
 
     public List<AudioLivroSelecaoDTO> findAllByLedor(String loginLedor){
         Usuario usuairoLedor = usuarioRepository.findByLoginLike(loginLedor);
-        List<AudioLivro> listaAudioLivro = audioLivroRepository.findByLedorIdAndAtivo(usuairoLedor.getId(),true);
+        List<AudioLivro> listaAudioLivro = audioLivroRepository.findByLedorIdAndControleAtivo(usuairoLedor.getId(),true);
         List<AudioLivroSelecaoDTO> listaAudioLivroSelecao = new ArrayList<>();
         listaAudioLivro.forEach(x->listaAudioLivroSelecao.add(new AudioLivroSelecaoDTO(x)));
         return listaAudioLivroSelecao;
@@ -89,8 +86,11 @@ public class AudioLivroService {
             audioLivro.setUrlTexto(audioLivroDTO.getUrlTexto());
         }
         audioLivro.setDescricao(audioLivroDTO.getDescricao());
-        audioLivro.setAtivo(true);
-        audioLivro.setAprovado(1);
+        if(audioLivro.getControle() == null){
+            audioLivro.setControle(new Controle());
+        }else {
+            audioLivro.getControle().setAprovado(0);
+        }
         audioLivro.setLedor(usuarioRepository.findByLoginLike(audioLivroDTO.getLedor()));
         audioLivro.setLivroReferencia(livroRepository.findById(audioLivroDTO.getLivro().getId()).get());
         List<Long> listaIdAssunto = new ArrayList<>();

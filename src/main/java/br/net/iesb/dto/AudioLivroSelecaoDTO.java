@@ -16,7 +16,7 @@ public class AudioLivroSelecaoDTO {
         this.titulo = audioLivro.getTitulo();
         this.codigo = audioLivro.getCodigo();
         this.id = audioLivro.getId().toString();
-        this.aprovado = verificarAprovado(audioLivro.getAprovado());
+        this.aprovado = verificarAprovado(audioLivro.getControle().getAprovado());
     }
 
     private String verificarAprovado(Integer aprovado){

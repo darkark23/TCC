@@ -36,11 +36,15 @@ public class Aula {
     @JoinColumn(name = "ID_ASSUNTO", nullable = false, foreignKey = @ForeignKey(name = "FK_AULA_ASSUNTO") )
     private Assunto Assunto;
 
-    @ManyToMany(cascade = { CascadeType.PERSIST,CascadeType.MERGE})
-    @JoinTable(name = "AULA_LEDOR", joinColumns = @JoinColumn(name = "ID_AULA"), inverseJoinColumns = @JoinColumn(name = "ID_LEDOR"))
-    private List<Usuario> usuarios;
+    @ManyToOne(cascade = { CascadeType.PERSIST,CascadeType.MERGE})
+    @JoinColumn(name = "ID_LEDOR", nullable = false, foreignKey = @ForeignKey(name = "FK_AULA_USUARIO") )
+    private Usuario ledor;
 
     @Column(name = "DATA_INSERCAO", nullable = false)
     private Date dataInsercao;
+
+    @ManyToOne(cascade = { CascadeType.PERSIST,CascadeType.MERGE})
+    @JoinColumn(name = "ID_CONTROLE", nullable = false, foreignKey = @ForeignKey(name = "FK_AULA_CONTROLE") )
+    private Controle controle;
 
 }
