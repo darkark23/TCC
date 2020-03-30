@@ -1,6 +1,6 @@
 'use strict'
 angular.module('tccApp').controller('ContatoController',
-		[ '$scope', '$state', 'contatoService', '$rootScope', function($scope, $state, contatoService, $rootScope) {
+		[ '$scope', '$state', function($scope, $state) {
 
 	synth.cancel();
 	reproduzirFrase(getAudio.contato.intro);

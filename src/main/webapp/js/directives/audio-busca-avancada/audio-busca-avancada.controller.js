@@ -1,6 +1,7 @@
 'use strict'
 angular.module('tccApp').controller('AudioBuscaAvancadaController',
-		[ "$scope", '$state', 'audioBuscaAvancadaService', '$rootScope', function($scope, $state, audioBuscaAvancadaService, $rootScope) {
+	[ "$scope", '$state', 'audioBuscaAvancadaService', '$rootScope', 'loginService',
+		function($scope, $state, audioBuscaAvancadaService, $rootScope, loginService) {
 			
 			var synth = window.speechSynthesis;
 			synth.cancel();
@@ -15,42 +16,46 @@ angular.module('tccApp').controller('AudioBuscaAvancadaController',
 				} 
 			};
 													
-	          const recognition = new webkitSpeechRecognition();
-	          recognition.interimResults = true;
-	          recognition.lang = "pt-BR";
-	          recognition.continuous = true;
-	          recognition.start();
-	          // This event happens when you talk in the microphone
-	          recognition.onresult = function(event) {
-	            for (let i = event.resultIndex; i < event.results.length; i++) {
-	              if (event.results[i].isFinal) {
-	            	  var son = event.results[i][0].transcript.trim();
-	            	  if (son == 'principal'){
-	            		  synth.cancel();
-	            		  $state.go('principal', {
-							}, {
-								reload : true
-							});
-	            	  } else if(son == 'menu'){
-	            		  	synth.cancel();
-	            			$state.go('menu', {
-							}, {
-								reload : true
-							});
-	            	  } else if(son == 'sair'){
-	            		  	synth.cancel();
-	            			$state.go('principal', {
-							}, {
-								reload : true
-							});
-	            	  }       	 
-	              }
-	            }
-	          };
+			const recognition = new webkitSpeechRecognition();
+			recognition.interimResults = true;
+			recognition.lang = "pt-BR";
+			recognition.continuous = true;
+			recognition.start();
+			// This event happens when you talk in the microphone
+			recognition.onresult = function(event) {
+			for (let i = event.resultIndex; i < event.results.length; i++) {
+				if (event.results[i].isFinal) {
+					var son = event.results[i][0].transcript.trim();
+					if (son == 'principal'){
+						synth.cancel();
+						$state.go('principal', {
+						}, {
+							reload : true
+						});
+					} else if(son == 'menu'){
+						synth.cancel();
+						$state.go('menu', {
+						}, {
+							reload : true
+						});
+					} else if(son == 'sair'){
+						synth.cancel();
+						$state.go('principal', {
+						}, {
+							reload : true
+						});
+					}
+				}
+			}
+			};
 	          
-	          $scope.atualizar = function(string) {
-	        	  console.log(string);
-	        	  $scope.microfone = string;
-				};
+			$scope.atualizar = function(string) {
+				console.log(string);
+				$scope.microfone = string;
+			};
+
+			$scope.logOff = function() {
+				loginService.logOffUsuario();
+			};
 	          
 		}]);

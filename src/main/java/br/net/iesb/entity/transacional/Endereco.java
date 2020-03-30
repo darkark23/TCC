@@ -20,7 +20,7 @@ public class Endereco {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ENDERECO_SEQUENCE")
     @SequenceGenerator(name = "ENDERECO_SEQUENCE", sequenceName = "ENDERECO_SEQUENCE")
     @Column(name = "ID", nullable = false)
-    private Integer id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "ID_CIDADE", foreignKey = @ForeignKey(name = "FK_ENDERECO_CIDADE"), nullable = false)

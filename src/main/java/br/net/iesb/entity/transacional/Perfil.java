@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Perfil {
+public class Perfil implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PERFIL_SEQUENCE")
@@ -32,4 +33,8 @@ public class Perfil {
     @Column(name = "DATA_INSERCAO", nullable = false)
     private Date dataInsercao;
 
+    @Override
+    public String getAuthority() {
+        return this.nome;
+    }
 }

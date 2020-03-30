@@ -1,5 +1,5 @@
 'use strict'
-angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast','ngMaterial','ngMessages','ui.select','ngSanitize']).config(
+angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast','ngMaterial','ngMessages','ui.select','ngSanitize','ngMask']).config(
 		[ '$stateProvider', '$urlRouterProvider','$locationProvider', 'RestangularProvider','$mdDateLocaleProvider',
 				function($stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider,$mdDateLocaleProvider) {
 			
@@ -25,7 +25,7 @@ angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast','ngMate
 					            },
 					            'headNav': {
 					            	templateUrl: '/js/components/head-menu.html',
-					            	controller: 'AgendaController',
+					            	controller: 'AgendaController'
 					            	}
 					        }
 					}).state('audio', {
@@ -37,7 +37,7 @@ angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast','ngMate
 				            },
 				            'headNav': {
 				            	templateUrl: '/js/components/head-menu.html',
-				            	controller: 'AudioController',
+				            	controller: 'AudioController'
 				            	}
 				        }
 					}).state('audioBusca', {
@@ -49,7 +49,7 @@ angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast','ngMate
 				            },
 				            'headNav': {
 				            	templateUrl: '/js/components/head-menu.html',
-				            	controller: 'AudioBuscaController',
+				            	controller: 'AudioBuscaController'
 				            	}
 				        }
 					}).state('audioBuscaAvancada', {
@@ -61,7 +61,7 @@ angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast','ngMate
 							},
 							'headNav': {
 								templateUrl: '/js/components/head-menu.html',
-								controller: 'AudioBuscaControllerAvancada',
+								controller: 'AudioBuscaControllerAvancada'
 							}
 						}
 					}).state('audioLista', {
@@ -73,7 +73,7 @@ angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast','ngMate
 				            },
 				            'headNav': {
 				            	templateUrl: '/js/components/head-menu.html',
-				            	controller: 'AudioListaController',
+				            	controller: 'AudioListaController'
 				            	}
 				        }
 					}).state('login', {
@@ -85,7 +85,7 @@ angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast','ngMate
 				            },
 				            'headNav': {
 				            	templateUrl: '/js/components/head-principal.html',
-				            	controller: 'LoginController',
+				            	controller: 'LoginController'
 				            	}
 				        }
 					}).state('menu', {
@@ -97,7 +97,7 @@ angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast','ngMate
 				            },
 				            'headNav': {
 				            	templateUrl: '/js/components/head-menu.html',
-				            	controller: 'MenuController',
+				            	controller: 'MenuController'
 				            	}
 				        }
 					}).state('principal', {
@@ -109,7 +109,7 @@ angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast','ngMate
 				            },
 				            'headNav': {
 				            	templateUrl: '/js/components/head-principal.html',
-				            	controller: 'PrincipalController',
+				            	controller: 'PrincipalController'
 				            	}
 				        }
 					}).state('localizacao', {
@@ -121,7 +121,7 @@ angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast','ngMate
 				            },
 				            'headNav': {
 				            	templateUrl: '/js/components/head-principal.html',
-				            	controller: 'LocalizacaoController',
+				            	controller: 'LocalizacaoController'
 				            	}
 				        }
 					}).state('contato', {
@@ -133,7 +133,7 @@ angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast','ngMate
 				            },
 				            'headNav': {
 				            	templateUrl: '/js/components/head-principal.html',
-				            	controller: 'ContatoController',
+				            	controller: 'ContatoController'
 				            	}
 				        }
 					}).state('audioListaLedor', {
@@ -144,8 +144,8 @@ angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast','ngMate
 								controller : 'LedorListaAudioController'
 							},
 							'headNav': {
-								templateUrl: '/js/components/head-menu-ledor.html',
-								controller: 'MenuController',
+								templateUrl: '/js/components/head-menu.html',
+								controller: 'MenuController'
 							}
 						}
 					}).state('aulaLedor', {
@@ -156,8 +156,8 @@ angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast','ngMate
 								controller : 'LedorAulasController'
 							},
 							'headNav': {
-								templateUrl: '/js/components/head-menu-ledor.html',
-								controller: 'MenuController',
+								templateUrl: '/js/components/head-menu.html',
+								controller: 'MenuController'
 							}
 						}
 					}).state('audioEditarLedor', {
@@ -169,8 +169,44 @@ angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast','ngMate
 								controller : 'LedorEditarAudioController'
 							},
 							'headNav': {
-								templateUrl: '/js/components/head-menu-ledor.html',
-								controller: 'MenuController',
+								templateUrl: '/js/components/head-menu.html',
+								controller: 'MenuController'
+							}
+						}
+					}).state('adminListaUsuario', {
+						url : '/adminListaUsuario',
+						views: {
+							'': {
+								templateUrl : '/js/directives/paginas-admin/admin-lista-usuario/admin-lista-usuario.html',
+								controller : 'AdminListaUsuarioController'
+							},
+							'headNav': {
+								templateUrl: '/js/components/head-menu.html',
+								controller: 'MenuController'
+							}
+						}
+					}).state('usuarioEdicao', {
+						url : '/usuarioEdicao/?id',
+						views: {
+							'': {
+								templateUrl : '/js/directives/usuario-edicao/usuario-edicao.html',
+								controller : 'UsuarioEdicaoController'
+							},
+							'headNav': {
+								templateUrl: '/js/components/head-menu.html',
+								controller: 'MenuController'
+							}
+						}
+					}).state('geradorChaveLedor', {
+						url : '/geradorChaveLedor',
+						views: {
+							'': {
+								templateUrl : '/js/directives/geracao-chave-ledor/geracao-chave-ledor.html',
+								controller : 'GeracaoChaveLedorController'
+							},
+							'headNav': {
+								templateUrl: '/js/components/head-menu.html',
+								controller: 'MenuController'
 							}
 						}
 					});
@@ -188,6 +224,4 @@ angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast','ngMate
 						var m = moment(dateString, 'DD/MM/YYYY', true);
 						return m.isValid() ? m.toDate() : new Date(NaN);
 					}
-				}]).run(function($rootScope) {
-				    $rootScope.nav = null;
-				});
+				}]);

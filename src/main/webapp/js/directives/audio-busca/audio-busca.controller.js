@@ -1,6 +1,6 @@
 'use strict'
 angular.module('tccApp').controller('AudioBuscaController',
-		[ "$scope", '$state', 'audioBuscaService', '$rootScope', function($scope, $state, audioBuscaService, $rootScope) {
+		[ "$scope", '$state', 'audioBuscaService', '$rootScope', 'loginService', function($scope, $state, audioBuscaService, $rootScope, loginService) {
 
 	var tipoInput = 0;
 	$scope.termo = null;
@@ -80,6 +80,10 @@ angular.module('tccApp').controller('AudioBuscaController',
 				}
 			}
 		}
+	};
+
+	$scope.logOff = function() {
+		loginService.logOffUsuario();
 	};
 
 }]);

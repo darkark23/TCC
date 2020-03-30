@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Noticias</title>
+	</head>
+	<body>
+		<section class="py-5">
+			<div class="container">
+				<form>
+					<div class="alert alert-warning alert-dismissible fade show" role="alert">
+						<strong>Holy guacamole!</strong> You should check in on some of those fields below.
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="form-group">
+						<label >Nome Completo</label>
+						<input type="text" ng-model="usuario.pessoa.nome" class="form-control"  aria-describedby="emailHelp">
+						<small  class="form-text text-muted">Informar o nome completo. Ex.: Maria da Silva.</small>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label>CPF</label>
+							<input type="text" ng-model="usuario.pessoa.cpf" class="form-control"  aria-describedby="emailHelp" mask="999.999.999-99">
+							<small  class="form-text text-muted">Informar o CPF. Ex.: 000.000.000-00</small>
+						</div>
+						<div class="form-group col-md-6">
+							<label>RG</label>
+							<input type="text" ng-model="usuario.pessoa.rg" class="form-control"  aria-describedby="emailHelp" mask="99.999.999-99">
+							<small  class="form-text text-muted">Informar o RG. Ex.: 00.000.000-00</small>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label>Sexo</label>
+							<select ng-model="usuario.pessoa.sexo" class="form-control">
+								<option value="">Selecione um sexo</option>
+								<option ng-repeat="sexo in listaSexo" value="{{sexo.valor}}">{{sexo.descricao}}</option>
+							</select>
+							<small  class="form-text text-muted">Informar o sexo.</small>
+						</div>
+						<div class="form-group col-md-6">
+							<label>Data de Nascimento</label>
+							<div class="container">
+								<md-datepicker id="selecaoData" md- ng-model="usuario.pessoa.dataNascimento" md-placeholder="Selecion um dia" md-open-on-focus=""></md-datepicker>
+							</div>
+							<small  class="form-text text-muted">Informar data de nascimento. Ex.: 11/11/1111</small>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label>CEP</label>
+							<input type="text" ng-model="usuario.pessoa.endereco.cep" class="form-control"  aria-describedby="emailHelp" mask="99999-999">
+							<small  class="form-text text-muted">Informar o cep da residência. Ex.: 11111-111 .</small>
+						</div>
+						<div class="form-group col-md-6">
+							<label>Estado</label>
+							<select ng-model="usuario.pessoa.endereco.estadoId" ng-change="filtrarCidade()" class="form-control">
+								<option value="">Selecione um estado</option>
+								<option ng-repeat="estado in listaEstado" ng-value="estado.id" value="{{estado.id}}">{{estado.uf + ' - ' + estado.descricao}}</option>
+							</select>
+							<small  class="form-text text-muted">Informar o estado onde se localiza a residência.</small>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label>Cidade</label>
+							<select ng-model="usuario.pessoa.endereco.cidadeId" class="form-control">
+								<option value="">Selecione uma cidade</option>
+								<option ng-repeat="cidade in listaCidadeFiltrada" ng-value="cidade.id" value="{{cidade.id}}">{{cidade.descricao}}</option>
+							</select>
+							<small  class="form-text text-muted">Informar a cidade onde se localiza a residência.</small>
+						</div>
+						<div class="form-group col-md-6">
+							<label>Bairro</label>
+							<input type="text" ng-model="usuario.pessoa.endereco.bairro" class="form-control"  aria-describedby="emailHelp">
+							<small  class="form-text text-muted">Informar o bairro onde se localiza a residência.</small>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label>Complemento</label>
+						<input type="text" ng-model="usuario.pessoa.endereco.complemento" class="form-control"  aria-describedby="emailHelp">
+						<small  class="form-text text-muted">Informar dados de complemento da localização da residência.</small>
+					</div>
+
+					<div class="form-row">
+						<div class="form-group col-md-2">
+							<label>Tipo Telefone</label>
+							<select ng-model="usuario.pessoa.telefone.tipo" class="form-control">
+								<option value="">Selecione um tipo</option>
+								<option ng-repeat="tipoTelefone in listaTipoTelefone" value="{{tipoTelefone.valor}}">{{tipoTelefone.descricao}}</option>
+							</select>
+							<small  class="form-text text-muted">Selecionar o tipo de telefone de contato informado.</small>
+						</div>
+						<div class="form-group col-md-10">
+							<label>Número de Telefone</label>
+							<input type="text" id="telefone" ng-model="usuario.pessoa.telefone.numero" class="form-control" aria-describedby="emailHelp" mask="(99) 9?9999-9999">
+							<small  class="form-text text-muted">Informar o número de telefone para contato.</small>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label>Login</label>
+						<input type="text" ng-model="usuario.login" class="form-control"  aria-describedby="emailHelp">
+						<small  class="form-text text-muted">Informar um login para autenticação e utilização dos serviços do portal do ledor.</small>
+					</div>
+
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label>Senha</label>
+							<input type="password" ng-model="usuario.senha" class="form-control"  aria-describedby="emailHelp">
+							<small  class="form-text text-muted">Informar uma senha para autenticação e utilização dos serviços do portal do ledor.</small>
+						</div>
+						<div class="form-group col-md-6">
+							<label>Confirmar senha</label>
+							<input type="password" ng-model="senhaConfimacao" class="form-control"  aria-describedby="emailHelp">
+							<small  class="form-text text-muted">Confirmar senha digitada.</small>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label>E-mail</label>
+						<input type="text" ng-model="usuario.email" class="form-control"  aria-describedby="emailHelp">
+						<small  class="form-text text-muted">Informar um e-mail para contato.</small>
+					</div>
+
+					<div class="form-group">
+						<label>Perfil</label>
+						<select ng-model="usuario.perfil" class="form-control">
+							<option value="">Selecione um perfil</option>
+							<option ng-repeat="perfil in listaPerfil" ng-value="perfil.id" value="{{perfil.id}}">{{perfil.descricao}}</option>
+						</select>
+						<small  class="form-text text-muted">Perfil que será atribuido ao usuário cadastrado.</small>
+					</div>
+				</form>
+			</div>
+		</section>
+	</body>
+</html>

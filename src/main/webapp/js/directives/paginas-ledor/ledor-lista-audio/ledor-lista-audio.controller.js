@@ -21,7 +21,7 @@ angular.module('tccApp').controller('LedorListaAudioController',
 	};
 
 	$scope.voltar = function() {
-		$state.go('audioBusca',{}, {reload : true});
+		$state.go('menu',{}, {reload : true});
 	};
 
 	var reproduzirIntro = function() {
@@ -145,5 +145,9 @@ angular.module('tccApp').controller('LedorListaAudioController',
 
 	$scope.editar = function(id) {
 		$state.go('audioEditarLedor',{id : id}, {reload : true});
+	};
+
+	$scope.logOff = function() {
+		loginService.logOffUsuario();
 	};
 }]);

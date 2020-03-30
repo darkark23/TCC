@@ -30,12 +30,15 @@ public class LoginController {
         if (usuarioInformationDTO.getExistente()) {
             return new UsuarioLoginDTO(usuarioInformationDTO);
         } else {
-            usuarioInformationDTO = usuarioService.verificaLogin(usuarioConfirmacaoDTO);
-			if (usuarioInformationDTO.getExistente()) {
+            UsuarioInformationDTO usuarioInformationDTOReturn = usuarioService.verificaLogin(usuarioConfirmacaoDTO);
+			if (usuarioInformationDTOReturn.getExistente() && usuarioInformationDTOReturn.getSituacao() == 1) {
+			    usuarioInformationDTO = usuarioInformationDTOReturn;
 				return new UsuarioLoginDTO(usuarioInformationDTO);
-			} else {
-				return new UsuarioLoginDTO();
-			}
+			} else if (usuarioInformationDTO.getExistente() && usuarioInformationDTO.getSituacao() != 1) {
+                return new UsuarioLoginDTO(usuarioInformationDTOReturn);
+			}else {
+                return new UsuarioLoginDTO();
+            }
         }
     }
 

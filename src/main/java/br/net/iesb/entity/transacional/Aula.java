@@ -36,7 +36,7 @@ public class Aula {
     @JoinColumn(name = "ID_ASSUNTO", nullable = false, foreignKey = @ForeignKey(name = "FK_AULA_ASSUNTO") )
     private Assunto Assunto;
 
-    @ManyToOne(cascade = { CascadeType.PERSIST,CascadeType.MERGE})
+    @ManyToOne
     @JoinColumn(name = "ID_LEDOR", nullable = false, foreignKey = @ForeignKey(name = "FK_AULA_USUARIO") )
     private Usuario ledor;
 

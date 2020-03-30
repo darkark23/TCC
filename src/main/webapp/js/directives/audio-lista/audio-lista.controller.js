@@ -1,6 +1,6 @@
 'use strict'
 angular.module('tccApp').controller('AudioListaController',
-		[ "$scope", '$state', 'audioListaService', '$rootScope', function($scope, $state, audioListaService, $rootScope) {
+		[ "$scope", '$state', '$rootScope', 'audioListaService', 'loginService', function($scope, $state, $rootScope, audioListaService, loginService) {
 
 	comecarReconhecimento();
 	$scope.audioLivros = null;
@@ -109,6 +109,10 @@ angular.module('tccApp').controller('AudioListaController',
 			reproduzirFrase(getAudio.audioLista.semResultado);
 			currentResultado = 0;
 		}
+	};
+
+	$scope.logOff = function() {
+		loginService.logOffUsuario();
 	};
 
 }]);

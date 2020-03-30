@@ -53,4 +53,8 @@ angular.module('tccApp').controller('LedorEditarAudioController',
 		$state.go('audioListaLedor',{}, {reload : true});
 	};
 
+	$scope.logOff = function() {
+		loginService.logOffUsuario();
+	};
+
 }]);

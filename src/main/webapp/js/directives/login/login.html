@@ -8,6 +8,9 @@
 	<body>
 		<section class="py-5">
 			<div class="container">
+				<div ng-show="usuarioPerfilTemp.situacao == 0" class="alert alert-dark" role="alert">
+					Seu perfil ainda não foi aprovado, aguarde a aprovação ou entre em contato com um administrador.
+				</div>
 				<form>
 					<div class="form-group row">
 						<label for="usuario" class="col-sm-2 col-form-label">Usuário</label>
@@ -26,6 +29,7 @@
 					<div class="form-group row">
 						<div class="col-sm-10">
 							<button type="submit"ng-click="confirmarUsuario()" class="btn btn-primary">Entrar</button>
+							<button type="submit"ng-click="confirmarUsuario()" class="btn btn-primary">Chave de registro</button>
 						</div>
 					</div>
 				</form>

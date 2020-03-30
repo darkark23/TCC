@@ -1,6 +1,6 @@
 'use strict';
 angular.module('tccApp').controller('AgendaController',
-		[ "$scope", '$state', 'agendaService', '$rootScope', function($scope, $state, agendaService, $rootScope) {
+		[ "$scope", '$state', 'agendaService', '$rootScope','loginService', function($scope, $state, agendaService, $rootScope, loginService) {
 
 	var audioAgenda = null;
 
@@ -9,7 +9,11 @@ angular.module('tccApp').controller('AgendaController',
 	if ($state.params.data){
 		agendaService.getAgendaDia($state.params.data,function (agendaDia) {
 			$scope.agendaDia = agendaDia;
-			$scope.dataSelecionada = new Date($state.params.data);
+			if($state.params.data){
+				$scope.dataSelecionada = new Date($state.params.data);
+			}else{
+				$scope.dataSelecionada = new Date();
+			}
 			construirAudioAgenda();
 			iniciarAudio();
 		},function () {
@@ -67,13 +71,25 @@ angular.module('tccApp').controller('AgendaController',
 	};
 
 	$scope.acessarAgendaProxima = function() {
-		let proximaData = new Date($state.params.data);
+		let proximaData;
+		if($state.params.data){
+			proximaData = new Date($state.params.data);
+		}else{
+			proximaData = new Date();
+		}
+
 		proximaData.setDate(proximaData.getDate() + 1);
 		$state.go('agenda',{data : proximaData},{reload : true});
 	};
 
 	$scope.acessarAgendaAnterior = function() {
-		let proximaData = new Date($state.params.data);
+		let proximaData;
+		if($state.params.data){
+			proximaData = new Date($state.params.data);
+		}else{
+			proximaData = new Date();
+		}
+
 		proximaData.setDate(proximaData.getDate() - 1);
 		$state.go('agenda',{data : proximaData},{reload : true});
 	};
@@ -100,5 +116,9 @@ angular.module('tccApp').controller('AgendaController',
 		synth.cancel();
 		reproduzirFrase(audioAgenda + getAudio.agenda.comandos);
 	}
+
+	$scope.logOff = function() {
+		loginService.logOffUsuario();
+	};
 	          
 }]);

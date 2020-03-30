@@ -1,5 +1,5 @@
 'use strict'
-angular.module('tccApp').service('loginService', ['Restangular', function (Restangular) {
+angular.module('tccApp').service('loginService', ['Restangular','$state', function (Restangular,$state) {
 
     this.api = function () {
         return Restangular.one('login');
@@ -12,5 +12,14 @@ angular.module('tccApp').service('loginService', ['Restangular', function (Resta
     this.logOff = function (success, error) {
         return this.api().one('logOff').get().then(success, error);
     };
+
+    this.logOffUsuario = function () {
+        this.logOff(
+            function () {
+                $state.go('principal', {}, {reload : true});
+            },function () {
+                $state.go('principal', {}, {reload : true});
+            });
+    }
 
 }]);

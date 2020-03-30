@@ -45,10 +45,30 @@ public class AulaService {
         return 0;
     };
 
+    public Integer rejeitarAula(AulaRequestDTO aulaRequestDTO){
+        Aula aula = aulaRepository.findById(aulaRequestDTO.getId()).get();
+        aula.getControle().setAprovado(2);
+        aula.getControle().setDescricaoReprovado(aulaRequestDTO.getMotivo());
+        aulaRepository.saveAndFlush(aula);
+        return 0;
+    };
+
+    public Integer aprovarAula(Long id){
+        Aula aula = aulaRepository.findById(id).get();
+        aula.getControle().setAprovado(1);
+        aulaRepository.saveAndFlush(aula);
+        return 0;
+    };
+
     public Integer saveAula(AulaRequestDTO aulaRequestDTO){
         Usuario usuario = usuarioRepository.findByLoginLike(aulaRequestDTO.getLogin());
         Assunto assunto = assuntoRepository.findById(aulaRequestDTO.getAssunto().getId()).get();
-        Aula aula = new Aula();
+        Aula aula;
+        if (aulaRequestDTO.getId() != null){
+            aula = aulaRepository.findById(aulaRequestDTO.getId()).get();
+        }else {
+            aula = new Aula();
+        }
         aula.setAssunto(assunto);
         aula.setLedor(usuario);
         aula.setControle(new Controle());

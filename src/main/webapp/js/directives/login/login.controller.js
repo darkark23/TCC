@@ -3,13 +3,17 @@ angular.module('tccApp').controller('LoginController',
 		[ '$scope', '$state', 'loginService', '$rootScope', function($scope, $state, loginService, $rootScope) {
 
 	$scope.dados = {usuario : null,	senha : null};
+	$scope.usuarioPerfilTemp = null;
 
 	loginService.confirmarUsuario($scope.dados,
 		function (usuarioPerfil) {
 			if (usuarioPerfil.existente == true){
-				synth.cancel();
-				$rootScope.usuarioPerfil = usuarioPerfil;
-				$state.go('menu',{},{reload : true});
+				if (usuarioPerfil.situacao == 1){
+					synth.cancel();
+					$rootScope.usuarioPerfil = usuarioPerfil;
+					$state.go('menu',{},{reload : true});
+				}else{
+				}
 			}else{}
 		},function () {
 		});
@@ -24,9 +28,15 @@ angular.module('tccApp').controller('LoginController',
 		loginService.confirmarUsuario($scope.dados,
 			function (usuarioPerfil) {
 				if (usuarioPerfil.existente == true){
-					synth.cancel();
-					$rootScope.usuarioPerfil = usuarioPerfil;
-					$state.go('menu',{},{reload : true});
+					if (usuarioPerfil.situacao == 1){
+						synth.cancel();
+						$rootScope.usuarioPerfil = usuarioPerfil;
+						$state.go('menu',{},{reload : true});
+					}else if(usuarioPerfil.situacao == 2){
+						$state.go('usuarioEdicao',{},{reload : true});
+					}else {
+						$scope.usuarioPerfilTemp = usuarioPerfil.situacao;
+					}
 				}else{
 					reproduzirFrase(getAudio.login.usuarioSenhaIncorreto);
 				}

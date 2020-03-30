@@ -1,5 +1,6 @@
 package br.net.iesb.dto;
 
+import br.net.iesb.entity.transacional.Assunto;
 import br.net.iesb.entity.transacional.Aula;
 import br.net.iesb.util.DataUtil;
 import br.net.iesb.util.FormatarUtil;
@@ -42,11 +43,16 @@ public class AulaDiaEdicaoDTO {
     @Getter
     public class AulaDTO{
         String descricao;
+        String nome;
+        String descricaoAula;
         String id;
+        Integer idAprovado;
+        Long idAssunto;
         Integer horarioId;
-        String assunto;
+        Assunto assunto;
         String ledor;
         String aprovado;
+        String motivoRejeicao;
         boolean aulaLedor ;
 
         public AulaDTO(String descricao,Integer horarioId){
@@ -55,12 +61,21 @@ public class AulaDiaEdicaoDTO {
         }
 
         public AulaDTO(Aula aula, Long idLedor,Integer horarioId){
+            this.nome = aula.getNome();
             this.id = aula.getId().toString();
             this.horarioId = horarioId;
             this.descricao = DataUtil.DataHoraAula(aula.getDataHorario(),aula.getNome());
-            this.assunto = aula.getAssunto().getNome();
+            this.assunto = aula.getAssunto();
             this.ledor =  aula.getLedor().getPessoa().getNome();
             this.aulaLedor = aula.getLedor().getId() == idLedor;
+            this.idAprovado = aula.getControle().getAprovado();
+            if(aula.getControle().getDescricaoReprovado() != null){
+                this.motivoRejeicao = aula.getControle().getDescricaoReprovado();
+            }
+            if (aula.getDescricao() != null){
+                this.descricaoAula = aula.getDescricao();
+            }
+            this.motivoRejeicao = aula.getControle().getDescricaoReprovado();
             this.aprovado = FormatarUtil.getAprovacao(aula.getControle().getAprovado());
         }
 

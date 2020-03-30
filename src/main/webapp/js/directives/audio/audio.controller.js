@@ -1,6 +1,6 @@
 'use strict'
 angular.module('tccApp').controller('AudioController',
-    ["$scope", '$state', 'audioService', '$rootScope', function ($scope, $state, audioService, $rootScope) {
+    ["$scope", '$state', 'audioService', '$rootScope', 'loginService' , function ($scope, $state, audioService, $rootScope, loginService) {
 
     $scope.audioLivro = null;
     $scope.audio = null;
@@ -158,6 +158,10 @@ angular.module('tccApp').controller('AudioController',
                 }
             }
         }
+    };
+
+    $scope.logOff = function() {
+        loginService.logOffUsuario();
     };
 
 }]);

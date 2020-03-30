@@ -20,6 +20,10 @@ public class UsuarioInformationDTO extends UsuarioLoginDTO {
         this.setNome(usuario.getPessoa().getNome());
         this.setPerfil(usuario.getPerfil().getNome());
         this.setExistente(true);
+        this.setSituacao(usuario.getControle().getAprovado());
+        if(usuario.getControle().getAprovado() == 2){
+            this.setMotivo(usuario.getControle().getDescricaoReprovado());
+        }
     }
 
 }

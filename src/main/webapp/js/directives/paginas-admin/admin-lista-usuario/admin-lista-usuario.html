@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Noticias</title>
+</head>
+<body>
+    <section class="py-5">
+        <div class="container">
+            <div ng-show="listarUsuarios.length == 0">
+                <div class="alert alert-danger" role="alert">
+                    Nenhum usuário cadastrado.
+                </div>
+            </div>
+            <table ng-show="audioLivros != 0" class="table">
+                <div ng-show="audioLivros">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Usuário</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Perfil</th>
+                        <th scope="col">Situação</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="usuario in listarUsuarios">
+                        <th scope="row">{{$index + 1}}</th>
+                        <td>{{usuario.usuario}}</td>
+                        <td>{{usuario.nomePessoa}}</td>
+                        <td>{{usuario.perfilNome}}</td>
+                        <td>{{usuario.situacaoNome}}</td>
+                        <td align="right">
+                            <button type="button" ng-click="visualizarUsuario(usuario.id)" class="btn btn-success">Visualizar</button>
+                            <button type="button" ng-click="desativar(usuario.id)" class="btn btn-success">Desativar</button>
+                            <button type="button" data-toggle="modal" data-target="#modalRejeitar" ng-show="usuario.perfilId == 3 && (usuario.situacaoId == 0 || usuario.situacaoId == 1)" ng-click="prepararRejeitar(usuario.id)" class="btn btn-success">Rejeitar</button>
+                            <button type="button" ng-show="usuario.perfilId == 3 && (usuario.situacaoId == 0 || usuario.situacaoId == 2)" ng-click="aprovar(usuario.id)" class="btn btn-success">Aprovar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"></th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">
+                            <button type="button" ng-click="acessarAudio(audioLivro.id)" class="btn btn-secondary">Adicionar Usuário</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </div>
+            </table>
+        </div>
+        <div class="container">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <button type="button" ng-click="voltar()" class="btn btn-secondary">Voltar</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade"  id="modalRejeitar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalRejeicao">Rejeitar Cadastro Ledor</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label >Motivo da rejeição</label>
+                            <textarea class="form-control" ng-model="modalMotivo"  id="textoModalRejeitar" rows="3"></textarea>
+                            <small  class="form-text text-muted">Breve motivo da rejeição e a possível solução para a aprovação.</small>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" ng-click="limparRejeitar()" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" ng-click="rejeitar()" class="btn btn-primary"  data-dismiss="modal">Rejeitar Aula</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

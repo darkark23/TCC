@@ -36,8 +36,14 @@ public class AulaController {
 
     @ResponseBody
     @PostMapping(path = "/cancelarAula", consumes = "application/json")
-    public Integer agendaDiaEdicao(@RequestBody Long id) {
+    public Integer cancelarAula(@RequestBody Long id) {
         return aulaService.cancelarAula(id);
+    }
+
+    @ResponseBody
+    @PostMapping(path = "/aprovarAula", consumes = "application/json")
+    public Integer aprovarAula(@RequestBody Long id) {
+        return aulaService.aprovarAula(id);
     }
 
     @ResponseBody
@@ -50,5 +56,11 @@ public class AulaController {
     @PostMapping(path = "/saveAula", consumes = "application/json")
     public Integer saveAula(@RequestBody AulaRequestDTO aulaRequestDTO) {
         return aulaService.saveAula(aulaRequestDTO);
+    }
+
+    @ResponseBody
+    @PostMapping(path = "/rejeitarAula", consumes = "application/json")
+    public Integer rejeitarAula(@RequestBody AulaRequestDTO aulaRequestDTO) {
+        return aulaService.rejeitarAula(aulaRequestDTO);
     }
 }

@@ -8,11 +8,15 @@
 	<body>
 		<section class="py-5">
 			<div class="container">
-				<button ng-show="usuarioPerfil.perfil == 'Ledor'" type="button" ui-sref="audioListaLedor" class="btn btn-primary btn-lg btn-block">Editar/Adicionar Áudio Livro</button>
-				<button ng-show="usuarioPerfil.perfil == 'Ledor'" type="button" ng-click="acessarAgendaLedor()" class="btn btn-secondary btn-lg btn-block">Verificar Aulas Programadas</button>
-				<button type="button" ui-sref="audioBusca" class="btn btn-primary btn-lg btn-block">Biblioteca Áudio Livro (Áudio)</button>
+				<button type="button" ui-sref="audioBusca" class="btn btn-secondary btn-lg btn-block">Biblioteca Áudio Livro (Áudio)</button>
 				<button type="button" ng-click="acessarAgenda()" class="btn btn-secondary btn-lg btn-block">Agenda de Clube do Ledor (Agenda)</button>
-				<button type="button" ng-click="sair()" class="btn btn-secondary btn-lg btn-block">Sair</button>
+				<button ng-show="usuarioPerfil.perfil != 'Aluno'" type="button" ui-sref="audioListaLedor" class="btn btn-secondary btn-lg btn-block">Editar/Adicionar Áudio Livro</button>
+				<button ng-show="usuarioPerfil.perfil != 'Aluno'" type="button" ng-click="acessarAgendaLedor()" class="btn btn-secondary btn-lg btn-block">Verificar Aulas Programadas</button>
+				<button ng-show="usuarioPerfil.perfil == 'Administrador'" type="button" ui-sref="geradorChaveLedor" class="btn btn-secondary btn-lg btn-block">Gerar Chave de Registro de Ledor</button>
+				<button ng-show="usuarioPerfil.perfil == 'Administrador'" type="button" ui-sref="adminListaUsuario" class="btn btn-secondary btn-lg btn-block">Adiministrar Usuário</button>
+				<button ng-show="usuarioPerfil.perfil == 'Administrador'" type="button" ui-sref="usuarioEdicao" class="btn btn-secondary btn-lg btn-block">Usuário Edição</button>
+
+				<button type="button" ng-click="logOff()" class="btn btn-secondary btn-lg btn-block">Sair</button>
 			</div>
 		</section>
 	</body>

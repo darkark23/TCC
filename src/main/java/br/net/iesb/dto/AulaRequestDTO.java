@@ -10,11 +10,13 @@ import java.util.Date;
 @NoArgsConstructor
 public class AulaRequestDTO {
 
+    private Long id;
     private String login;
     private AssuntoEdicaoDTO assunto;
     private String titulo;
     private String descricao;
     private Integer idHorario;
+    private String motivo;
     private Date data;
 
 }

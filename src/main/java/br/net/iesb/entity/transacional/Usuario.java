@@ -4,8 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Usuario {
+public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USUARIO_SEQUENCE")
@@ -37,7 +41,7 @@ public class Usuario {
     @Column(name = "EMAIL", nullable = false, length = 50)
     private String email;
 
-    @Column(name = "SENHA", nullable = false, length = 50)
+    @Column(name = "SENHA", nullable = false, length = 60)
     private String senha;
 
     @Column(name = "DATA_INSERCAO", nullable = false)
@@ -50,4 +54,41 @@ public class Usuario {
     @OneToMany
     @JoinColumn(name = "ID_LEDOR")
     private List<Competencia> listaCompetencias;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<Perfil> perfils = new ArrayList<>();
+        perfils.add(this.perfil);
+        return perfils;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.senha;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.login;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return this.controle.getAtivo();
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return controle.getAtivo();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return controle.getAtivo();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return controle.getAtivo();
+    }
 }

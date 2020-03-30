@@ -1,6 +1,6 @@
 'use strict'
 angular.module('tccApp').controller('MenuController',
-		['$scope', '$state', 'menuService','loginService', '$rootScope', function($scope, $state, menuService, loginService, $rootScope) {
+		['$scope', '$state', 'menuService', 'loginService', '$rootScope', function($scope, $state, menuService, loginService, $rootScope) {
 	
 	synth.cancel();
 	reproduzirFrase(getAudio.menu.intro);
@@ -71,12 +71,8 @@ angular.module('tccApp').controller('MenuController',
 		$state.go('aulaLedor',{data : new Date()}, {reload : true});
 	};
 
-	$scope.sair = function() {
-		loginService.logOff(
-			function () {
-				$state.go('principal', {}, {reload : true});
-			},function () {
-			});
+	$scope.logOff = function() {
+		loginService.logOffUsuario();
 	};
 
 }]);
