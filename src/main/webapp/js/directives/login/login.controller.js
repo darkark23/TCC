@@ -1,9 +1,12 @@
 'use strict'
 angular.module('tccApp').controller('LoginController',
-		[ '$scope', '$state', 'loginService', '$rootScope', function($scope, $state, loginService, $rootScope) {
+		[ '$scope', '$state', 'loginService', 'geracaoChaveLedorService', '$rootScope', function($scope, $state, loginService, geracaoChaveLedorService, $rootScope) {
 
 	$scope.dados = {usuario : null,	senha : null};
+	$scope.chaveCadastro = null;
 	$scope.usuarioPerfilTemp = null;
+
+	$scope.telaChaveCadastro = false;
 
 	loginService.confirmarUsuario($scope.dados,
 		function (usuarioPerfil) {
@@ -25,24 +28,46 @@ angular.module('tccApp').controller('LoginController',
 	comecarReconhecimento();
 
 	$scope.confirmarUsuario = function(){
-		loginService.confirmarUsuario($scope.dados,
-			function (usuarioPerfil) {
-				if (usuarioPerfil.existente == true){
-					if (usuarioPerfil.situacao == 1){
-						synth.cancel();
-						$rootScope.usuarioPerfil = usuarioPerfil;
-						$state.go('menu',{},{reload : true});
-					}else if(usuarioPerfil.situacao == 2){
+		if($scope.telaChaveCadastro){
+			if($scope.chaveCadastro == null){
+
+			}else {
+				geracaoChaveLedorService.validarChaveCadastro($scope.chaveCadastro,function (retorno) {
+					if(retorno == 1){
 						$state.go('usuarioEdicao',{},{reload : true});
-					}else {
-						$scope.usuarioPerfilTemp = usuarioPerfil.situacao;
+					}else{
+
 					}
-				}else{
-					reproduzirFrase(getAudio.login.usuarioSenhaIncorreto);
-				}
-			},function () {
-		});
+				},function () {
+					
+				})
+			}
+		}else {
+			loginService.confirmarUsuario($scope.dados,
+				function (usuarioPerfil) {
+					if (usuarioPerfil.existente == true){
+						if (usuarioPerfil.situacao == 1){
+							synth.cancel();
+							$rootScope.usuarioPerfil = usuarioPerfil;
+							$state.go('menu',{},{reload : true});
+						}else if(usuarioPerfil.situacao == 2){
+							$state.go('usuarioEdicao',{},{reload : true});
+						}else {
+							$scope.usuarioPerfilTemp = usuarioPerfil.situacao;
+						}
+					}else{
+						reproduzirFrase(getAudio.login.usuarioSenhaIncorreto);
+					}
+				},function () {
+				});
+		}
 	};
+
+	$scope.alterFormulario = function(){
+		$scope.telaChaveCadastro = !$scope.telaChaveCadastro
+	};
+
+
 
 	document.onkeyup = function(e) {
 		if (e.which == 96) {
@@ -135,5 +160,7 @@ angular.module('tccApp').controller('LoginController',
 			}
 		}
 	};
+
+
 
 }]);

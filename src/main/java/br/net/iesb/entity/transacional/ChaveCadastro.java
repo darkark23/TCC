@@ -30,4 +30,9 @@ public class ChaveCadastro {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataInsercao;
 
+    public ChaveCadastro(Integer chave){
+        this.chave = chave;
+        this.dataInsercao = new Date();
+    }
+
 }

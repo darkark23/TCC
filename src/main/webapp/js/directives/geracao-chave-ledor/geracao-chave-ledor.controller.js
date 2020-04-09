@@ -13,12 +13,20 @@ angular.module('tccApp').controller('GeracaoChaveLedorController',
 		},function () {
 		});
 
+	$scope.chaveGerada = "_ _ _ _ _";
+	$scope.isChaveGerada = false;
 
 	$scope.voltar = function() {
 		$state.go('menu',{}, {reload : true});
 	};
 
 	$scope.gerarChave = function() {
-		$state.go('menu',{}, {reload : true});
+		geracaoChaveLedorService.gerarChaveCadastro(function (chave) {
+			$scope.chaveGerada = chave;
+			$scope.isChaveGerada = true;
+		},function () {
+			$scope.chaveGerada = "ERRO NA GERAÇÃO DA CHAVE"
+			$scope.isChaveGerada = false;
+		})
 	};
 }]);

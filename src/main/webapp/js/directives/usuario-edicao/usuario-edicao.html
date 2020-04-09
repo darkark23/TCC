@@ -138,6 +138,13 @@
 						</select>
 						<small  class="form-text text-muted">Perfil que será atribuido ao usuário cadastrado.</small>
 					</div>
+
+					<div class="form-group row">
+						<div class="col-sm-10">
+							<button ng-show="novoUsuario" type="submit"ng-click="cadastrarNovo()" class="btn btn-primary">Registrar</button>
+							<button ng-show="novoUsuario" type="submit"ng-click="sair()" class="btn btn-primary">Sair</button>
+						</div>
+					</div>
 				</form>
 			</div>
 		</section>

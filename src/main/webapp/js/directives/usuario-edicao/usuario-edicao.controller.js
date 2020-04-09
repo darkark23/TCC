@@ -6,6 +6,7 @@ angular.module('tccApp').controller('UsuarioEdicaoController',
 	$scope.listaEstado = null;
 	$scope.listaPerfil = null;
 	$scope.listaCidadeFiltrada = null;
+	$scope.novoUsuario = false;
 
 	$scope.listaSexo = [
 		{descricao : "Feminino", valor : "F"},
@@ -37,13 +38,19 @@ angular.module('tccApp').controller('UsuarioEdicaoController',
 	}
 
 	function recuperarUsuario() {
-		loginService.confirmarUsuario($scope.dados,
-			function (usuarioPerfil) {
-				if (usuarioPerfil.existente == true){
-					$rootScope.usuarioPerfil = usuarioPerfil;
-				}else{}
-			},function () {
-			});
+		if($scope.dados){
+			loginService.confirmarUsuario($scope.dados,
+				function (usuarioPerfil) {
+					if (usuarioPerfil.existente == true){
+						$rootScope.usuarioPerfil = usuarioPerfil;
+					}else{
+
+					}
+				},function () {
+				});
+		}else {
+			$scope.novoUsuario = true;
+		}
 	}
 
 	function recuperarListaEdicao() {
@@ -86,4 +93,13 @@ angular.module('tccApp').controller('UsuarioEdicaoController',
             $scope.usuario.pessoa.endereco.cidadeId = null;
         }
     }
+
+	$scope.sair = function () {
+		$state.go('principal', {}, {reload : true});
+	}
+
+	$scope.cadastrarNovo = function () {
+		$state.go('principal', {}, {reload : true});
+	}
+
 }]);
