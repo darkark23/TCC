@@ -186,7 +186,7 @@
 				<artifactId>heroku-deploy</artifactId>
 				<version>3.0.2</version>
 				<configuration>
-					<appName>heroku-demo-stackabuse</appName>
+					<appName>tcc</appName>
 					<includeTarget>false</includeTarget>
 					<includes>
 						<include>${project.build.directory}/${project.build.finalName}.jar</include>
