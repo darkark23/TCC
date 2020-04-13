@@ -8,6 +8,11 @@
 	<body>
 		<section class="py-5">
 			<div class="container">
+				<h3>Gerenciar Áudio Livro</h3>
+				<p class="lead">Área para gerenciamento de áudio livros pelos Ledores e Professores.</p>
+				<hr class="my-4">
+			</div>
+			<div class="container">
 				<div ng-show="audioLivros.length > 1 && audioLivros" class="alert alert-light" role="alert">Mostrando {{audioLivros.length}} resultados</div>
 				<div ng-show="audioLivros.length == 1 && audioLivros" class="alert alert-light" role="alert">Mostrando 1 resultado</div>
 				<div ng-show="audioLivros == 0">
@@ -33,10 +38,10 @@
 								<td>{{audioLivro.codigo}}</td>
 								<td>{{audioLivro.aprovado}}</td>
 								<td align="right">
-									<button id="botao{{$index+1}}" type="button" ng-click="acessarAudio(audioLivro.id)" class="btn btn-success">Visualizar</button>
-									<button id="botao{{$index+1}}" type="button" ng-click="editar(audioLivro.id)" class="btn btn-success">Editar</button>
-									<button id="botao{{$index+1}}" type="button" ng-click="remover(audioLivro.id)" class="btn btn-success">Aprovar</button>
-									<button id="botao{{$index+1}}" type="button" ng-click="remover(audioLivro.id)" class="btn btn-success">Remover</button>
+									<button id="botao{{$index+1}}" type="button" ng-click="acessarAudio(audioLivro.id)" class="btn btn-dark">Visualizar</button>
+									<button id="botao{{$index+1}}" type="button" ng-click="editar(audioLivro.id)" class="btn btn-dark">Editar</button>
+									<button id="botao{{$index+1}}" type="button" ng-click="remover(audioLivro.id)" class="btn btn-dark">Aprovar</button>
+									<button id="botao{{$index+1}}" type="button" ng-click="remover(audioLivro.id)" class="btn btn-dark">Remover</button>
 								</td>
 							</tr>
 						</tbody>
@@ -52,9 +57,9 @@
 					</div>
 				</div>
 				<div ng-show="audioLivros.length < 10">
-					<div class="btn-group btn-group-toggle" data-toggle="buttons">
-						<button type="button" ng-click="voltar()" class="btn btn-secondary">Voltar</button>
-						<button type="button" ng-click="adicionar()" class="btn btn-secondary">Adicionar Audio Livro</button>
+					<div>
+						<button type="button" ng-click="voltar()" class="btn btn-dark">Voltar</button>
+						<button type="button" ng-click="adicionar()" class="btn btn-dark">Adicionar Audio Livro</button>
 					</div>
 				</div>
 			</div>

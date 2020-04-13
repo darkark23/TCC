@@ -68,12 +68,12 @@ var getTexto = {
 };
 
 var reproduzirFrase = function(frase) {
-/*	console.log(frase);
+	console.log(frase);
 	synth.cancel();
 	utterance = new SpeechSynthesisUtterance(frase);
 	utterance.lang = 'pt-BR';
 	utterance.rate = 2;
-	synth.speak(utterance);*/
+	synth.speak(utterance);
 
 };
 

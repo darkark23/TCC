@@ -8,15 +8,35 @@
 	<body>
 		<section class="py-5">
 			<div class="container">
-				<button type="button" ui-sref="audioBusca" class="btn btn-secondary btn-lg btn-block">Biblioteca Áudio Livro (Áudio)</button>
-				<button type="button" ng-click="acessarAgenda()" class="btn btn-secondary btn-lg btn-block">Agenda de Clube do Ledor (Agenda)</button>
-				<button ng-show="usuarioPerfil.perfil != 'Aluno'" type="button" ui-sref="audioListaLedor" class="btn btn-secondary btn-lg btn-block">Editar/Adicionar Áudio Livro</button>
-				<button ng-show="usuarioPerfil.perfil != 'Aluno'" type="button" ng-click="acessarAgendaLedor()" class="btn btn-secondary btn-lg btn-block">Verificar Aulas Programadas</button>
-				<button ng-show="usuarioPerfil.perfil == 'Administrador'" type="button" ui-sref="geradorChaveLedor" class="btn btn-secondary btn-lg btn-block">Gerar Chave de Registro de Ledor</button>
-				<button ng-show="usuarioPerfil.perfil == 'Administrador'" type="button" ui-sref="adminListaUsuario" class="btn btn-secondary btn-lg btn-block">Adiministrar Usuário</button>
-				<button ng-show="usuarioPerfil.perfil == 'Administrador'" type="button" ui-sref="usuarioEdicao" class="btn btn-secondary btn-lg btn-block">Usuário Edição</button>
+				<h2>Menu</h2>
+				<p class="lead">Menu para seleção de funçoes do Portal do Ledor.</p>
+				<hr class="my-4">
+			</div>
+			<div class="container">
+				<div class="jumbotron" style="padding: 2rem 2rem ">
+					<h3>Área do Aluno</h3>
+					<p class="lead">Funções para acesso dos aluno da instituição .</p>
+					<hr class="my-4">
+					<button type="button" ui-sref="audioBusca" class="btn btn-dark btn-lg btn-block">Biblioteca Áudio Livro (Áudio)</button>
+					<button type="button" ng-click="acessarAgenda()" class="btn btn-dark btn-lg btn-block">Agenda do Clube do Ledor (Agenda)</button>
+				</div>
+				<div ng-show="usuarioPerfil.perfil != 'Aluno'" class="jumbotron" style="padding: 2rem 2rem ">
+					<h3>Área do Ledor/Professor</h3>
+					<p class="lead">Funções para Ledores e Professores cadastrados na instituição .</p>
+					<hr class="my-4">
+					<button ng-show="usuarioPerfil.perfil != 'Aluno'" type="button" ui-sref="audioListaLedor" class="btn btn-dark btn-lg btn-block">Gerenciar Áudio Livro</button>
+					<button ng-show="usuarioPerfil.perfil != 'Aluno'" type="button" ng-click="acessarAgendaLedor()" class="btn btn-dark btn-lg btn-block">Gerenciar Agenda do Clube do Ledor</button>
+				</div>
 
-				<button type="button" ng-click="logOff()" class="btn btn-secondary btn-lg btn-block">Sair</button>
+				<div  ng-show="usuarioPerfil.perfil == 'Administrador'" class="jumbotron" style="padding: 2rem 2rem ">
+					<h3>Administrador</h3>
+					<p class="lead">Funções para adiministradores do sistema .</p>
+					<hr class="my-4">
+					<button ng-show="usuarioPerfil.perfil == 'Administrador'" type="button" ui-sref="geradorChaveLedor" class="btn btn-dark btn-lg btn-block">Gerar Chave de Registro de Ledor (Chave)</button>
+					<button ng-show="usuarioPerfil.perfil == 'Administrador'" type="button" ui-sref="adminListaUsuario" class="btn btn-dark btn-lg btn-block">Gerenciar Usuário</button>
+				</div>
+
+				<button type="button" ng-click="logOff()" class="btn btn-dark btn-lg btn-block">Sair</button>
 			</div>
 		</section>
 	</body>

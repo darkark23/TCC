@@ -3,28 +3,35 @@
  	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>Noticias</title>
+		<title>Agenda de Clube do Ledor</title>
 	</head>
 	<body>
 		<section class="py-5">
 			<div class="container">
+				<h3>Agenda de Clube do Ledor</h3>
+				<p class="lead">Área para verificação das aulas marcadas pelos ledores.</p>
+				<hr class="my-4">
+			</div>
+			<div class="container">
 				<md-datepicker id="selecaoData" md- ng-model="dataSelecionada" md-placeholder="Selecion um dia" md-open-on-focus=""></md-datepicker>
-				<button style="margin: 5px" type="button" ng-click="acessarAgendaBusca()" class="btn btn-primary">Buscar</button>
+				<button style="margin: 5px" type="button" ng-click="acessarAgendaBusca()" class="btn btn-dark">Buscar</button>
 			</div>
 			<p></p>
 			<div ng-show="agendaDia" class="container">
 				<ul class="list-group">
-					<li class="list-group-item active">{{agendaDia.data}}</li>
+					<li class="list-group-item list-group-item-dark" style="color: #FFFFFF;background-color: #343a40">
+						<h5>{{agendaDia.data}}</h5>
+					</li>
 					<li ng-show="agendaDia.listaAulas" ng-repeat="aula in agendaDia.listaAulas" class="list-group-item">{{aula.descricao}}</li>
 					<li ng-show="agendaDia.listaAulas.length == 0" class="list-group-item">Não existem aulas registradas para este dia.</li>
 				</ul>
 			</div>
 			<p></p>
 			<div class="container">
-				<div class="btn-group btn-group-toggle" data-toggle="buttons">
-					<button type="button" ng-click="acessarAgendaAnterior()" class="btn btn-primary">Anterior</button>
-					<button type="button" ui-sref="menu" class="btn btn-danger">Voltar</button>
-					<button type="button" ng-click="acessarAgendaProxima()" class="btn btn-primary ">Próximo</button>
+				<div >
+					<button type="button" ng-click="acessarAgendaAnterior()" class="btn btn-dark">Anterior</button>
+					<button type="button" ui-sref="menu" class="btn btn-dark">Voltar</button>
+					<button type="button" ng-click="acessarAgendaProxima()" class="btn btn-dark">Próximo</button>
 				</div>
 			</div>
 		</section>

@@ -3,10 +3,15 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>Noticias</title>
+		<title>Resultado de Áudio Livro</title>
 	</head>
 	<body>
 		<section class="py-5">
+			<div class="container">
+				<h3>Resultado de Áudio Livro</h3>
+				<p class="lead">Área para escolha dos audios livros encontrados com o termo fornecido.</p>
+				<hr class="my-4">
+			</div>
 			<div class="container">
 				<div ng-show="audioLivros.length > 1 && audioLivros" class="alert alert-light" role="alert">Mostrando {{audioLivros.length}} resultados</div>
 				<div ng-show="audioLivros.length == 1 && audioLivros" class="alert alert-light" role="alert">Mostrando 1 resultado</div>
@@ -31,7 +36,7 @@
 								<td>{{audioLivro.titulo}}</td>
 								<td>{{audioLivro.codigo}}</td>
 								<td align="right">
-									<button id="botao{{$index+1}}" type="button" ng-click="acessarAudio(audioLivro.id)" class="btn btn-success">Selecionar(Escutar)</button>
+									<button id="botao{{$index+1}}" type="button" ng-click="acessarAudio(audioLivro.id)" class="btn btn-dark">Selecionar (Escutar)</button>
 								</td>
 							</tr>
 						</tbody>
@@ -39,16 +44,16 @@
 				</table>
 			</div>
 			<div class="container">
-				<div ng-show="audioLivros.length > 10 && audioLivros">
+				<!--<div ng-show="audioLivros.length > 10 && audioLivros">
 					<div class="btn-group btn-group-toggle" data-toggle="buttons">
 						<button type="button" class="btn btn-primary"> Anterior</button>
 						<button type="button" ng-click="voltar()" class="btn btn-danger">Voltar</button>
 						<button type="button" class="btn btn-primary "> Próximo</button>
 					</div>
-				</div>
-				<div ng-show="audioLivros.length < 10">
-					<div class="btn-group btn-group-toggle" data-toggle="buttons">
-						<button type="button" ng-click="voltar()" class="btn btn-secondary">Voltar</button>
+				</div>-->
+				<div>
+					<div>
+						<button type="button" ng-click="voltar()" class="btn btn-dark">Voltar</button>
 					</div>
 				</div>
 			</div>

@@ -9,8 +9,13 @@
 		<div>
 			<section class="py-5">
 				<div class="container">
+					<h3>Gerenciar Agenda do Clube do Ledor</h3>
+					<p class="lead">Área para gerenciamento das aulas do Clube do Ledor pelos Ledores e Professores.</p>
+					<hr class="my-4">
+				</div>
+				<div class="container">
 					<md-datepicker id="selecaoData" md- ng-model="dataSelecionada" md-placeholder="Selecion um dia" md-open-on-focus=""></md-datepicker>
-					<button style="margin: 5px" type="button" ng-click="acessarAgendaBusca()" class="btn btn-primary">Buscar</button>
+					<button style="margin: 5px" type="button" ng-click="acessarAgendaBusca()" class="btn btn-dark">Buscar</button>
 				</div>
 				<div ng-show="!agendaDia.listaAulas" class="container">
 					<div class="d-flex justify-content-center">
@@ -21,26 +26,28 @@
 				</div>
 				<div ng-show="agendaDia" class="container">
 					<ul class="list-group">
-						<li class="list-group-item active">{{agendaDia.data}}</li>
+						<li class="list-group-item list-group-item-dark" style="color: #FFFFFF;background-color: #343a40">
+							<h5>{{agendaDia.data}}</h5>
+						</li>
 						<li ng-show="agendaDia.listaAulas" ng-repeat="aula in agendaDia.listaAulas" class="list-group-item">
 							<span ng-show="aula.id" class="align-middle">{{aula.descricao + ' - Ledor: ' + aula.ledor + ' - Situação: ' + aula.aprovado}}</span>
-							<button ng-show="(aula.aulaLedor || (usuarioPerfil.perfil == 'Professor'  || usuarioPerfil.perfil == 'Administrador')) && aula.id "  type="button" data-toggle="modal" data-target="#modalCancelar" ng-click="modalCancelar(aula.id)" class="btn btn-danger float-right align-middle">Cancelar</button>
-                            <button ng-show="(usuarioPerfil.perfil == 'Professor' || usuarioPerfil.perfil == 'Administrador') && aula.id && aula.idAprovado != 1"  type="button" data-toggle="modal" data-target="#modalAprovar" ng-click="modalAprovar(aula.id)" class="btn btn-danger float-right align-middle">Aprovar</button>
-                            <button ng-show="(usuarioPerfil.perfil == 'Professor' || usuarioPerfil.perfil == 'Administrador') && aula.id "  type="button"  data-toggle="modal" data-target="#modalRejeitar" ng-click="modalRejeitar(aula.id)" class="btn btn-danger float-right align-middle">Rejeitar</button>
+							<button ng-show="(aula.aulaLedor || (usuarioPerfil.perfil == 'Professor'  || usuarioPerfil.perfil == 'Administrador')) && aula.id "  type="button" data-toggle="modal" data-target="#modalCancelar" ng-click="modalCancelar(aula.id)" class="btn btn-dark float-right align-middle">Cancelar</button>
+                            <button ng-show="(usuarioPerfil.perfil == 'Professor' || usuarioPerfil.perfil == 'Administrador') && aula.id && aula.idAprovado != 1"  type="button" data-toggle="modal" data-target="#modalAprovar" ng-click="modalAprovar(aula.id)" class="btn btn-dark float-right align-middle">Aprovar</button>
+                            <button ng-show="(usuarioPerfil.perfil == 'Professor' || usuarioPerfil.perfil == 'Administrador') && aula.id "  type="button"  data-toggle="modal" data-target="#modalRejeitar" ng-click="modalRejeitar(aula.id)" class="btn btn-dark float-right align-middle">Rejeitar</button>
 							<span ng-show="!aula.id" class="align-middle">{{aula.descricao}}</span>
-							<button ng-show="aula.id "  type="button" data-toggle="modal" data-target="#modalVisualizar" ng-click="modalVisualizar(aula)" class="btn btn-danger float-right align-middle">Visualizar</button>
-							<button ng-show="aula.id && aula.aulaLedor "  type="button" data-toggle="modal" data-target="#modalMarcar" ng-click="modalMarcar(aula)" class="btn btn-danger float-right align-middle">Editar</button>
-							<button ng-show="!aula.id" type="button" data-toggle="modal" data-target="#modalMarcar" ng-click="modalMarcar(aula)" class="btn btn-success float-right align-middle">Marcar</button>
+							<button ng-show="aula.id "  type="button" data-toggle="modal" data-target="#modalVisualizar" ng-click="modalVisualizar(aula)" class="btn btn-dark float-right align-middle">Visualizar</button>
+							<button ng-show="aula.id && aula.aulaLedor "  type="button" data-toggle="modal" data-target="#modalMarcar" ng-click="modalMarcar(aula)" class="btn btn-dark float-right align-middle">Editar</button>
+							<button ng-show="!aula.id" type="button" data-toggle="modal" data-target="#modalMarcar" ng-click="modalMarcar(aula)" class="btn btn-dark float-right align-middle">Marcar</button>
 						</li>
 						<li ng-show="agendaDia.listaAulas.length == 0" class="list-group-item">Não existem aulas registradas para este dia.</li>
 					</ul>
 				</div>
 				<p></p>
 				<div class="container">
-					<div class="btn-group btn-group-toggle" data-toggle="buttons">
-						<button type="button" ng-click="acessarAgendaAnterior()" class="btn btn-primary">Anterior</button>
-						<button type="button" ui-sref="menu" class="btn btn-danger">Voltar</button>
-						<button type="button" ng-click="acessarAgendaProxima()" class="btn btn-primary ">Próximo</button>
+					<div>
+						<button type="button" ng-click="acessarAgendaAnterior()" class="btn btn-dark">Anterior</button>
+						<button type="button" ui-sref="menu" class="btn btn-dark">Voltar</button>
+						<button type="button" ng-click="acessarAgendaProxima()" class="btn btn-dark ">Próximo</button>
 					</div>
 				</div>
 			</section>
@@ -89,9 +96,9 @@
 						</form>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-						<button type="button" ng-show="!aula.id" ng-click="salvarAula()" class="btn btn-primary"  data-dismiss="modal">Marcar Aula</button>
-						<button type="button" ng-show="aula.id" ng-click="salvarAula()" class="btn btn-primary"  data-dismiss="modal">Alterar Aula</button>
+						<button type="button" class="btn btn-dark" data-dismiss="modal">Cancelar</button>
+						<button type="button" ng-show="!aula.id" ng-click="salvarAula()" class="btn btn-dark"  data-dismiss="modal">Marcar Aula</button>
+						<button type="button" ng-show="aula.id" ng-click="salvarAula()" class="btn btn-dark"  data-dismiss="modal">Alterar Aula</button>
 					</div>
 				</div>
 			</div>
@@ -117,8 +124,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="button" ng-click="rejeitar()" class="btn btn-primary"  data-dismiss="modal">Rejeitar Aula</button>
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">Cancelar</button>
+                        <button type="button" ng-click="rejeitar()" class="btn btn-dark"  data-dismiss="modal">Rejeitar Aula</button>
                     </div>
                 </div>
             </div>
@@ -138,8 +145,8 @@
 						<p>Deseja realmente aprovar a aula?</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
-						<button type="button" ng-click="aprovar()" class="btn btn-primary"  data-dismiss="modal">Sim</button>
+						<button type="button" class="btn btn-dark" data-dismiss="modal">Não</button>
+						<button type="button" ng-click="aprovar()" class="btn btn-dark"  data-dismiss="modal">Sim</button>
 					</div>
 				</div>
 			</div>
@@ -159,8 +166,8 @@
 						<p>Deseja realmente cancelar a aula e abrir o espaço na agenda?</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
-						<button type="button" ng-click="cancelar()" class="btn btn-primary"  data-dismiss="modal">Sim</button>
+						<button type="button" class="btn btn-dark" data-dismiss="modal">Não</button>
+						<button type="button" ng-click="cancelar()" class="btn btn-dark"  data-dismiss="modal">Sim</button>
 					</div>
 				</div>
 			</div>
@@ -201,7 +208,7 @@
 
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
+						<button type="button" class="btn btn-dark" data-dismiss="modal">Voltar</button>
 					</div>
 				</div>
 			</div>

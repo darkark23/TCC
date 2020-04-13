@@ -3,10 +3,15 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>Noticias</title>
+		<title>Reprodução de Áudio Livro</title>
 	</head>
 	<body>
 		<section class="py-5">
+			<div class="container">
+				<h3>Reprodução de Áudio Livro</h3>
+				<p class="lead">Área para de reprodução do audio livro selecionado.</p>
+				<hr class="my-4">
+			</div>
 			<div class="container">
 				<strong>Título</strong>
 				<br>{{audioLivro.tituloAudioBook}}</br>
@@ -43,19 +48,19 @@
 				<audio preload="metadata" id="audio" src="{{audioLivro.url}}" controls></audio>
 
 				<p></p>
-				<div class="btn-group" role="group" aria-label="Basic example">
-					<button type="button" class="btn btn-secondary" ng-click="retrocederAudio()">Retroceder</button>
-					<button type="button" class="btn btn-success" ng-click="reproduzirAudio()">Reproduzir</button>
-					<button type="button" class="btn btn-danger" ng-click="pararAudio()">Parar</button>
-					<button type="button" class="btn btn-secondary" ng-click="avancarAudio()">Avançar</button>
-					<button type="button" class="btn btn-success" ng-click="aumentarVolume()">Vol+(Aumentar)</button>
-					<button type="button" class="btn btn-danger" ng-click="abaixarVolume()">Vol-(Abaixar)</button>
+				<div>
+					<button type="button" class="btn btn-dark" ng-click="retrocederAudio()">Retroceder <<</button>
+					<button type="button" class="btn btn-dark" ng-click="reproduzirAudio()">Reproduzir ></button>
+					<button type="button" class="btn btn-dark" ng-click="pararAudio()">Parar </button>
+					<button type="button" class="btn btn-dark" ng-click="avancarAudio()">Avançar >></button>
+					<button type="button" class="btn btn-dark" ng-click="aumentarVolume()">Vol + (Aumentar)</button>
+					<button type="button" class="btn btn-dark" ng-click="abaixarVolume()">Vol - (Abaixar)</button>
 				</div>
 			</div>
 			<p></p>
 			<div class="container">
 				<div class="btn-group btn-group-toggle" data-toggle="buttons">
-					<button type="button" ng-click="voltar()" class="btn btn-secondary">Voltar</button>
+					<button type="button" ng-click="voltar()" class="btn btn-dark">Voltar</button>
 				</div>
 			</div>
 		</section>
