@@ -23,7 +23,7 @@ public class AudioLivro {
     @Column(name = "ID", nullable = false)
     private Long id;
 
-    @Column(name = "TITULO", nullable = false, length = 50)
+    @Column(name = "TITULO", nullable = false, length = 255)
     private String titulo;
 
     @Column(name = "CODIGO", nullable = true, length = 50)
