@@ -2,6 +2,8 @@
 angular.module('tccApp').controller('GeracaoChaveLedorController',
 		[ "$scope", '$state', '$rootScope', 'geracaoChaveLedorService', 'loginService', function($scope, $state, $rootScope, geracaoChaveLedorService, loginService) {
 
+	synth.cancel();
+
 	loginService.confirmarUsuario($scope.dados,
 		function (usuarioPerfil) {
 			if (usuarioPerfil.existente == true){

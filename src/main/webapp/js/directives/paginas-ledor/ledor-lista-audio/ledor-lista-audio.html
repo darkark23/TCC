@@ -16,7 +16,7 @@
 				<div ng-show="audioLivros.length > 1 && audioLivros" class="alert alert-light" role="alert">Mostrando {{audioLivros.length}} resultados</div>
 				<div ng-show="audioLivros.length == 1 && audioLivros" class="alert alert-light" role="alert">Mostrando 1 resultado</div>
 				<div ng-show="audioLivros == 0">
-					<div class="alert alert-danger" role="alert">
+					<div class="alert alert-dark" role="alert">
 						Nenhum áudio livro cadastrado pelo ledor.
 					</div>
 				</div>
@@ -33,15 +33,17 @@
 						</thead>
 						<tbody>
 							<tr ng-repeat="audioLivro in audioLivros">
-								<th scope="row">{{$index + 1}}</th>
-								<td>{{audioLivro.titulo}}</td>
-								<td>{{audioLivro.codigo}}</td>
-								<td>{{audioLivro.aprovado}}</td>
-								<td align="right">
-									<button id="botao{{$index+1}}" type="button" ng-click="acessarAudio(audioLivro.id)" class="btn btn-dark">Visualizar</button>
-									<button id="botao{{$index+1}}" type="button" ng-click="editar(audioLivro.id)" class="btn btn-dark">Editar</button>
-									<button id="botao{{$index+1}}" type="button" ng-click="remover(audioLivro.id)" class="btn btn-dark">Aprovar</button>
-									<button id="botao{{$index+1}}" type="button" ng-click="remover(audioLivro.id)" class="btn btn-dark">Remover</button>
+								<th width="5%" scope="row">{{$index + 1}}</th>
+								<td width="25%">{{audioLivro.titulo}}</td>
+								<td width="5%">{{audioLivro.codigo}}</td>
+								<td width="5%">{{formatarSituacao(audioLivro.idSituacaoAprovacao)}}</td>
+								<td width="60%" align="right">
+									<button id="botao{{$index+1}}" type="button" ng-click="acessarAudio(audioLivro.id)" style="margin-top:5px" class="btn btn-dark">Visualizar</button>
+									<button id="botao{{$index+2}}" type="button" ng-click="editar(audioLivro.id)" style="margin-top:5px" ng-show="mostrarEditar(audioLivro)" class="btn btn-dark">Editar</button>
+									<button id="botao{{$index+3}}" type="button" ng-click="mostrarModal(audioLivro.id,tipoOperacao.APROVAR)" style="margin-top:5px" ng-show="mostrarAprovar(audioLivro)" class="btn btn-dark" data-toggle="modal" data-target="#modal">Aprovar</button>
+                                    <button id="botao{{$index+4}}" type="button" ng-click="mostrarModal(audioLivro.id,tipoOperacao.REPROVAR)" style="margin-top:5px" ng-show="mostrarReprovar(audioLivro)" class="btn btn-dark" data-toggle="modal" data-target="#modal">Reprovar</button>
+                                    <button id="botao{{$index+5}}" type="button" ng-click="mostrarModal(audioLivro.id,tipoOperacao.SUBMETER)" style="margin-top:5px" ng-show="mostrarSubmeter(audioLivro)" class="btn btn-dark" data-toggle="modal" data-target="#modal">Submeter</button>
+									<button id="botao{{$index+6}}" type="button" ng-click="mostrarModal(audioLivro.id,tipoOperacao.REMOVER)" style="margin-top:5px" class="btn btn-dark" data-toggle="modal" data-target="#modal">Remover</button>
 								</td>
 							</tr>
 						</tbody>
@@ -64,5 +66,34 @@
 				</div>
 			</div>
 		</section>
+
+		<!-- Modal -->
+		<div class="modal fade"  id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="modalAprovarTitulo">{{modal.titulo}}</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p>{{modal.mensagem}}</p>
+                        <form ng-show="modal.indicadorMostrarjustificativa">
+                            <div class="form-group">
+                                <label>Motivo Rejeição</label>
+                                <textarea class="form-control" ng-model="modal.justificativa"  id="textoModalRejeitar" rows="3"></textarea>
+                                <small  class="form-text text-muted">Breve motivo da rejeição e a possível solução para a aprovação.</small>
+                            </div>
+                        </form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-dark" data-dismiss="modal">Não</button>
+						<button type="button" ng-click="modalSim()" class="btn btn-dark" data-dismiss="modal">Sim</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</body>
 </html>

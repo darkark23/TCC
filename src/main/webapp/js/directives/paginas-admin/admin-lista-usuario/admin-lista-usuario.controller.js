@@ -26,6 +26,7 @@ angular.module('tccApp').controller('AdminListaUsuarioController',
 				},function () {});
 		}
 
+		synth.cancel();
 		construir();
 
 		$scope.voltar = function() {
@@ -73,8 +74,32 @@ angular.module('tccApp').controller('AdminListaUsuarioController',
 		};
 
 		$scope.visualizarUsuario = function(id) {
-			$state.go('usuarioEdicao',{id : id}, {reload : true});
+			$state.go('usuarioEdicao',{id : id,indicadorNovo : false, indicadorChave : false}, {reload : true});
 		};
 
+		$scope.cadastrarUsuario = function() {
+			$state.go('usuarioEdicao',{indicadorNovo : true, indicadorChave : false}, {reload : true});
+		};
+
+		$scope.formatarSituacao = function(id) {
+			let nome = formatarIdSituacaoAprovacao(id);
+			return nome;
+		}
+
+		$scope.mostrarAprovar = function(audioLivro){
+			return ($rootScope.usuarioPerfil.perfil == 'Professor' || $rootScope.usuarioPerfil.perfil == 'Administrador') && audioLivro.idSituacaoAprovacao != enumSituacaoAprovacao.APROVADO && audioLivro.idSituacaoAprovacao != enumSituacaoAprovacao.PENDENTE ;
+		}
+
+		$scope.mostrarReprovar = function(audioLivro){
+			return ($rootScope.usuarioPerfil.perfil == 'Professor' || $rootScope.usuarioPerfil.perfil == 'Administrador') && audioLivro.idSituacaoAprovacao != enumSituacaoAprovacao.REPROVADO && audioLivro.idSituacaoAprovacao != enumSituacaoAprovacao.PENDENTE ;
+		}
+
+		$scope.mostrarSubmeter = function(audioLivro){
+			return audioLivro.idSituacaoAprovacao != enumSituacaoAprovacao.SUBMETIDO && audioLivro.idSituacaoAprovacao != enumSituacaoAprovacao.APROVADO;
+		}
+
+		$scope.mostrarEditar = function(audioLivro){
+			return audioLivro.idSituacaoAprovacao != enumSituacaoAprovacao.SUBMETIDO;
+		}
 
 }]);

@@ -23,11 +23,11 @@ public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USUARIO_SEQUENCE")
-    @SequenceGenerator(name = "USUARIO_SEQUENCE", sequenceName = "USUARIO_SEQUENCE")
+    @SequenceGenerator(name = "USUARIO_SEQUENCE", sequenceName = "USUARIO_SEQUENCE",initialValue = 6)
     @Column(name = "ID", nullable = false)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = { CascadeType.PERSIST,CascadeType.MERGE})
     @JoinColumn(name = "ID_PESSOA", foreignKey = @ForeignKey(name = "FK_USUARIO_PESSOA"), nullable = false)
     private Pessoa pessoa;
 
@@ -48,7 +48,7 @@ public class Usuario implements UserDetails {
     private Date dataInsercao;
 
     @ManyToOne(cascade = { CascadeType.PERSIST,CascadeType.MERGE})
-    @JoinColumn(name = "ID_CONTROLE", nullable = false, foreignKey = @ForeignKey(name = "FK_AULA_CONTROLE") )
+    @JoinColumn(name = "ID_CONTROLE", nullable = false, foreignKey = @ForeignKey(name = "FK_USUARIO_CONTROLE") )
     private Controle controle;
 
     @OneToMany

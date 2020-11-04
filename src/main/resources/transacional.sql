@@ -1,8 +1,8 @@
 --Perfil--
 INSERT INTO PERFIL (ID, DESCRICAO, NOME, DATA_INSERCAO) VALUES ( 1,'Perfil de Administrador do sistema','Administrador',CURRENT_TIMESTAMP);
-INSERT INTO PERFIL (ID, DESCRICAO, NOME, DATA_INSERCAO) VALUES ( 2,'Perfil de aluno','Aluno',CURRENT_TIMESTAMP);
-INSERT INTO PERFIL (ID, DESCRICAO, NOME, DATA_INSERCAO) VALUES ( 3,'Perfil de ledor','Ledor',CURRENT_TIMESTAMP);
-INSERT INTO PERFIL (ID, DESCRICAO, NOME, DATA_INSERCAO) VALUES ( 4,'Perfil de professor','Professor',CURRENT_TIMESTAMP);
+INSERT INTO PERFIL (ID, DESCRICAO, NOME, DATA_INSERCAO) VALUES ( 2,'Perfil de Aluno','Aluno',CURRENT_TIMESTAMP);
+INSERT INTO PERFIL (ID, DESCRICAO, NOME, DATA_INSERCAO) VALUES ( 3,'Perfil de Voluntário','Voluntário',CURRENT_TIMESTAMP);
+INSERT INTO PERFIL (ID, DESCRICAO, NOME, DATA_INSERCAO) VALUES ( 4,'Perfil de Professor','Professor',CURRENT_TIMESTAMP);
 
 --IDIOMA--
 INSERT INTO IDIOMA (ID, NOME, DATA_INSERCAO) VALUES (1,'Português',CURRENT_TIMESTAMP);
@@ -5605,22 +5605,28 @@ INSERT INTO CIDADE (ID, NOME, ID_ESTADO) VALUES (5562, 'Tupiratins', 27);
 INSERT INTO CIDADE (ID, NOME, ID_ESTADO) VALUES (5563, 'Wanderlândia', 27);
 INSERT INTO CIDADE (ID, NOME, ID_ESTADO) VALUES (5564, 'Xambioá', 27);
 
+--SituacaoAprovacao--
+INSERT INTO SITUACAO_APROVACAO (ID, NOME) VALUES (1,'Pendente');
+INSERT INTO SITUACAO_APROVACAO (ID, NOME) VALUES (2,'Aprovado');
+INSERT INTO SITUACAO_APROVACAO (ID, NOME) VALUES (3,'Reprovado');
+INSERT INTO SITUACAO_APROVACAO (ID, NOME) VALUES (4,'Submetido');
+
 --Controle--
-INSERT INTO CONTROLE (ID, ATIVO, APROVADO, DESCRICAO_REPROVADO) VALUES (1,TRUE,1,NULL);
-INSERT INTO CONTROLE (ID, ATIVO, APROVADO, DESCRICAO_REPROVADO) VALUES (2,TRUE,1,NULL);
-INSERT INTO CONTROLE (ID, ATIVO, APROVADO, DESCRICAO_REPROVADO) VALUES (3,TRUE,1,NULL);
-INSERT INTO CONTROLE (ID, ATIVO, APROVADO, DESCRICAO_REPROVADO) VALUES (4,TRUE,1,NULL);
-INSERT INTO CONTROLE (ID, ATIVO, APROVADO, DESCRICAO_REPROVADO) VALUES (5,TRUE,1,NULL);
-INSERT INTO CONTROLE (ID, ATIVO, APROVADO, DESCRICAO_REPROVADO) VALUES (6,TRUE,1,NULL);
-INSERT INTO CONTROLE (ID, ATIVO, APROVADO, DESCRICAO_REPROVADO) VALUES (7,TRUE,1,NULL);
-INSERT INTO CONTROLE (ID, ATIVO, APROVADO, DESCRICAO_REPROVADO) VALUES (8,TRUE,1,NULL);
-INSERT INTO CONTROLE (ID, ATIVO, APROVADO, DESCRICAO_REPROVADO) VALUES (9,TRUE,1,NULL);
-INSERT INTO CONTROLE (ID, ATIVO, APROVADO, DESCRICAO_REPROVADO) VALUES (10,TRUE,1,NULL);
-INSERT INTO CONTROLE (ID, ATIVO, APROVADO, DESCRICAO_REPROVADO) VALUES (11,TRUE,1,NULL);
-INSERT INTO CONTROLE (ID, ATIVO, APROVADO, DESCRICAO_REPROVADO) VALUES (12,TRUE,1,NULL);
-INSERT INTO CONTROLE (ID, ATIVO, APROVADO, DESCRICAO_REPROVADO) VALUES (13,TRUE,1,NULL);
-INSERT INTO CONTROLE (ID, ATIVO, APROVADO, DESCRICAO_REPROVADO) VALUES (14,TRUE,1,NULL);
-INSERT INTO CONTROLE (ID, ATIVO, APROVADO, DESCRICAO_REPROVADO) VALUES (15,TRUE,1,NULL);
+INSERT INTO CONTROLE (ID, ATIVO, ID_SITUACAO_APROVACAO, DESCRICAO_REPROVADO) VALUES (1,TRUE,2,NULL);
+INSERT INTO CONTROLE (ID, ATIVO, ID_SITUACAO_APROVACAO, DESCRICAO_REPROVADO) VALUES (2,TRUE,2,NULL);
+INSERT INTO CONTROLE (ID, ATIVO, ID_SITUACAO_APROVACAO, DESCRICAO_REPROVADO) VALUES (3,TRUE,2,NULL);
+INSERT INTO CONTROLE (ID, ATIVO, ID_SITUACAO_APROVACAO, DESCRICAO_REPROVADO) VALUES (4,TRUE,2,NULL);
+INSERT INTO CONTROLE (ID, ATIVO, ID_SITUACAO_APROVACAO, DESCRICAO_REPROVADO) VALUES (5,TRUE,2,NULL);
+INSERT INTO CONTROLE (ID, ATIVO, ID_SITUACAO_APROVACAO, DESCRICAO_REPROVADO) VALUES (6,TRUE,2,NULL);
+INSERT INTO CONTROLE (ID, ATIVO, ID_SITUACAO_APROVACAO, DESCRICAO_REPROVADO) VALUES (7,TRUE,2,NULL);
+INSERT INTO CONTROLE (ID, ATIVO, ID_SITUACAO_APROVACAO, DESCRICAO_REPROVADO) VALUES (8,TRUE,2,NULL);
+INSERT INTO CONTROLE (ID, ATIVO, ID_SITUACAO_APROVACAO, DESCRICAO_REPROVADO) VALUES (9,TRUE,2,NULL);
+INSERT INTO CONTROLE (ID, ATIVO, ID_SITUACAO_APROVACAO, DESCRICAO_REPROVADO) VALUES (10,TRUE,2,NULL);
+INSERT INTO CONTROLE (ID, ATIVO, ID_SITUACAO_APROVACAO, DESCRICAO_REPROVADO) VALUES (11,TRUE,2,NULL);
+INSERT INTO CONTROLE (ID, ATIVO, ID_SITUACAO_APROVACAO, DESCRICAO_REPROVADO) VALUES (12,TRUE,2,NULL);
+INSERT INTO CONTROLE (ID, ATIVO, ID_SITUACAO_APROVACAO, DESCRICAO_REPROVADO) VALUES (13,TRUE,2,NULL);
+INSERT INTO CONTROLE (ID, ATIVO, ID_SITUACAO_APROVACAO, DESCRICAO_REPROVADO) VALUES (14,TRUE,2,NULL);
+INSERT INTO CONTROLE (ID, ATIVO, ID_SITUACAO_APROVACAO, DESCRICAO_REPROVADO) VALUES (15,TRUE,2,NULL);
 
 --ENDERECO--
 INSERT INTO ENDERECO (ID, BAIRRO, CEP, COMPLEMENTO, ID_CIDADE, DATA_INSERCAO) VALUES (1,'bairro01', 11111111,'complemento01',882, CURRENT_TIMESTAMP);
@@ -5633,12 +5639,6 @@ INSERT INTO TELEFONE (ID, NUMERO, TIPO, DATA_INSERCAO) VALUES (1,11111111111111,
 INSERT INTO TELEFONE (ID, NUMERO, TIPO, DATA_INSERCAO) VALUES (2,22222222222222,'C',CURRENT_TIMESTAMP);
 INSERT INTO TELEFONE (ID, NUMERO, TIPO, DATA_INSERCAO) VALUES (3,33333333333333,'T',CURRENT_TIMESTAMP);
 INSERT INTO TELEFONE (ID, NUMERO, TIPO, DATA_INSERCAO) VALUES (4,44444444444444,'C',CURRENT_TIMESTAMP);
-
---FUNCIONALIDADE--
-INSERT INTO FUNCIONALIDADE (ID, DESCRICAO, NOME, DATA_INSERCAO) VALUES (1,'Funcionalidade de acesso aos horários de aula.','Agenda Aulas',CURRENT_TIMESTAMP);
-INSERT INTO FUNCIONALIDADE (ID, DESCRICAO, NOME, DATA_INSERCAO) VALUES (2,'Funcionalidade de busca aos audio livros.','Buscar Audio Livros',CURRENT_TIMESTAMP);
-INSERT INTO FUNCIONALIDADE (ID, DESCRICAO, NOME, DATA_INSERCAO) VALUES (3,'Funcionalidade de edição e submição de audio livros.','Submeter Audio Livro',CURRENT_TIMESTAMP);
-INSERT INTO FUNCIONALIDADE (ID, DESCRICAO, NOME, DATA_INSERCAO) VALUES (4,'Funcionalidade de edição e submição de notícias.','Submeter Notícias',CURRENT_TIMESTAMP);
 
 --IMAGEM--
 INSERT INTO IMAGEM (ID, DESCRICAO, URL, DATA_INSERCAO) VALUES (1, 'Livros sobre uma mesa de madeira com um quadro negro ao fundo.','resources/imagem/noticia01.jpg',CURRENT_TIMESTAMP);
@@ -5655,34 +5655,35 @@ INSERT INTO ASSUNTO (ID, DESCRICAO, NOME, DATA_INSERCAO) VALUES (1,'Relacionado 
 INSERT INTO ASSUNTO (ID, DESCRICAO, NOME, DATA_INSERCAO) VALUES (2,'Relacionado com a área de de Graduação em nivel superior.','Nível Superior',CURRENT_TIMESTAMP);
 INSERT INTO ASSUNTO (ID, DESCRICAO, NOME, DATA_INSERCAO) VALUES (3,'Relacionado aos assuntos mais relevante da atualidade.','Atualidades',CURRENT_TIMESTAMP);
 INSERT INTO ASSUNTO (ID, DESCRICAO, NOME, DATA_INSERCAO) VALUES (4,'Relacionado ao controle e planejamento financeiro pessoal.','Educação Financeira',CURRENT_TIMESTAMP);
+INSERT INTO ASSUNTO (ID, DESCRICAO, NOME, DATA_INSERCAO) VALUES (5,'Relacionado a deficiência visual.','Deficiência Visual',CURRENT_TIMESTAMP);
+INSERT INTO ASSUNTO (ID, DESCRICAO, NOME, DATA_INSERCAO) VALUES (6,'Direcionado a Crianças.','Infantil',CURRENT_TIMESTAMP);
 
 --EDITORA--
-INSERT INTO EDITORA (ID, NOME, DATA_INSERCAO) VALUES (1,'EDUFBA',CURRENT_TIMESTAMP);
-INSERT INTO EDITORA (ID, NOME, DATA_INSERCAO) VALUES (2,'Editora 02',CURRENT_TIMESTAMP);
-INSERT INTO EDITORA (ID, NOME, DATA_INSERCAO) VALUES (3,'Editora 03',CURRENT_TIMESTAMP);
-INSERT INTO EDITORA (ID, NOME, DATA_INSERCAO) VALUES (4,'Editora 04',CURRENT_TIMESTAMP);
+INSERT INTO EDITORA (ID, NOME, DATA_INSERCAO) VALUES (1,'--Sem Editora Referênciada--',CURRENT_TIMESTAMP);
+INSERT INTO EDITORA (ID, NOME, DATA_INSERCAO) VALUES (2,'EDUFBA',CURRENT_TIMESTAMP);
 
 --AUTOR--
-INSERT INTO AUTOR (ID, DATA_NASCIMENTO, NOME, DATA_INSERCAO) VALUES (1,'1111-11-11','Alves, Miriam',CURRENT_TIMESTAMP);
-INSERT INTO AUTOR (ID, DATA_NASCIMENTO, NOME, DATA_INSERCAO) VALUES (2,'1111-11-11','Autor 02',CURRENT_TIMESTAMP);
-INSERT INTO AUTOR (ID, DATA_NASCIMENTO, NOME, DATA_INSERCAO) VALUES (3,'1111-11-11','Autor 03',CURRENT_TIMESTAMP);
-INSERT INTO AUTOR (ID, DATA_NASCIMENTO, NOME, DATA_INSERCAO) VALUES (4,'1111-11-11','Autor 04',CURRENT_TIMESTAMP);
+INSERT INTO AUTOR (ID, DATA_NASCIMENTO, NOME, DATA_INSERCAO) VALUES (1,'1111-11-11','--Sem Autor Referênciada--',CURRENT_TIMESTAMP);
+INSERT INTO AUTOR (ID, DATA_NASCIMENTO, NOME, DATA_INSERCAO) VALUES (2,'1952-01-01','Silvia Maria Guerra Anastacio',CURRENT_TIMESTAMP);
+INSERT INTO AUTOR (ID, DATA_NASCIMENTO, NOME, DATA_INSERCAO) VALUES (3,'1952-01-01','Andersen',CURRENT_TIMESTAMP);
+INSERT INTO AUTOR (ID, DATA_NASCIMENTO, NOME, DATA_INSERCAO) VALUES (4,'1952-01-01','Hans Christian Wilde',CURRENT_TIMESTAMP);
+INSERT INTO AUTOR (ID, DATA_NASCIMENTO, NOME, DATA_INSERCAO) VALUES (5,'1952-01-01','Oscar',CURRENT_TIMESTAMP);
 
 --LIVRO--
-INSERT INTO LIVRO (ID, SINOPSE, TITULO, ID_EDITORA, ID_IDIOMA, DATA_INSERCAO) VALUES (1,'O audiolivro Uma luz na escuridão reúne dois contos: “A cega e a negra - uma fábula” (2008), da autora brasileira Miriam Alves; e “A terra dos cegos”, tradução do texto “The country of the blind” (1904), do autor britânico H. G. Wells.','Uma luz na escuridão',1,1,CURRENT_TIMESTAMP);
-INSERT INTO LIVRO (ID, SINOPSE, TITULO, ID_EDITORA, ID_IDIOMA, DATA_INSERCAO) VALUES (2,'Lendas e contos infantis contém nove lendas e contos voltados para o público infantil','Soltando a Imaginação Lendas e Contos Infantis',1,1,CURRENT_TIMESTAMP);
-INSERT INTO LIVRO (ID, SINOPSE, TITULO, ID_EDITORA, ID_IDIOMA, DATA_INSERCAO) VALUES (3,'Sinopse 03','titulo 03',3,3,CURRENT_TIMESTAMP);
-INSERT INTO LIVRO (ID, SINOPSE, TITULO, ID_EDITORA, ID_IDIOMA, DATA_INSERCAO) VALUES (4,'Sinopse 04','titulo 04',4,4,CURRENT_TIMESTAMP);
+INSERT INTO LIVRO (ID, SINOPSE, TITULO, ID_EDITORA, ID_IDIOMA, DATA_INSERCAO) VALUES (1,'--Sem Sinopse--','--Sem Livro Referênciada--',1,1,CURRENT_TIMESTAMP);
+INSERT INTO LIVRO (ID, SINOPSE, TITULO, ID_EDITORA, ID_IDIOMA, DATA_INSERCAO) VALUES (2,'O livro Uma Luz na Escuridão reúne dois contos: “A cega e a negra - uma fábula” (2008), da autora brasileira Miriam Alves; e “A terra dos cegos”, tradução do texto “The country of the blind” (1904), do autor britânico H. G. Wells.','Uma luz na escuridão',2,1,CURRENT_TIMESTAMP);
+INSERT INTO LIVRO (ID, SINOPSE, TITULO, ID_EDITORA, ID_IDIOMA, DATA_INSERCAO) VALUES (3,'Lendas e contos infantis contém nove lendas e contos voltados para o público infantil','Soltando a Imaginação Lendas e Contos Infantis',2,1,CURRENT_TIMESTAMP);
 
 --LIVRO_AUTOR--
 INSERT INTO LIVRO_AUTOR VALUES (1,1);
-INSERT INTO LIVRO_AUTOR VALUES (2,1);
+INSERT INTO LIVRO_AUTOR VALUES (2,2);
 INSERT INTO LIVRO_AUTOR VALUES (3,3);
-INSERT INTO LIVRO_AUTOR VALUES (4,4);
+INSERT INTO LIVRO_AUTOR VALUES (3,4);
+INSERT INTO LIVRO_AUTOR VALUES (3,5);
 
 --PESSOA--
-INSERT INTO PESSOA (ID, CPF, DATA_NASCIMENTO, NOME, RG, SEXO, ID_ENDERECO, ID_RESPONSAVEL, ID_TELEFONE, DATA_INSERCAO) VALUES (1,1111111111,'1111-11-11','PESSOA 01',111111111,'M',1,NULL,1,CURRENT_TIMESTAMP);
-INSERT INTO PESSOA (ID, CPF, DATA_NASCIMENTO, NOME, RG, SEXO, ID_ENDERECO, ID_RESPONSAVEL, ID_TELEFONE, DATA_INSERCAO) VALUES (2,2222222222,'1111-11-11','PESSOA 02',222222222,'F',2,NULL,2,CURRENT_TIMESTAMP);
+INSERT INTO PESSOA (ID, CPF, DATA_NASCIMENTO, NOME, RG, SEXO, ID_ENDERECO, ID_RESPONSAVEL, ID_TELEFONE, DATA_INSERCAO) VALUES (1,1111111111,'1111-11-11','Daniel Medeiros',111111111,'M',1,NULL,1,CURRENT_TIMESTAMP);
+INSERT INTO PESSOA (ID, CPF, DATA_NASCIMENTO, NOME, RG, SEXO, ID_ENDERECO, ID_RESPONSAVEL, ID_TELEFONE, DATA_INSERCAO) VALUES (2,2222222222,'1111-11-11','Rafael da Silva',222222222,'F',2,NULL,2,CURRENT_TIMESTAMP);
 INSERT INTO PESSOA (ID, CPF, DATA_NASCIMENTO, NOME, RG, SEXO, ID_ENDERECO, ID_RESPONSAVEL, ID_TELEFONE, DATA_INSERCAO) VALUES (3,3333333333,'1111-11-11','PESSOA 03',333333333,'M',3,NULL,3,CURRENT_TIMESTAMP);
 INSERT INTO PESSOA (ID, CPF, DATA_NASCIMENTO, NOME, RG, SEXO, ID_ENDERECO, ID_RESPONSAVEL, ID_TELEFONE, DATA_INSERCAO) VALUES (4,4444444444,'1111-11-11','PESSOA 04',444444444,'F',4,NULL,4,CURRENT_TIMESTAMP);
 INSERT INTO PESSOA (ID, CPF, DATA_NASCIMENTO, NOME, RG, SEXO, ID_ENDERECO, ID_RESPONSAVEL, ID_TELEFONE, DATA_INSERCAO) VALUES (5,4444444444,'1111-11-11','Aluno',555555555,'F',4,NULL,4,CURRENT_TIMESTAMP);
@@ -5697,52 +5698,30 @@ INSERT INTO PESSOA_COMPETENCIA VALUES (3,3);
 INSERT INTO PESSOA_COMPETENCIA VALUES (4,4);
 
 --USUARIO--
-INSERT INTO USUARIO (ID, EMAIL, LOGIN, SENHA, ID_PERFIL, ID_PESSOA, DATA_INSERCAO, ID_CONTROLE) VALUES (1,'EMAIL 01','Daniel','cachorro',1,1,CURRENT_TIMESTAMP,1);
-INSERT INTO USUARIO (ID, EMAIL, LOGIN, SENHA, ID_PERFIL, ID_PESSOA, DATA_INSERCAO, ID_CONTROLE) VALUES (2,'EMAIL 02','LOGIN 02','SENHA 02',2,2,CURRENT_TIMESTAMP,2);
-INSERT INTO USUARIO (ID, EMAIL, LOGIN, SENHA, ID_PERFIL, ID_PESSOA, DATA_INSERCAO, ID_CONTROLE) VALUES (3,'EMAIL 03','LOGIN 03','SENHA 03',3,3,CURRENT_TIMESTAMP,3);
-INSERT INTO USUARIO (ID, EMAIL, LOGIN, SENHA, ID_PERFIL, ID_PESSOA, DATA_INSERCAO, ID_CONTROLE) VALUES (4,'EMAIL 04','LOGIN 04','SENHA 04',4,4,CURRENT_TIMESTAMP,4);
-INSERT INTO USUARIO (ID, EMAIL, LOGIN, SENHA, ID_PERFIL, ID_PESSOA, DATA_INSERCAO, ID_CONTROLE) VALUES (5,'EMAIL 04','aluno','aluno',2,5,CURRENT_TIMESTAMP,5);
-INSERT INTO USUARIO (ID, EMAIL, LOGIN, SENHA, ID_PERFIL, ID_PESSOA, DATA_INSERCAO, ID_CONTROLE) VALUES (6,'EMAIL 04','ledor','ledor',3,6,CURRENT_TIMESTAMP,6);
-INSERT INTO USUARIO (ID, EMAIL, LOGIN, SENHA, ID_PERFIL, ID_PESSOA, DATA_INSERCAO, ID_CONTROLE) VALUES (7,'EMAIL 04','administrador','administrador',1,7,CURRENT_TIMESTAMP,15);
-
---ACESSO LOG--
-INSERT INTO ACESSO_LOG VALUES (1,'1111-11-11','Alterção de cadastro',1,1);
-INSERT INTO ACESSO_LOG VALUES (2,'1111-11-11','Alterção de cadastro',2,2);
-INSERT INTO ACESSO_LOG VALUES (3,'1111-11-11','Alterção de cadastro',3,3);
-INSERT INTO ACESSO_LOG VALUES (4,'1111-11-11','Alterção de cadastro',4,4);
+INSERT INTO USUARIO (ID, EMAIL, LOGIN, SENHA, ID_PERFIL, ID_PESSOA, DATA_INSERCAO, ID_CONTROLE) VALUES (1,'EMAIL 01','Daniel','senha',1,1,CURRENT_TIMESTAMP,1);
+INSERT INTO USUARIO (ID, EMAIL, LOGIN, SENHA, ID_PERFIL, ID_PESSOA, DATA_INSERCAO, ID_CONTROLE) VALUES (2,'EMAIL 04','aluno','aluno',2,5,CURRENT_TIMESTAMP,5);
+INSERT INTO USUARIO (ID, EMAIL, LOGIN, SENHA, ID_PERFIL, ID_PESSOA, DATA_INSERCAO, ID_CONTROLE) VALUES (3,'EMAIL 04','voluntario','voluntario',3,3,CURRENT_TIMESTAMP,6);
+INSERT INTO USUARIO (ID, EMAIL, LOGIN, SENHA, ID_PERFIL, ID_PESSOA, DATA_INSERCAO, ID_CONTROLE) VALUES (4,'EMAIL 04','professor','professor',4,6,CURRENT_TIMESTAMP,6);
+INSERT INTO USUARIO (ID, EMAIL, LOGIN, SENHA, ID_PERFIL, ID_PESSOA, DATA_INSERCAO, ID_CONTROLE) VALUES (5,'EMAIL 04','administrador','administrador',1,7,CURRENT_TIMESTAMP,15);
 
 --NOTICIA--
 INSERT INTO NOTICIA VALUES (1,'<p class="lead">Designer cria fonte que une braile ao alfabeto tradicional.</p><p>São Paulo – Um designer japonês teve uma ideia brilhante para tentar incluir ainda mais os deficientes visuais no dia-a-dia da sociedade: criar uma fonte tipográfica que une a escrita tradicional ao braile. A lógica por trás disso é permitir que cegos e outras pessoas possam compartilhar de uma mesma comunicação em um espaço comum.</p><p>Como? Da seguinte maneira: os pontos do braile aprecem em alto relevo e integrados aos caracteres tradicionais do alfabeto latino. O designer Kosuke Takahashi, criador da fonte Braile Neue, propõe que essa tipografia seja adotada já nos próximos Jogos Olímpicos, que ocorrem daqui a dois anos, em Tóquio, capital do Japão.</p><p>Mas há um problema: geralmente a comunicação em braile tende a ser pequena e quase invisível. Por isso, Takahashi diz que realizou uma pesquisa para ver se uma larga sinalização com a linguagem para deficientes visuais poderia ser legível a eles. “Descobri que é possível, contanto que exista um padrão de até seis pontos, independentemente do tamanho”, diz o designer, em seu website.</p><p>“Hoje em dia, raramente vemos o braile implementado nos lugares públicos, uma vez que essa comunicação necessita de um espaço adicional, sendo considerada por aqueles que têm visão como algo não importante”, diz Takahashi.</p><p>“A Braille Neue aborda essa questão, ao tornar o braile mais acessível para ser usado por pessoas sem deficiência visual. Ao divulgar essa fonte tipográfica, acredito que mais pessoas vão ficar familiarizadas com a linguagem”, acrescenta o designer.</p><p>Ele afirma ainda que a fonte pode substituir as atuais sinalizações no espaço público, precisando apenas fazer alguns ajustes. “É fácil implementá-la na infraestrutura existente e é também um trampolim para um futuro mais sustentável e inclusivo após 2020”, comenta Takahashi.</p><p>Fonte:https://exame.abril.com.br/estilo-de-vida/designer-cria-fonte-que-une-braile-ao-alfabeto-tradicional/</p>','1111-11-11','Notícia 01',1,1);
 INSERT INTO NOTICIA VALUES (2,'<p class="lead">Sessões de cinema, acções de formação e jogos adaptados fazem parte do vasto programa de uma semana dedicada à temática da deficiência<p><p>A Semana Temática da Deficiência, que este ano vai para a 11.ª edição, a decorrer entre os dias 1 e 9 de Dezembro em vários espaços e equipamentos de Setúbal, inclui sessões de cinema, acções de formação e jogos adaptados.</p><p>Subordinado ao tema “Com os nossos sentidos!” e organizado pelo Grupo Concelhio para as Deficiências – Setúbal, o evento arranca no primeiro dia de Dezembro às 10h30 no Cinema Charlot – Auditório Municipal, com “Cineautismo”. Trata-se de uma sessão cinematográfica para crianças e jovens com perturbações do espectro do autismo. A entrada é gratuita, mediante inscrição nesta ligação.</p><p>O cinema volta a estar em destaque nesta edição da Semana Temática da Deficiência com a exibição, no dia 8, às 16h00, no Espaço 50 Cuts, do filme “A Família Belier”. A entrada é gratuita.</p><p>O “Dia Aberto dos Jogos Adaptados”, destinado à comunidade educativa, realiza-se no dia 3, entre as 09h00 e as 18h00, na Escola Secundária Sebastião da Gama, com actividades de boccia, goalball, basquetebol em cadeira de rodas, slalom em cadeira de rodas e percursos com guia para cegos.</p><p>No mesmo dia, entre as 10h00 e as 17h00, na placa central da Avenida Luísa Todi e no centro comercial Alegro Setúbal, a população tem a oportunidade de realizar rastreios gratuitos de prevenção da doença renal.</p><p>Um “Jantar às Cegas”, que desafia participantes, sem quaisquer problemas visuais, a ter uma refeição totalmente privados de luz, é servido no dia 5, às 20h00, na Escola de Hotelaria e Turismo de Setúbal. A iniciativa é dirigida às entidades e aos técnicos do Grupo Concelhio para as Deficiências – Setúbal.</p><p>A 11.ª Semana Temática de Deficiência, construiu um programa de “sensibilização da comunidade para uma atitude de aceitação, valorização e inclusão das pessoas com deficiência e de promoção dos valores de tolerância, solidariedade e respeito pelos outros”, refere a autarquia de Setúbal em comunicado.</p><p>A iniciativa, que conta com a presença de várias entidades, entre elas a Câmara de Setúbal que integra o Grupo Concelhio para a Deficiência, propõe ainda um alargado conjunto de acções de formação destinadas à comunidade educativa e técnicos e cuidadores de saúde.</p><p>Fonte:https://www.diariodaregiao.pt/local/setubal/2019/11/21/cidade-recebe-programa-dedicado-a-integracao/<p/>','1111-11-11','Notícia 02',2,2);
 
 --AULA--
-INSERT INTO AULA (ID, DATA_HORARIO_AULA, DESCRICAO, NOME, ID_ASSUNTO, DATA_INSERCAO, ID_CONTROLE, ID_LEDOR) VALUES (1,TO_DATE('2019/11/24 09:00:00', 'yyyy/mm/dd hh24:mi:ss'),'DESCRIÇÃO 01','AULA 01',1,CURRENT_TIMESTAMP,7,6);
-INSERT INTO AULA (ID, DATA_HORARIO_AULA, DESCRICAO, NOME, ID_ASSUNTO, DATA_INSERCAO, ID_CONTROLE, ID_LEDOR) VALUES (2,TO_DATE('2019/11/24 10:00:00', 'yyyy/mm/dd hh24:mi:ss'),'DESCRIÇÃO 02','AULA 02',2,CURRENT_TIMESTAMP,8,5);
-INSERT INTO AULA (ID, DATA_HORARIO_AULA, DESCRICAO, NOME, ID_ASSUNTO, DATA_INSERCAO, ID_CONTROLE, ID_LEDOR) VALUES (3,TO_DATE('2019/11/25 10:00:00', 'yyyy/mm/dd hh24:mi:ss'),'DESCRIÇÃO 03','AULA 03',3,CURRENT_TIMESTAMP,9,6);
-INSERT INTO AULA (ID, DATA_HORARIO_AULA, DESCRICAO, NOME, ID_ASSUNTO, DATA_INSERCAO, ID_CONTROLE, ID_LEDOR) VALUES (4,TO_DATE('2019/11/25 14:00:00', 'yyyy/mm/dd hh24:mi:ss'),'DESCRIÇÃO 04','AULA 04',4,CURRENT_TIMESTAMP,10,6);
+INSERT INTO AULA (ID, DATA_HORARIO_AULA, DESCRICAO, NOME, ID_ASSUNTO, DATA_INSERCAO, ID_CONTROLE, ID_LEDOR) VALUES (1,TO_DATE('2020/11/01 09:00:00', 'yyyy/mm/dd hh24:mi:ss'),'DESCRIÇÃO 01','AULA 01',1,CURRENT_TIMESTAMP,7,3);
+INSERT INTO AULA (ID, DATA_HORARIO_AULA, DESCRICAO, NOME, ID_ASSUNTO, DATA_INSERCAO, ID_CONTROLE, ID_LEDOR) VALUES (2,TO_DATE('2020/11/02 10:00:00', 'yyyy/mm/dd hh24:mi:ss'),'DESCRIÇÃO 02','AULA 02',2,CURRENT_TIMESTAMP,8,3);
+INSERT INTO AULA (ID, DATA_HORARIO_AULA, DESCRICAO, NOME, ID_ASSUNTO, DATA_INSERCAO, ID_CONTROLE, ID_LEDOR) VALUES (3,TO_DATE('2020/11/03 10:00:00', 'yyyy/mm/dd hh24:mi:ss'),'DESCRIÇÃO 03','AULA 03',3,CURRENT_TIMESTAMP,9,3);
+INSERT INTO AULA (ID, DATA_HORARIO_AULA, DESCRICAO, NOME, ID_ASSUNTO, DATA_INSERCAO, ID_CONTROLE, ID_LEDOR) VALUES (4,TO_DATE('2020/11/01 14:00:00', 'yyyy/mm/dd hh24:mi:ss'),'DESCRIÇÃO 04','AULA 04',4,CURRENT_TIMESTAMP,10,3);
 
 --AUDIO_LIVRO--
-INSERT INTO AUDIO_LIVRO (ID, CODIGO, URL_TEXTO, TITULO, URL_AUDIO, DESCRICAO, ID_LEDOR, ID_LIVRO_REFERENCIA, DATA_INSERCAO, ID_CONTROLE) VALUES (1,'CODIGO01','https://repositorio.ufba.br/ri/bitstream/ri/25372/1/Uma%20Luz%20na%20Escurida%cc%83o.pdf','Uma luz na escuridão - A Cega e a Negra','https://repositorio.ufba.br/ri/bitstream/ri/25372/2/1 A Cega e a Negra.mp3','Audiolivro do conto A Cega e a Negra do Livro Uma luz na escuridão. Audio livro retirado de https://repositorio.ufba.br ',6,1,CURRENT_TIMESTAMP,11);
-INSERT INTO AUDIO_LIVRO (ID, CODIGO, URL_TEXTO,TITULO, URL_AUDIO, DESCRICAO, ID_LEDOR, ID_LIVRO_REFERENCIA, DATA_INSERCAO, ID_CONTROLE) VALUES (2,'CODIGO02','https://repositorio.ufba.br/ri/bitstream/ri/25372/1/Uma%20Luz%20na%20Escurida%cc%83o.pdf','Uma luz na escuridão - Uma luz na escuridão','https://repositorio.ufba.br/ri/bitstream/ri/25372/3/2%20A%20Terra%20dos%20Cegos.mp3','Audiolivro do conto A Terra dos Cegos do Livro Uma luz na escuridão. Audio livro retirado de https://repositorio.ufba.br',6,1,CURRENT_TIMESTAMP,12);
-INSERT INTO AUDIO_LIVRO (ID, CODIGO, URL_TEXTO,TITULO, URL_AUDIO, DESCRICAO, ID_LEDOR, ID_LIVRO_REFERENCIA, DATA_INSERCAO, ID_CONTROLE) VALUES (3,'CODIGO03','https://repositorio.ufba.br/ri/bitstream/ri/25459/1/Soltando%20a%20Imagina%c3%a7%c3%a3o%20Lendas%20e%20Contos%20Infantis.pdf','Soltando a Imaginação: Lendas e Contos Infantis - O Linho','https://repositorio.ufba.br/ri/bitstream/ri/25459/2/1%20O%20Linho.mp3','Audiolivro do conto O Linho parte da coleção Soltando a imaginação: lendas e contos infantis. Audio livro retirado de https://repositorio.ufba.br.',6,2,CURRENT_TIMESTAMP,13);
-INSERT INTO AUDIO_LIVRO (ID, CODIGO, URL_TEXTO,TITULO, URL_AUDIO, DESCRICAO, ID_LEDOR, ID_LIVRO_REFERENCIA, DATA_INSERCAO, ID_CONTROLE) VALUES (4,'CODIGO04','https://repositorio.ufba.br/ri/bitstream/ri/25459/1/Soltando%20a%20Imagina%c3%a7%c3%a3o%20Lendas%20e%20Contos%20Infantis.pdf','Soltando a Imaginação: Lendas e Contos Infantis - O Porcofrinho','https://repositorio.ufba.br/ri/bitstream/ri/25459/3/2%20O%20Porcofrinho.mp3','Audiolivro do conto O Porcofrinho parte da coleção Soltando a imaginação: lendas e contos infantis. Audio livro retirado de https://repositorio.ufba.br.',6,2,CURRENT_TIMESTAMP,14);
+INSERT INTO AUDIO_LIVRO (ID, CODIGO, URL_TEXTO, TITULO, URL_AUDIO, DESCRICAO, ID_LEDOR, ID_LIVRO_REFERENCIA, DATA_INSERCAO, ID_CONTROLE) VALUES (1,'CODIGO01','https://repositorio.ufba.br/ri/bitstream/ri/25372/1/Uma%20Luz%20na%20Escurida%cc%83o.pdf','Uma luz na escuridão - A Cega e a Negra','https://repositorio.ufba.br/ri/bitstream/ri/25372/2/1 A Cega e a Negra.mp3','Audiolivro do conto A Cega e a Negra do Livro Uma luz na escuridão. Audio livro retirado de https://repositorio.ufba.br ',2,2,CURRENT_TIMESTAMP,11);
+INSERT INTO AUDIO_LIVRO (ID, CODIGO, URL_TEXTO,TITULO, URL_AUDIO, DESCRICAO, ID_LEDOR, ID_LIVRO_REFERENCIA, DATA_INSERCAO, ID_CONTROLE) VALUES (2,'CODIGO02','https://repositorio.ufba.br/ri/bitstream/ri/25372/1/Uma%20Luz%20na%20Escurida%cc%83o.pdf','Uma luz na escuridão - A Terra dos Cegos','https://repositorio.ufba.br/ri/bitstream/ri/25372/3/2%20A%20Terra%20dos%20Cegos.mp3','Audiolivro do conto A Terra dos Cegos do Livro Uma luz na escuridão. Audio livro retirado de https://repositorio.ufba.br',2,2,CURRENT_TIMESTAMP,12);
+INSERT INTO AUDIO_LIVRO (ID, CODIGO, URL_TEXTO,TITULO, URL_AUDIO, DESCRICAO, ID_LEDOR, ID_LIVRO_REFERENCIA, DATA_INSERCAO, ID_CONTROLE) VALUES (3,'CODIGO03','https://repositorio.ufba.br/ri/bitstream/ri/25459/1/Soltando%20a%20Imagina%c3%a7%c3%a3o%20Lendas%20e%20Contos%20Infantis.pdf','Soltando a Imaginação: Lendas e Contos Infantis - O Linho','https://repositorio.ufba.br/ri/bitstream/ri/25459/2/1%20O%20Linho.mp3','Audiolivro do conto O Linho parte da coleção Soltando a imaginação: lendas e contos infantis. Audio livro retirado de https://repositorio.ufba.br.',2,2,CURRENT_TIMESTAMP,13);
+INSERT INTO AUDIO_LIVRO (ID, CODIGO, URL_TEXTO,TITULO, URL_AUDIO, DESCRICAO, ID_LEDOR, ID_LIVRO_REFERENCIA, DATA_INSERCAO, ID_CONTROLE) VALUES (4,'CODIGO04','https://repositorio.ufba.br/ri/bitstream/ri/25459/1/Soltando%20a%20Imagina%c3%a7%c3%a3o%20Lendas%20e%20Contos%20Infantis.pdf','Soltando a Imaginação: Lendas e Contos Infantis - O Porcofrinho','https://repositorio.ufba.br/ri/bitstream/ri/25459/3/2%20O%20Porcofrinho.mp3','Audiolivro do conto O Porcofrinho parte da coleção Soltando a imaginação: lendas e contos infantis. Audio livro retirado de https://repositorio.ufba.br.',2,2,CURRENT_TIMESTAMP,14);
 
 --AUDIO_LIVRO_ASSUNTO--
-INSERT INTO AUDIO_LIVRO_ASSUNTO (ID_AUDIO_LIVRO, ID_ASSUNTO) VALUES (1,1);
-INSERT INTO AUDIO_LIVRO_ASSUNTO (ID_AUDIO_LIVRO, ID_ASSUNTO) VALUES (1,2);
-INSERT INTO AUDIO_LIVRO_ASSUNTO (ID_AUDIO_LIVRO, ID_ASSUNTO) VALUES (1,3);
-INSERT INTO AUDIO_LIVRO_ASSUNTO (ID_AUDIO_LIVRO, ID_ASSUNTO) VALUES (1,4);
-INSERT INTO AUDIO_LIVRO_ASSUNTO (ID_AUDIO_LIVRO, ID_ASSUNTO) VALUES (2,2);
-INSERT INTO AUDIO_LIVRO_ASSUNTO (ID_AUDIO_LIVRO, ID_ASSUNTO) VALUES (3,3);
-INSERT INTO AUDIO_LIVRO_ASSUNTO (ID_AUDIO_LIVRO, ID_ASSUNTO) VALUES (4,3);
-
---ACESSO_AUDIO_LIVRO--
-INSERT INTO ACESSO_AUDIO_LIVRO VALUES (1,'1111-11-11',000000,1,1);
-INSERT INTO ACESSO_AUDIO_LIVRO VALUES (2,'1111-11-11',000200,2,2);
-INSERT INTO ACESSO_AUDIO_LIVRO VALUES (3,'1111-11-11',000300,3,3);
-INSERT INTO ACESSO_AUDIO_LIVRO VALUES (4,'1111-11-11',000400,4,4);
-
-
-
-
-
+INSERT INTO AUDIO_LIVRO_ASSUNTO (ID_AUDIO_LIVRO, ID_ASSUNTO) VALUES (1,5);
+INSERT INTO AUDIO_LIVRO_ASSUNTO (ID_AUDIO_LIVRO, ID_ASSUNTO) VALUES (2,5);
+INSERT INTO AUDIO_LIVRO_ASSUNTO (ID_AUDIO_LIVRO, ID_ASSUNTO) VALUES (3,6);
+INSERT INTO AUDIO_LIVRO_ASSUNTO (ID_AUDIO_LIVRO, ID_ASSUNTO) VALUES (4,6);

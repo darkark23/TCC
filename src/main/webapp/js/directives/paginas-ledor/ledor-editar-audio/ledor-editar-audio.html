@@ -8,18 +8,23 @@
 	<body>
 		<section class="py-5">
 			<div class="container">
+				<div class="alert alert-dark" role="alert" ng-show="erro.show" id="erro-box">
+					{{erro.texto}}
+				</div>
 				<form>
-					<div><h5>{{audioLivro}}</h5></div>
-					<div class="alert alert-warning alert-dismissible fade show" role="alert">
-						<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
+					<div ng-show="audioLivro.idSituacaoAprovacao == 3" class="form-group">
+						<label>Motivo Rejeição</label>
+						<p>{{audioLivro.motivoRejeicao}}</p>
 					</div>
 					<div class="form-group">
 						<label >Título</label>
 						<input type="text" ng-model="audioLivro.tituloAudioBook" class="form-control"  aria-describedby="emailHelp">
 						<small  class="form-text text-muted">O título sera usado na busca pelo audio livro via comando de voz.</small>
+					</div>
+					<div class="form-group" ng-show="mostrarCodigo()">
+						<label >Código</label>
+						<input type="text" ng-model="audioLivro.codigo" class="form-control"  aria-describedby="emailHelp">
+						<small  class="form-text text-muted">O código indentificador padronizado pela instituição.</small>
 					</div>
 					<div class="form-group">
 						<label>Assuntos</label>
@@ -52,7 +57,7 @@
 						<small  class="form-text text-muted">Url da versão em texto do livro de referência ou audio livro caso exista. Caso não exista deixe o campo vazio.</small>
 					</div>
 					<div class="form-group">
-						<label >Descriçao</label>
+						<label>Descriçao</label>
 						<textarea class="form-control" ng-model="audioLivro.descricao" id="exampleFormControlTextarea1" rows="3"></textarea>
 						<small  class="form-text text-muted">Breve descrição sobre o áudio livro.(Tamanho máximo de 255 caracteres)</small>
 					</div>

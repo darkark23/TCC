@@ -9,12 +9,6 @@ angular.module('tccApp').controller('AudioBuscaAvancadaController',
 			utterance.lang = 'pt-BR';
 			utterance.rate = 2;
 			synth.speak(utterance);
-			
-			document.onkeyup = function(e) {
-				if (e.which == 96) {
-					synth.speak(utterance);
-				} 
-			};
 													
 			const recognition = new webkitSpeechRecognition();
 			recognition.interimResults = true;

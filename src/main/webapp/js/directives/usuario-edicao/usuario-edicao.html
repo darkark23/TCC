@@ -8,13 +8,10 @@
 	<body>
 		<section class="py-5">
 			<div class="container">
+				<div class="alert alert-dark" role="alert" ng-show="erro.show" id="erro-box">
+					{{erro.texto}}
+				</div>
 				<form>
-					<div class="alert alert-warning alert-dismissible fade show" role="alert">
-						<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
 					<div class="form-group">
 						<label >Nome Completo</label>
 						<input type="text" ng-model="usuario.pessoa.nome" class="form-control"  aria-describedby="emailHelp">
@@ -130,7 +127,7 @@
 						<small  class="form-text text-muted">Informar um e-mail para contato.</small>
 					</div>
 
-					<div class="form-group">
+					<div ng-show="!indicadorChave" class="form-group">
 						<label>Perfil</label>
 						<select ng-model="usuario.perfil" class="form-control">
 							<option value="">Selecione um perfil</option>
@@ -141,8 +138,10 @@
 
 					<div class="form-group row">
 						<div class="col-sm-10">
-							<button ng-show="novoUsuario" type="submit"ng-click="cadastrarNovo()" class="btn btn-primary">Registrar</button>
-							<button ng-show="novoUsuario" type="submit"ng-click="sair()" class="btn btn-primary">Sair</button>
+							<button ng-show="mostrarRegistrar()" ng-click="cadastrarNovo()" class="btn btn-dark">Registrar</button>
+							<button ng-show="mostarAtualizar()" ng-click="atualizar()" class="btn btn-dark">Atualizar</button>
+							<button ng-show="mostrarSair()" ng-click="sair()" class="btn btn-dark">Sair</button>
+							<button ng-show="mostrarVoltar()" ng-click="voltar()" class="btn btn-dark">Voltar</button>
 						</div>
 					</div>
 				</form>

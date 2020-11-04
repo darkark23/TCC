@@ -11,7 +11,7 @@ angular.module('tccApp').controller('LoginController',
 	loginService.confirmarUsuario($scope.dados,
 		function (usuarioPerfil) {
 			if (usuarioPerfil.existente == true){
-				if (usuarioPerfil.situacao == 1){
+				if (usuarioPerfil.idSituacaoAprovacao == enumSituacaoAprovacao.APROVADO){
 					synth.cancel();
 					$rootScope.usuarioPerfil = usuarioPerfil;
 					$state.go('menu',{},{reload : true});
@@ -34,7 +34,7 @@ angular.module('tccApp').controller('LoginController',
 			}else {
 				geracaoChaveLedorService.validarChaveCadastro($scope.chaveCadastro,function (retorno) {
 					if(retorno == 1){
-						$state.go('usuarioEdicao',{},{reload : true});
+						$state.go('usuarioEdicao',{indicadorChave : true, indicadorNovo:true},{reload : true});
 					}else{
 
 					}
@@ -46,14 +46,14 @@ angular.module('tccApp').controller('LoginController',
 			loginService.confirmarUsuario($scope.dados,
 				function (usuarioPerfil) {
 					if (usuarioPerfil.existente == true){
-						if (usuarioPerfil.situacao == 1){
+						if (usuarioPerfil.idSituacaoAprovacao == enumSituacaoAprovacao.APROVADO){
 							synth.cancel();
 							$rootScope.usuarioPerfil = usuarioPerfil;
 							$state.go('menu',{},{reload : true});
-						}else if(usuarioPerfil.situacao == 2){
-							$state.go('usuarioEdicao',{},{reload : true});
+						}else if(usuarioPerfil.idSituacaoAprovacao == enumSituacaoAprovacao.PENDENTE){
+							$state.go('usuarioEdicao',{indicadorChave : true, indicadorNovo:false},{reload : true});
 						}else {
-							$scope.usuarioPerfilTemp = usuarioPerfil.situacao;
+							$scope.usuarioPerfilTemp = usuarioPerfil.idSituacaoAprovacao;
 						}
 					}else{
 						reproduzirFrase(getAudio.login.usuarioSenhaIncorreto);
@@ -65,26 +65,6 @@ angular.module('tccApp').controller('LoginController',
 
 	$scope.alterFormulario = function(){
 		$scope.telaChaveCadastro = !$scope.telaChaveCadastro
-	};
-
-
-
-	document.onkeyup = function(e) {
-		if (e.which == 96) {
-			reproduzirFrase(getAudio.login.intro + getAudio.login.fraseAjuda);
-		} else if (e.which == 49) {
-			synth.cancel();
-			$state.go('principal',{},{reload : true});
-		} else if (e.which == 50) {
-			synth.cancel();
-			$state.go('contato',{},{reload : true});
-		} else if (e.which == 51) {
-			synth.cancel();
-			$state.go('localizacao',{}, {reload : true});
-		} else if (e.which == 52) {
-			synth.cancel();
-			$state.go('login',{}, {reload : true});
-		}
 	};
 
 	recognition.onresult = function(event) {
@@ -160,7 +140,5 @@ angular.module('tccApp').controller('LoginController',
 			}
 		}
 	};
-
-
 
 }]);

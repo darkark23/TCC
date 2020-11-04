@@ -13,6 +13,10 @@
 				<hr class="my-4">
 			</div>
 			<div class="container">
+				<strong>Motivo Rejeição</strong>
+				<div ng-show="audioLivro.idSituacaoAprovacao == 3" class="form-group"
+				<br>{{audioLivro.motivoRejeicao}}</br>
+				</div>
 				<strong>Título</strong>
 				<br>{{audioLivro.tituloAudioBook}}</br>
 				<strong>Ledor</strong>
@@ -42,6 +46,7 @@
 						Sem versão em texto
 					</br>
 				</div>
+
 				<p></p>
 				<strong>Audio</strong>
 				<p></p>
@@ -56,6 +61,7 @@
 					<button type="button" class="btn btn-dark" ng-click="aumentarVolume()">Vol + (Aumentar)</button>
 					<button type="button" class="btn btn-dark" ng-click="abaixarVolume()">Vol - (Abaixar)</button>
 				</div>
+
 			</div>
 			<p></p>
 			<div class="container">

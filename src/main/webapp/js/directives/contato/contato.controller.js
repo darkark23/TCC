@@ -1,28 +1,27 @@
 'use strict'
 angular.module('tccApp').controller('ContatoController',
-		[ '$scope', '$state', function($scope, $state) {
+		[ '$scope', '$state', 'loginService', function($scope, $state, loginService) {
 
 	synth.cancel();
 	reproduzirFrase(getAudio.contato.intro);
 	comecarReconhecimento();
 
-	document.onkeyup = function(e) {
-		if (e.which == 96) {
-			reproduzirFrase(getAudio.login.intro + getAudio.login.fraseAjuda);
-		} else if (e.which == 49) {
-			synth.cancel();
-			$state.go('principal',{},{reload : true});
-		} else if (e.which == 50) {
-			synth.cancel();
-			$state.go('contato',{},{reload : true});
-		} else if (e.which == 51) {
-			synth.cancel();
-			$state.go('localizacao',{}, {reload : true});
-		} else if (e.which == 52) {
-			synth.cancel();
-			$state.go('login',{}, {reload : true});
-		}
-	};
+	$scope.logar = function(){
+		let dados = {usuario : null,	senha : null};
+		loginService.confirmarUsuario(dados,
+			function (usuarioPerfil) {
+				if (usuarioPerfil.existente == true){
+					synth.cancel();
+					$rootScope.usuarioPerfil = usuarioPerfil;
+					$state.go('menu',{},{reload : true});
+				}else{
+					$state.go('login', {}, {
+						reload : true
+					});
+				}
+			},function () {
+			});
+	}
 
 	recognition.onresult = function(event) {
 		for (let i = event.resultIndex; i < event.results.length; i++) {

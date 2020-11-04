@@ -2,7 +2,6 @@ package br.net.iesb.dto;
 
 import br.net.iesb.entity.transacional.Usuario;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -20,8 +19,8 @@ public class UsuarioInformationDTO extends UsuarioLoginDTO {
         this.setNome(usuario.getPessoa().getNome());
         this.setPerfil(usuario.getPerfil().getNome());
         this.setExistente(true);
-        this.setSituacao(usuario.getControle().getAprovado());
-        if(usuario.getControle().getAprovado() == 2){
+        this.setIdSituacaoAprovacao(usuario.getControle().getSituacaoAprovacao().getId());
+        if(usuario.getControle().getSituacaoAprovacao().getId() == 2){
             this.setMotivo(usuario.getControle().getDescricaoReprovado());
         }
     }

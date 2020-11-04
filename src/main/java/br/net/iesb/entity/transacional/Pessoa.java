@@ -19,19 +19,19 @@ public class Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PESSOA_SEQUENCE")
-    @SequenceGenerator(name = "PESSOA_SEQUENCE", sequenceName = "PESSOA_SEQUENCE")
+    @SequenceGenerator(name = "PESSOA_SEQUENCE", sequenceName = "PESSOA_SEQUENCE",initialValue = 8)
     @Column(name = "ID", nullable = false)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = { CascadeType.PERSIST,CascadeType.MERGE})
     @JoinColumn(name = "ID_ENDERECO", foreignKey = @ForeignKey(name = "FK_PESSOA_ENDERECO"), nullable = false)
     private Endereco endereco;
 
-    @ManyToOne
+    @ManyToOne(cascade = { CascadeType.PERSIST,CascadeType.MERGE})
     @JoinColumn(name = "ID_TELEFONE", foreignKey = @ForeignKey(name = "FK_PESSOA_TELEFONE"), nullable = false)
     private Telefone telefone;
 
-    @ManyToOne
+    @ManyToOne(cascade = { CascadeType.PERSIST,CascadeType.MERGE})
     @JoinColumn(name = "ID_RESPONSAVEL", foreignKey = @ForeignKey(name = "FK_PESSOA_PESSOA"), nullable = true)
     private Pessoa responsavel;
 

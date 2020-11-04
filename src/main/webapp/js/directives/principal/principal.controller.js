@@ -5,8 +5,6 @@ angular.module('tccApp').controller('PrincipalController',
 	var currentNoticia = 0;
 	$scope.noticias = null;
 
-
-
 	principalService.getNoticias(function (listaNoticias) {
 		$scope.noticias = listaNoticias;
 	},function () {
@@ -32,32 +30,6 @@ angular.module('tccApp').controller('PrincipalController',
 	synth.cancel();
 	reproduzirFrase(getAudio.principal.intro);
 	comecarReconhecimento();
-
-	document.onkeyup = function(e) {
-		if (e.which == 96) {
-			reproduzirFrase(getAudio.principal.intro);
-		} else if (e.which == 49) {
-			synth.cancel();
-			$state.go('principal', {}, {
-				reload : true
-			});
-		} else if (e.which == 50) {
-			synth.cancel();
-			$state.go('contato', {}, {
-				reload : true
-			});
-		} else if (e.which == 51) {
-			synth.cancel();
-			$state.go('localizacao', {}, {
-				reload : true
-			});
-		} else if (e.which == 52) {
-			synth.cancel();
-			$state.go('login', {}, {
-				reload : true
-			});
-		}
-	};
 
 	recognition.onresult = function(event) {
 		for (let i = event.resultIndex; i < event.results.length; i++) {

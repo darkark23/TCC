@@ -1,6 +1,7 @@
 package br.net.iesb.dto;
 
 import br.net.iesb.entity.transacional.Usuario;
+import br.net.iesb.enumeration.SituacaoAprovacaoEnum;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,18 +11,20 @@ import lombok.Setter;
 @Setter
 public class  UsuarioLoginDTO {
 
+    private Long id;
     private String nome;
     private String login;
     private String perfil;
     private Boolean existente = false;
-    private Integer situacao;
+    private Integer idSituacaoAprovacao;
     private String motivo;
 
     public UsuarioLoginDTO (Usuario usuario){
+        this.id = usuario.getId();
         this.nome = usuario.getPessoa().getNome();
         this.perfil = usuario.getPerfil().getNome();
-        this.situacao = usuario.getControle().getAprovado();
-        if(situacao == 2){
+        this.idSituacaoAprovacao = usuario.getControle().getSituacaoAprovacao().getId();
+        if(idSituacaoAprovacao == SituacaoAprovacaoEnum.REPROVADO.getId()){
             this.motivo = usuario.getControle().getDescricaoReprovado();
         }
     }
@@ -31,8 +34,8 @@ public class  UsuarioLoginDTO {
         this.login = usuarioInformationDTO.getLogin();
         this.perfil = usuarioInformationDTO.getPerfil();
         this.existente = true;
-        this.situacao = usuarioInformationDTO.getSituacao();
-        if(situacao == 2){
+        this.idSituacaoAprovacao = usuarioInformationDTO.getIdSituacaoAprovacao();
+        if(idSituacaoAprovacao == SituacaoAprovacaoEnum.REPROVADO.getId()){
             this.motivo = usuarioInformationDTO.getMotivo();
         }
     }

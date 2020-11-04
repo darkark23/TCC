@@ -21,7 +21,7 @@ import java.util.HashMap;
         basePackages = "br.net.iesb.repository.transacional",
         entityManagerFactoryRef = "transacionalEntityManager",
         transactionManagerRef = "transacionalTransactionManager")
-public class PercistenceTransacionalAutoConfiguration  {
+public class PersistenceTransacionalAutoConfiguration {
 
     @Bean
     @Primary

@@ -9,13 +9,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class AssuntoEdicaoDTO {
 
     private Long id;
     private String nome;
-
-    public AssuntoEdicaoDTO(){
-    }
 
     public AssuntoEdicaoDTO(Assunto assunto){
         this.id = assunto.getId();

@@ -15,4 +15,10 @@ angular.module('tccApp').service('audioListaService', ['Restangular', function (
         return listaAudioLivro;
     };
 
+/*    this.getListaAudioLivroTermo = function (pageable, success, error) {
+        var params = {pageable: pageable};
+        var listaAudioLivro = this.api().one('findAllTermo').get(pageable).then(success, error);
+        return listaAudioLivro;
+    };*/
+
 }]);

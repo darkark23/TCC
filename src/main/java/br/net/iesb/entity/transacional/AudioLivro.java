@@ -55,7 +55,7 @@ public class AudioLivro {
     private Date dataInsercao;
 
     @ManyToOne(cascade = { CascadeType.PERSIST,CascadeType.MERGE})
-    @JoinColumn(name = "ID_CONTROLE", nullable = false, foreignKey = @ForeignKey(name = "FK_AULA_CONTROLE") )
+    @JoinColumn(name = "ID_CONTROLE", nullable = false, foreignKey = @ForeignKey(name = "FK_AUDIO_CONTROLE") )
     private Controle controle;
 
 }

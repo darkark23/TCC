@@ -30,14 +30,16 @@
 							<h5>{{agendaDia.data}}</h5>
 						</li>
 						<li ng-show="agendaDia.listaAulas" ng-repeat="aula in agendaDia.listaAulas" class="list-group-item">
-							<span ng-show="aula.id" class="align-middle">{{aula.descricao + ' - Ledor: ' + aula.ledor + ' - Situação: ' + aula.aprovado}}</span>
-							<button ng-show="(aula.aulaLedor || (usuarioPerfil.perfil == 'Professor'  || usuarioPerfil.perfil == 'Administrador')) && aula.id "  type="button" data-toggle="modal" data-target="#modalCancelar" ng-click="modalCancelar(aula.id)" class="btn btn-dark float-right align-middle">Cancelar</button>
-                            <button ng-show="(usuarioPerfil.perfil == 'Professor' || usuarioPerfil.perfil == 'Administrador') && aula.id && aula.idAprovado != 1"  type="button" data-toggle="modal" data-target="#modalAprovar" ng-click="modalAprovar(aula.id)" class="btn btn-dark float-right align-middle">Aprovar</button>
-                            <button ng-show="(usuarioPerfil.perfil == 'Professor' || usuarioPerfil.perfil == 'Administrador') && aula.id "  type="button"  data-toggle="modal" data-target="#modalRejeitar" ng-click="modalRejeitar(aula.id)" class="btn btn-dark float-right align-middle">Rejeitar</button>
+
+							<span ng-show="aula.id" class="align-middle">{{aula.descricao + ' - Ledor: ' + aula.ledor + ' - Situação: ' + formatarSituacao(aula.idSituacaoAprovacao)}}</span>
 							<span ng-show="!aula.id" class="align-middle">{{aula.descricao}}</span>
-							<button ng-show="aula.id "  type="button" data-toggle="modal" data-target="#modalVisualizar" ng-click="modalVisualizar(aula)" class="btn btn-dark float-right align-middle">Visualizar</button>
-							<button ng-show="aula.id && aula.aulaLedor "  type="button" data-toggle="modal" data-target="#modalMarcar" ng-click="modalMarcar(aula)" class="btn btn-dark float-right align-middle">Editar</button>
-							<button ng-show="!aula.id" type="button" data-toggle="modal" data-target="#modalMarcar" ng-click="modalMarcar(aula)" class="btn btn-dark float-right align-middle">Marcar</button>
+
+							<button type="button" data-toggle="modal"  data-target="#modalVisualizar" ng-click="modalVisualizar(aula)"  ng-show="aula.id"               style="margin-right: 5px" class="btn btn-dark float-right align-middle">Visualizar</button>
+							<button type="button" data-toggle="modal"  data-target="#modalMarcar"     ng-click="modalMarcar(aula)"      ng-show="mostrarEditar(aula)"   style="margin-right: 5px" class="btn btn-dark float-right align-middle">Editar</button>
+                            <button type="button" data-toggle="modal"  data-target="#modalAprovar"    ng-click="modalAprovar(aula.id)"  ng-show="mostrarAprovar(aula)"  style="margin-right: 5px" class="btn btn-dark float-right align-middle">Aprovar</button>
+                            <button type="button" data-toggle="modal"  data-target="#modalRejeitar"   ng-click="modalRejeitar(aula.id)" ng-show="mostrarReprovar(aula)" style="margin-right: 5px" class="btn btn-dark float-right align-middle">Rejeitar</button>
+							<button type="button" data-toggle="modal"  data-target="#modalMarcar"     ng-click="modalMarcar(aula)"      ng-show="!aula.id"              style="margin-right: 5px" class="btn btn-dark float-right align-middle">Marcar</button>
+							<button type="button" data-toggle="modal"  data-target="#modalCancelar"   ng-click="modalCancelar(aula.id)" ng-show="mostrarCancelar(aula)" style="margin-right: 5px" class="btn btn-dark float-right align-middle">Cancelar</button>
 						</li>
 						<li ng-show="agendaDia.listaAulas.length == 0" class="list-group-item">Não existem aulas registradas para este dia.</li>
 					</ul>
@@ -65,6 +67,9 @@
 						</button>
 					</div>
 					<div class="modal-body">
+						<div class="alert alert-dark" role="alert" ng-show="erro.show" id="erro-box">
+							{{erro.texto}}
+						</div>
 						<form>
 							<div class="form-group">
 								<label>Título Aula</label>
@@ -89,7 +94,7 @@
 								<small  class="form-text text-muted">Breve descrição sobre o conteudo da aula á ser ministrada.(Tamanho máximo de 255 caracteres)</small>
 							</div>
 
-							<div ng-show=" aula.idAprovado == 2" class="form-group">
+							<div ng-show="aula.idAprovado == 3" class="form-group">
 								<label>Motivo Rejeição</label>
 								<p>{{aula.motivoRejeicao}}</p>
 							</div>
@@ -97,8 +102,8 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-dark" data-dismiss="modal">Cancelar</button>
-						<button type="button" ng-show="!aula.id" ng-click="salvarAula()" class="btn btn-dark"  data-dismiss="modal">Marcar Aula</button>
-						<button type="button" ng-show="aula.id" ng-click="salvarAula()" class="btn btn-dark"  data-dismiss="modal">Alterar Aula</button>
+						<button type="button" ng-show="!aula.id" ng-click="salvarAula()" class="btn btn-dark">Marcar Aula</button>
+						<button type="button" ng-show="aula.id" ng-click="salvarAula()" class="btn btn-dark">Alterar Aula</button>
 					</div>
 				</div>
 			</div>
@@ -205,7 +210,6 @@
 								<p>{{aula.motivoRejeicao}}</p>
 							</div>
 						</form>
-
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-dark" data-dismiss="modal">Voltar</button>

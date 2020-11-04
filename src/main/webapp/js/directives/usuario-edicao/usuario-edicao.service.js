@@ -13,4 +13,8 @@ angular.module('tccApp').service('usuarioEdicaoService', ['Restangular', functio
         return this.api().one('getCadastroUsuario/' + id).get().then(success, error);
     }
 
+    this.salvarUsuario = function (usuario ,success, error) {
+        return this.api().all('salvar').post(usuario).then(success, error);
+    };
+
 }]);

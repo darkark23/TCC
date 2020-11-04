@@ -92,23 +92,6 @@ angular.module('tccApp').controller('AudioController',
 
     };
 
-    document.onkeyup = function(e) {
-        if (e.which == 96) {
-            reproduzirFrase(getAudio.menu.intro);
-        } else if (e.which == 49) {
-            synth.cancel();
-            $state.go('audio-busca',{}, {reload : true});
-        } else if (e.which == 50) {
-            synth.cancel();
-            $state.go('agenda',{data : new Date()}, {reload : true});
-        } else if (e.which == 51) {
-            synth.cancel();
-            $state.go('principal',{}, {reload : true});
-        } else if (e.which == 52) {
-            reproduzirFrase(getAudio.menu.fraseAjuda);
-        }
-    };
-
     recognition.onresult = function(event) {
         for (let i = event.resultIndex; i < event.results.length; i++) {
             if (event.results[i].isFinal) {

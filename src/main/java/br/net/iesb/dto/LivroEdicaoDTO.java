@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@NoArgsConstructor
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class LivroEdicaoDTO {
 
     private Long id;

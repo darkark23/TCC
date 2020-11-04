@@ -2,17 +2,15 @@ package br.net.iesb.service.transacional;
 
 import br.net.iesb.dto.*;
 import br.net.iesb.entity.transacional.*;
+import br.net.iesb.enumeration.SituacaoAprovacaoEnum;
 import br.net.iesb.repository.transacional.AssuntoRepository;
-import br.net.iesb.repository.transacional.AudioLivroRepository;
 import br.net.iesb.repository.transacional.AulaRepository;
+import br.net.iesb.repository.transacional.SituacaoAprovacaoRepository;
 import br.net.iesb.repository.transacional.UsuarioRepository;
 import br.net.iesb.util.DataUtil;
-import org.assertj.core.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -28,8 +26,11 @@ public class AulaService {
     @Autowired
     AssuntoRepository assuntoRepository;
 
+    @Autowired
+    SituacaoAprovacaoRepository situacaoAprovacaoRepository;
+
     public AgendaDiaDTO getAgendaDia(Date data){
-        return new AgendaDiaDTO(aulaRepository.findByDataHorarioBetweenAndControleAtivoAndControleAprovado(DataUtil.dataInicio(data),DataUtil.dataFinal(data),true,1),data);
+        return new AgendaDiaDTO(aulaRepository.findByDataHorarioBetweenAndControleAtivoAndControleSituacaoAprovacaoId(DataUtil.dataInicio(data),DataUtil.dataFinal(data),true,SituacaoAprovacaoEnum.APROVADO.getId()),data);
     };
 
     public AulaDiaEdicaoDTO getAgendaDiaEdicao(AulaDiaEdicaoRequestDTO request){
@@ -37,6 +38,7 @@ public class AulaService {
         Long idUsuario = usuarioRepository.findByLoginLike(request.getUsuario()).getId();
         return new AulaDiaEdicaoDTO(listaAulas,request.getData(),idUsuario);
     };
+
 
     public Integer cancelarAula(Long id){
         Aula aula = aulaRepository.findById(id).get();
@@ -47,7 +49,7 @@ public class AulaService {
 
     public Integer rejeitarAula(AulaRequestDTO aulaRequestDTO){
         Aula aula = aulaRepository.findById(aulaRequestDTO.getId()).get();
-        aula.getControle().setAprovado(2);
+        aula.getControle().setSituacaoAprovacao(situacaoAprovacaoRepository.findById(SituacaoAprovacaoEnum.REPROVADO.getId()).get());
         aula.getControle().setDescricaoReprovado(aulaRequestDTO.getMotivo());
         aulaRepository.saveAndFlush(aula);
         return 0;
@@ -55,7 +57,7 @@ public class AulaService {
 
     public Integer aprovarAula(Long id){
         Aula aula = aulaRepository.findById(id).get();
-        aula.getControle().setAprovado(1);
+        aula.getControle().setSituacaoAprovacao(situacaoAprovacaoRepository.findById(SituacaoAprovacaoEnum.APROVADO.getId()).get());
         aulaRepository.saveAndFlush(aula);
         return 0;
     };
@@ -70,8 +72,10 @@ public class AulaService {
             aula = new Aula();
         }
         aula.setAssunto(assunto);
-        aula.setLedor(usuario);
-        aula.setControle(new Controle());
+        if(aula.getLedor() == null){
+            aula.setLedor(usuario);
+        }
+        aula.setControle(new Controle(situacaoAprovacaoRepository.findById(SituacaoAprovacaoEnum.SUBMETIDO.getId()).get()));
         aula.setDataInsercao(new Date());
         aula.setDescricao(aulaRequestDTO.getDescricao());
         aula.setNome(aulaRequestDTO.getTitulo());

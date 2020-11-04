@@ -44,4 +44,10 @@ public class CadastroController {
         return usuarioService.getCadastroUsuario(idUsuario);
     }
 
+    @ResponseBody
+    @PostMapping(path = "/salvar", consumes = "application/json")
+    public Integer salvar(@RequestBody UsuarioCadastroResponseDTO usuarioDTORequest) {
+        return usuarioService.salvarUsuario(usuarioDTORequest);
+    }
+
 }

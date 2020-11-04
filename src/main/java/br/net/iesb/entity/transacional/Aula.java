@@ -47,4 +47,5 @@ public class Aula {
     @JoinColumn(name = "ID_CONTROLE", nullable = false, foreignKey = @ForeignKey(name = "FK_AULA_CONTROLE") )
     private Controle controle;
 
+
 }

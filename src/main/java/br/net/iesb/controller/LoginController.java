@@ -3,6 +3,7 @@ package br.net.iesb.controller;
 import br.net.iesb.dto.UsuarioConfirmacaoDTO;
 import br.net.iesb.dto.UsuarioInformationDTO;
 import br.net.iesb.dto.UsuarioLoginDTO;
+import br.net.iesb.enumeration.SituacaoAprovacaoEnum;
 import br.net.iesb.service.transacional.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -31,10 +32,10 @@ public class LoginController {
             return new UsuarioLoginDTO(usuarioInformationDTO);
         } else {
             UsuarioInformationDTO usuarioInformationDTOReturn = usuarioService.verificaLogin(usuarioConfirmacaoDTO);
-			if (usuarioInformationDTOReturn.getExistente() && usuarioInformationDTOReturn.getSituacao() == 1) {
+			if (usuarioInformationDTOReturn.getExistente() && usuarioInformationDTOReturn.getIdSituacaoAprovacao() == SituacaoAprovacaoEnum.APROVADO.getId()) {
 			    usuarioInformationDTO = usuarioInformationDTOReturn;
 				return new UsuarioLoginDTO(usuarioInformationDTO);
-			} else if (usuarioInformationDTO.getExistente() && usuarioInformationDTO.getSituacao() != 1) {
+			} else if (usuarioInformationDTO.getExistente() && usuarioInformationDTO.getIdSituacaoAprovacao() != SituacaoAprovacaoEnum.APROVADO.getId()) {
                 return new UsuarioLoginDTO(usuarioInformationDTOReturn);
 			}else {
                 return new UsuarioLoginDTO();

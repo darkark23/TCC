@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 public class UsuarioCadastroResponseDTO {
 
     private Long id;
-    private String Motivo;
+    private String motivoRejeicao;
     private Long perfil;
     private String login;
     private String email;
     private String senha;
-
+    private Integer idSituacaoAprovacao;
     private PessoaResponseDTO pessoa;
 
     public UsuarioCadastroResponseDTO(Usuario usuario){
@@ -24,6 +24,7 @@ public class UsuarioCadastroResponseDTO {
         this.email = usuario.getEmail();
         this.senha = usuario.getSenha();
         this.pessoa = new PessoaResponseDTO(usuario.getPessoa());
-
+        this.idSituacaoAprovacao = usuario.getControle().getSituacaoAprovacao().getId();
+        this.motivoRejeicao = usuario.getControle().getDescricaoReprovado();
     }
 }

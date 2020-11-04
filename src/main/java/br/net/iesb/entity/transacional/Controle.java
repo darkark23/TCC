@@ -10,12 +10,13 @@ import javax.persistence.*;
 @Entity
 @Table(name = "CONTROLE")
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class Controle {
 
-    public Controle(){
-        this.aprovado = 0;
+    public Controle(SituacaoAprovacao situacaoAprovacao){
+        this.situacaoAprovacao = situacaoAprovacao;
         this.ativo = true;
     }
 
@@ -28,9 +29,11 @@ public class Controle {
     @Column(name = "ATIVO", nullable = false)
     private Boolean ativo;
 
-    @Column(name = "APROVADO", nullable = false)
-    private Integer aprovado;
+    @ManyToOne(cascade = { CascadeType.PERSIST,CascadeType.MERGE})
+    @JoinColumn(name = "ID_SITUACAO_APROVACAO", nullable = false, foreignKey = @ForeignKey(name = "FK_CONTROLE_SITUACAO"))
+    private SituacaoAprovacao situacaoAprovacao;
 
     @Column(name = "DESCRICAO_REPROVADO", nullable = true, length = 255)
     private String descricaoReprovado;
+
 }

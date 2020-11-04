@@ -2,6 +2,8 @@
 var synth = window.speechSynthesis;
 var utterance = null;
 var recognition = null;
+var indicadorReconhecimentoAtivado = true;
+var indicadorSintetizadorAtivado = true;
 
 var getAudio = {
 	principal: {
@@ -68,31 +70,56 @@ var getTexto = {
 };
 
 var reproduzirFrase = function(frase) {
-	console.log(frase);
-	synth.cancel();
-	utterance = new SpeechSynthesisUtterance(frase);
-	utterance.lang = 'pt-BR';
-	utterance.rate = 2;
-	synth.speak(utterance);
-
+	if(indicadorSintetizadorAtivado){
+		console.log(frase);
+		synth.cancel();
+		utterance = new SpeechSynthesisUtterance(frase);
+		utterance.lang = 'pt-BR';
+		utterance.rate = 2;
+		synth.speak(utterance);
+	}
 };
 
 var comecarReconhecimento = function(){
-
-	recognition = new webkitSpeechRecognition();
-	recognition.interimResults = true;
-	recognition.lang = 'pt-BR';
-	recognition.continuous = true;
-	recognition.start();
-
-	recognition.onend = function() {
-		recognition.abort();
+	if(indicadorReconhecimentoAtivado){
+		recognition = new webkitSpeechRecognition();
+		recognition.interimResults = true;
+		recognition.lang = 'pt-BR';
+		recognition.continuous = true;
 		recognition.start();
-	};
 
-	recognition.onerror = function(event) {
-		recognition.abort();
-		recognition.start();
-	};
+		recognition.onend = function() {
+			recognition.abort();
+			recognition.start();
+		};
 
+		recognition.onerror = function(event) {
+			recognition.abort();
+			recognition.start();
+		};
+	}else {
+		recognition.stop();
+	}
+};
+
+var ativarSuporte = function() {
+	if(indicadorReconhecimentoAtivado){
+		reproduzirFrase("Suporte desativado");
+		console.log("Suporte desativado");
+		ativarReconhecimento();
+		ativarSintetizador();
+	}else {
+		ativarReconhecimento();
+		ativarSintetizador();
+		reproduzirFrase("Suporte Ativado");
+		console.log("Suporte Ativado");
+	}
+};
+
+var ativarReconhecimento = function() {
+	indicadorReconhecimentoAtivado = !indicadorReconhecimentoAtivado;
+};
+
+var ativarSintetizador = function() {
+	indicadorSintetizadorAtivado = !indicadorSintetizadorAtivado;
 };

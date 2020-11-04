@@ -5,6 +5,12 @@ angular.module('tccApp').controller('AudioListaController',
 	comecarReconhecimento();
 	$scope.audioLivros = null;
 	var currentResultado = 0;
+	var pageable  = {
+		pageNumber: 1,
+		pageSize: 5,
+		sort: null,
+		termo: $state.params.termo
+	};
 
 	audioListaService.getListaAudioLivroTermo($state.params.termo,function (listaAudioLivro) {
 		$scope.audioLivros = listaAudioLivro;
@@ -26,7 +32,7 @@ angular.module('tccApp').controller('AudioListaController',
 			reproduzirFrase(getAudio.audioLista.intro + ' ' + getAudio.audioLista.naoEncontrado);
 		}else {
 			if($scope.audioLivros.length == 1){
-				reproduzirFrase(getAudio.audioLista.intro + ' Foi encontrado um resultado.' );
+				reproduzirFrase(getAudio.audioLista.intro + ' Foi encontrado um resultado.' + getAudio.audioLista.comandos );
 			}else {
 				reproduzirFrase(getAudio.audioLista.intro + ' Foram encontrados ' + $scope.audioLivros.length + ' resultados. ' + getAudio.audioLista.comandos );
 			}
@@ -78,23 +84,6 @@ angular.module('tccApp').controller('AudioListaController',
 					reproduzirFrase(getAudio.ajuda);
 				}
 			}
-		}
-	};
-
-	document.onkeyup = function(e) {
-		if (e.which == 96) {
-			reproduzirFrase(getAudio.menu.intro);
-		} else if (e.which == 49) {
-			synth.cancel();
-			$state.go('audio-busca',{}, {reload : true});
-		} else if (e.which == 50) {
-			synth.cancel();
-			$state.go('agenda',{data : new Date()}, {reload : true});
-		} else if (e.which == 51) {
-			synth.cancel();
-			$state.go('principal',{}, {reload : true});
-		} else if (e.which == 52) {
-			reproduzirFrase(getAudio.menu.fraseAjuda);
 		}
 	};
 

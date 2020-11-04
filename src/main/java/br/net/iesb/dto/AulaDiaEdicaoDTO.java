@@ -51,7 +51,8 @@ public class AulaDiaEdicaoDTO {
         Integer horarioId;
         Assunto assunto;
         String ledor;
-        String aprovado;
+        String login;
+        Integer idSituacaoAprovacao;
         String motivoRejeicao;
         boolean aulaLedor ;
 
@@ -67,8 +68,9 @@ public class AulaDiaEdicaoDTO {
             this.descricao = DataUtil.DataHoraAula(aula.getDataHorario(),aula.getNome());
             this.assunto = aula.getAssunto();
             this.ledor =  aula.getLedor().getPessoa().getNome();
+            this.login =  aula.getLedor().getLogin();
             this.aulaLedor = aula.getLedor().getId() == idLedor;
-            this.idAprovado = aula.getControle().getAprovado();
+            this.idAprovado = aula.getControle().getSituacaoAprovacao().getId();
             if(aula.getControle().getDescricaoReprovado() != null){
                 this.motivoRejeicao = aula.getControle().getDescricaoReprovado();
             }
@@ -76,7 +78,7 @@ public class AulaDiaEdicaoDTO {
                 this.descricaoAula = aula.getDescricao();
             }
             this.motivoRejeicao = aula.getControle().getDescricaoReprovado();
-            this.aprovado = FormatarUtil.getAprovacao(aula.getControle().getAprovado());
+            this.idSituacaoAprovacao = aula.getControle().getSituacaoAprovacao().getId();
         }
 
     }

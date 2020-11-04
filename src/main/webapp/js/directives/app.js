@@ -186,7 +186,7 @@ angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast','ngMate
 							}
 						}
 					}).state('usuarioEdicao', {
-						url : '/usuarioEdicao/?id',
+						url : '/usuarioEdicao/?id/?indicadorNovo/?indicadorChave',
 						views: {
 							'': {
 								templateUrl : '/js/directives/usuario-edicao/usuario-edicao.html',
@@ -224,4 +224,11 @@ angular.module('tccApp', [ 'ui.router','restangular','ui.mask','ngToast','ngMate
 						var m = moment(dateString, 'DD/MM/YYYY', true);
 						return m.isValid() ? m.toDate() : new Date(NaN);
 					}
-				}]);
+				}]).run(function ($rootScope) {
+
+				$rootScope.keyDown = function(value){
+					if(value.keyCode == 18 ) {
+						ativarSuporte();
+					}
+				};
+});
