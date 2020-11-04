@@ -34,7 +34,6 @@ angular.module('tccApp').controller('AudioController',
 
     $scope.avancarAudio = function () {
         if (audio.currentTime + 30 > audio.duration) {
-            audio.currentTime = audio.currentTime + 30;
             audio.pause();
             reproduzirFrase(getAudio.audio.finalAudio)
         } else {

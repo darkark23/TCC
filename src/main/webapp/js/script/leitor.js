@@ -92,11 +92,6 @@ var comecarReconhecimento = function(){
 			recognition.abort();
 			recognition.start();
 		};
-
-		recognition.onerror = function(event) {
-			recognition.abort();
-			recognition.start();
-		};
 	}else {
 		recognition.stop();
 	}
